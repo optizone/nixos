@@ -13,6 +13,11 @@ in
     ../../core/services/smb.nix
   ];
 
+  programs.winbox = {
+    enable = true;
+    openFirewall = true;
+  };
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''
     [Lenovo Thinkbook G6+ IMH - Goodix GT7868Q]
