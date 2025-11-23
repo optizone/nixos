@@ -138,15 +138,36 @@
           };
         };
 
-        vm = nixpkgs.lib.nixosSystem {
+        generic-laptop = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/vm
+            ./hosts/generic/laptop.nix
             nix-index-database.nixosModules.nix-index
           ];
           specialArgs = {
-            host = "vm";
-            username = "vm";
+            host = "laptop";
+            username = "laptop-user";
+            inherit
+              self
+              inputs
+              font
+              fontMono
+              shell
+              gitUsername
+              gitEmail
+              ;
+          };
+        };
+
+        generic-pc = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/generic/pc.nix
+            nix-index-database.nixosModules.nix-index
+          ];
+          specialArgs = {
+            host = "pc";
+            username = "pc-user";
             inherit
               self
               inputs
