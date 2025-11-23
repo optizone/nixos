@@ -17,7 +17,9 @@
       set -x MANROFFOPT -c
       set -g theme_nerd_fonts yes
 
-      fastfetch
+      if not test $FISH_INIT_SUPPRESS_FASTFETCH;
+        fastfetch
+      end
     '';
 
     shellAliases = {
@@ -36,8 +38,8 @@
       ",,,,," = ",,,,,";
 
       "ct" = "clean-trash-bin";
-      "ns" = "nix-shell --command fish -p";
-      "nd" = "nix develop --command fish";
+      "ns" = "FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix-shell --command fish -p";
+      "nd" = "FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix develop --command fish";
       "ndl" =
         "git reset -- flake.nix flake.lock && git add --intent-to-add flake.nix flake.lock && nd && git update-index --assume-unchanged flake.nix flake.lock";
       "ndhide" =
