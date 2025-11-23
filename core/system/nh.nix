@@ -6,7 +6,7 @@
       enable = true;
       extraArgs = "--keep-since 7d --keep 5";
     };
-    flake = "/home/${username}/zroot/infra/config/nixos";
+    flake = "/home/${username}/nixos";
   };
 
   environment.systemPackages = with pkgs; [
