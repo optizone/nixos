@@ -2,7 +2,7 @@
 with lib;
 let
   defaultApps = {
-    browser = [ "zen.desktop" ];
+    browser = [ "qutebrowser.desktop" ];
     text = [ "org.gnome.TextEditor.desktop" ];
     image = [ "oculante.desktop" ];
     audio = [ "mpv.desktop" ];
