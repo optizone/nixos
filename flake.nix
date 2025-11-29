@@ -145,7 +145,7 @@
             nix-index-database.nixosModules.nix-index
           ];
           specialArgs = {
-            host = "laptop";
+            host = "generic-laptop";
             username = "laptop-user";
             inherit
               self
@@ -166,7 +166,7 @@
             nix-index-database.nixosModules.nix-index
           ];
           specialArgs = {
-            host = "pc";
+            host = "generic-pc";
             username = "pc-user";
             inherit
               self
