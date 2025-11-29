@@ -4,7 +4,7 @@ My personal Gruvbox themed rice of NixOS based on Hyprland. It also contains all
 necessary integrations with zroot-infra and NixOS Flake configs of some of its
 services.
 
-![a](./screenshots/nvim-btop.png)
+![nvim-btop](./screenshots/nvim-btop.png)
 
 ## About
 
@@ -81,9 +81,9 @@ line in `user.nix` with the list of modules you want to enable (for example
 
 ### Gallery
 
-![ca](./screenshots/nvim-btop.png)
+![nvim-btop](./screenshots/nvim-btop.png)
 
-#![a](./screenshots/all-terminal.png)
+![all-terminal](./screenshots/all-terminal.png)
 
 ## Special thanks
 

@@ -13,7 +13,7 @@
       preview.markdownPreview.enable = true;
       images.img-clip.enable = true;
       images.image-nvim = {
-        enable = true;
+        enable = false;
         setupOpts = {
           backend = "kitty";
           integrations.markdown.enable = true;

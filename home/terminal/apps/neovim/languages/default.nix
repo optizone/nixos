@@ -1,6 +1,9 @@
 { ... }:
 {
-  imports = [ ./markdown.nix ];
+  imports = [
+    ./markdown.nix
+    ./typst.nix
+  ];
 
   programs.nvf.settings.config.vim.languages = {
     enableFormat = true;
