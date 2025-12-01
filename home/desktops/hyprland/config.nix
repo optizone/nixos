@@ -49,7 +49,7 @@
         "col.active_border" = "0xffbdae93";
         "col.inactive_border" = "0xff1d2021";
         # border_part_of_window = false;
-        no_border_on_floating = false;
+        # no_border_on_floating = false;
       };
 
       cursor = {
@@ -64,7 +64,7 @@
         animate_manual_resizes = false;
         enable_swallow = true;
         focus_on_activate = true;
-        new_window_takes_over_fullscreen = 2;
+        # new_window_takes_over_fullscreen = 2;
         middle_click_paste = false;
       };
 
@@ -261,21 +261,6 @@
         "$mainMod SHIFT, C, exec, cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"
       ];
 
-      # # binds active in lockscreen
-      # bindl = [
-      #   # laptop brigthness
-      #   ",XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-      #   ",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-      #   "$mainMod, XF86MonBrightnessUp, exec, brightnessctl set 100%+"
-      #   "$mainMod, XF86MonBrightnessDown, exec, brightnessctl set 100%-"
-      # ];
-
-      # # binds that repeat when held
-      # binde = [
-      #   ",XF86AudioRaiseVolume,exec, pamixer -i 2"
-      #   ",XF86AudioLowerVolume,exec, pamixer -d 2"
-      # ];
-
       # mouse binding
       bindm = [
         "$mainMod, mouse:272, movewindow"
@@ -284,76 +269,68 @@
 
       # windowrule
       windowrule = [
-        "float,class:^(Viewnior)$"
-        "float,class:^(imv)$"
-        "float,class:^(mpv)$"
-        "tile,class:^(Aseprite)$"
-        "float,class:^(Audacious)$"
-        "pin,class:^(rofi)$"
-        "pin,class:^(waypaper)$"
-        # "idleinhibit focus,mpv"
-        # "float,udiskie"
-        "float,title:^(Transmission)$"
-        "float,title:^(Volume Control)$"
-        "float,title:^(Firefox — Sharing Indicator)$"
-        "move 0 0,title:^(Firefox — Sharing Indicator)$"
-        "size 700 450,title:^(Volume Control)$"
-        "move 40 55%,title:^(Volume Control)$"
+        "match:class ^(Viewnior)$ float"
+        "match:class ^(imv)$ float"
+        "match:class ^(mpv)$ float"
+        "match:class ^(Aseprite)$ tile"
+        "match:class ^(Audacious)$ float"
+        "match:class ^(rofi)$ pin"
+        "match:class ^(waypaper)$, pin true"
+        "match:title ^(Transmission)$ float"
+        "match:title ^(Volume Control)$ float"
+        "match:title ^(Firefox — Sharing Indicator)$ float"
+        "match:title ^(Firefox — Sharing Indicator)$ move 0 0"
+        "match:title ^(Volume Control)$ size 700 450"
+        "match:title ^(Volume Control)$ move 40 55%"
 
-        "float, title:^(Picture-in-Picture)$"
-        "opacity 1.0 override 1.0 override, title:^(Picture-in-Picture)$"
-        "pin, title:^(Picture-in-Picture)$"
-        "opacity 1.0 override 1.0 override, title:^(.*imv.*)$"
-        "opacity 1.0 override 1.0 override, title:^(.*mpv.*)$"
-        "opacity 1.0 override 1.0 override, class:(Aseprite)"
-        "opacity 1.0 override 1.0 override, class:(Unity)"
-        "opacity 1.0 override 1.0 override, class:(zen)"
-        "opacity 1.0 override 1.0 override, class:(evince)"
-        "idleinhibit focus, class:^(mpv)$"
-        "idleinhibit fullscreen, class:^(firefox)$"
-        "float,class:^(org.gnome.Calculator)$"
-        "float,class:^(waypaper)$"
-        "float,class:^(zenity)$"
-        "size 850 500,class:^(zenity)$"
-        "size 725 330,class:^(SoundWireServer)$"
-        "float,class:^(org.gnome.FileRoller)$"
-        "float,class:^(org.pulseaudio.pavucontrol)$"
-        "float,class:^(SoundWireServer)$"
-        "float,class:^(.sameboy-wrapped)$"
-        "float,class:^(file_progress)$"
-        "float,class:^(confirm)$"
-        "float,class:^(dialog)$"
-        "float,class:^(download)$"
-        "float,class:^(notification)$"
-        "float,class:^(error)$"
-        "float,class:^(confirmreset)$"
-        "float,title:^(Open File)$"
-        "float,title:^(File Upload)$"
-        "float,title:^(branchdialog)$"
-        "float,title:^(Confirm to replace files)$"
-        "float,title:^(File Operation Progress)$"
+        "match:title ^(Picture-in-Picture)$ float"
+        "match:title ^(Picture-in-Picture)$ opacity 1.0 override 1.0 override"
+        "match:title ^(Picture-in-Picture)$ pin"
+        "match:title ^(.*imv.*)$ opacity 1.0 override 1.0 override"
+        "match:title ^(.*mpv.*)$ opacity 1.0 override 1.0 override"
+        "match:class (Aseprite) opacity 1.0 override 1.0 override"
+        "match:class (Unity) opacity 1.0 override 1.0 override"
+        "match:class (zen) opacity 1.0 override 1.0 override"
+        "match:class (evince) opacity 1.0 override 1.0 override"
+        "match:class ^(mpv)$ idleinhibit focus"
+        "match:class ^(firefox)$ idleinhibit fullscreen"
+        "match:class ^(org.gnome.Calculator)$ float"
+        # TODO: does not resize when called from rofi
+        "match:class ^(waypaper)$, float true"
+        "match:class ^(waypaper)$, size 50% 50%"
+        "match:class ^(zenity)$ float"
+        "match:class ^(zenity)$ size 850 500"
+        "match:class ^(SoundWireServer)$ size 725 330"
+        "match:class ^(org.gnome.FileRoller)$ float"
+        "match:class ^(org.pulseaudio.pavucontrol)$ float"
+        "match:class ^(SoundWireServer)$ float"
+        "match:class ^(.sameboy-wrapped)$ float"
+        "match:class ^(file_progress)$ float"
+        "match:class ^(confirm)$ float"
+        "match:class ^(dialog)$ float"
+        "match:class ^(download)$ float"
+        "match:class ^(notification)$ float"
+        "match:class ^(error)$ float"
+        "match:class ^(confirmreset)$ float"
+        "match:title ^(Open File)$ float"
+        "match:title ^(File Upload)$ float"
+        "match:title ^(branchdialog)$ float"
+        "match:title ^(Confirm to replace files)$ float"
+        "match:title ^(File Operation Progress)$ float"
 
-        "opacity 0.0 override,class:^(xwaylandvideobridge)$"
-        "noanim,class:^(xwaylandvideobridge)$"
-        "noinitialfocus,class:^(xwaylandvideobridge)$"
-        "maxsize 1 1,class:^(xwaylandvideobridge)$"
-        "noblur,class:^(xwaylandvideobridge)$"
+        "match:class ^(xwaylandvideobridge)$ opacity 0.0 override"
+        "match:class ^(xwaylandvideobridge)$ noanim"
+        "match:class ^(xwaylandvideobridge)$ noinitialfocus"
+        "match:class ^(xwaylandvideobridge)$ maxsize 1 1"
+        "match:class ^(xwaylandvideobridge)$ noblur"
 
-        # No gaps when only
-        "bordersize 0, floating:0, onworkspace:w[t1]"
-        "rounding 0, floating:0, onworkspace:w[t1]"
-        "bordersize 0, floating:0, onworkspace:w[tg1]"
-        "rounding 0, floating:0, onworkspace:w[tg1]"
-        "bordersize 0, floating:0, onworkspace:f[1]"
-        "rounding 0, floating:0, onworkspace:f[1]"
-
-        # "maxsize 1111 700, floating: 1"
-        # "center, floating: 1"
-
-        # Remove context menu transparency in chromium based apps
-        "opaque,class:^()$,title:^()$"
-        "noshadow,class:^()$,title:^()$"
-        "noblur,class:^()$,title:^()$"
+        # No gaps when only one window on workspace
+        "match:float false workspace w[t1], border_size 0"
+        "match:float false workspace w[t1], rounding 0"
+        "match:float false workspace w[tg1], border_size 0"
+        "match:float false workspace w[tg1], rounding 0"
+        "match:float false workspace f[1], border_size 0"
+        "match:float false workspace f[1], rounding 0"
       ];
 
       # No gaps when only

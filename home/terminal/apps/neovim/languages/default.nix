@@ -18,7 +18,7 @@
       };
       lsp = {
         enable = true;
-        server = "nixd";
+        # server = "nixd";
       };
       treesitter.enable = true;
     };

@@ -1,6 +1,6 @@
 { pkgs, font, ... }:
 {
-  home.packages = with pkgs; [ rofi-wayland ];
+  home.packages = with pkgs; [ rofi ];
 
   xdg.configFile = {
     "rofi/gruvbox-dark-soft.rasi".source = ./gruvbox-dark-soft.rasi;

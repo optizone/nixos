@@ -1,31 +1,26 @@
 {
-  description = "FrostPhoenix's nixos configuration";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
-
-    home-manager-rpi = {
-      url = "github:nix-community/home-manager?ref=release-25.05";
-      inputs.nixpkgs.follows = "nixos-raspberrypi";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hypr-contrib = {
       url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprpicker = {
       url = "github:hyprwm/hyprpicker";
-      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "hyprland/systems";
     };
 
     hyprlock = {
@@ -34,38 +29,28 @@
         hyprgraphics.follows = "hyprland/hyprgraphics";
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
+        nixpkgs.follows = "nixpkgs";
         systems.follows = "hyprland/systems";
       };
     };
-
-    disko = {
-      # the fork is needed for partition attributes support
-      url = "github:nvmd/disko/gpt-attrs";
-      # url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
-    };
-
-    nur.url = "github:nix-community/NUR";
-    nix-gaming.url = "github:fufexan/nix-gaming";
 
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
     };
 
-    nix-index-database.url = "github:Mic92/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    nvf = {
-      url = "github:notashelf/nvf";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf = {
+      url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -75,8 +60,6 @@
       nixpkgs,
       self,
       nix-index-database,
-      nixos-raspberrypi,
-      disko,
       ...
     }@inputs:
     let
@@ -92,7 +75,6 @@
         inherit system;
         config.allowUnfree = true;
       };
-      lib = nixpkgs.lib;
     in
     {
       nixosConfigurations = {

@@ -11,3 +11,33 @@ index 846f827..c51018d 100644
  {
      if (rdesc[607] == 0x15) {
          rdesc[607] = 0x25;
+
+diff --git a/hid-multitouch.c b/hid-multitouch.c
+index deba4d3..39c932f 100644
+--- a/hid-multitouch.c
++++ b/hid-multitouch.c
+@@ -1284,7 +1284,7 @@ static void mt_touch_report(struct hid_device *hid,
+ 			mod_timer(&td->release_timer,
+ 				  jiffies + msecs_to_jiffies(100));
+ 		else
+-			del_timer(&td->release_timer);
++			timer_delete(&td->release_timer);
+ 	}
+ 
+ 	clear_bit_unlock(MT_IO_FLAGS_RUNNING, &td->mt_io_flags);
+@@ -1838,7 +1838,7 @@ static void mt_remove(struct hid_device *hdev)
+ {
+ 	struct mt_device *td = hid_get_drvdata(hdev);
+ 
+-	del_timer_sync(&td->release_timer);
++	timer_delete_sync(&td->release_timer);
+ 
+ 	sysfs_remove_group(&hdev->dev.kobj, &mt_attribute_group);
+ 	hid_hw_stop(hdev);
+@@ -2274,4 +2274,4 @@ static void mt_remove(struct hid_device *hdev)
+ // 	.reset_resume = pm_ptr(mt_reset_resume),
+ // 	.resume = pm_ptr(mt_resume),
+ // };
+-// module_hid_driver(mt_driver);
+\ No newline at end of file
++// module_hid_driver(mt_driver);

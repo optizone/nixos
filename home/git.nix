@@ -8,10 +8,12 @@
   programs.git = {
     enable = true;
 
-    userName = "${gitUsername}";
-    userEmail = "${gitEmail}";
+    settings = {
+      user = {
+        name = "${gitUsername}";
+        email = "${gitEmail}";
+      };
 
-    extraConfig = {
       init.defaultBranch = "main";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
@@ -26,14 +28,17 @@
       core.excludesFile = "/home/${username}/.config/git/.gitignore";
     };
 
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
-        side-by-side = false;
-        diff-so-fancy = true;
-        navigate = true;
-      };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+
+    options = {
+      line-numbers = true;
+      side-by-side = false;
+      diff-so-fancy = true;
+      navigate = true;
     };
   };
 

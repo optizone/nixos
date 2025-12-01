@@ -3,6 +3,7 @@
   programs.nvf = {
     settings.config.vim.filetree.neo-tree = {
       enable = true;
+
       setupOpts = {
         window = {
           position = "right";
@@ -20,6 +21,11 @@
               };
             };
           };
+
+          name = {
+            use_git_status_colors = false;
+          };
+
           mappings = {
             "l" = "open";
             "h" = "close_node";

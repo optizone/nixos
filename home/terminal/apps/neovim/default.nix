@@ -13,8 +13,11 @@
 
     ./plugins/lualine.nix
     ./plugins/neo-tree.nix
+    # ./plugins/nvim-tree.nix
 
     ./custom-plugins/layout-mappers.nix
+
+    ./themes/gruvbox.nix
   ];
 
   home.packages = [
@@ -72,13 +75,6 @@
 
         highlight-undo.enable = true;
         indent-blankline.enable = true;
-      };
-
-      theme = {
-        enable = true;
-        name = "gruvbox";
-        style = "dark";
-        transparent = true;
       };
 
       # ------------------------------------------------------------
@@ -161,7 +157,7 @@
         snacks-nvim = {
           enable = true;
           setupOpts = {
-            picker.enable = true;
+            picker.enabled = true;
           };
         };
       };

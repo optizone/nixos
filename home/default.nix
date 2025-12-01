@@ -3,7 +3,6 @@
   imports = [
     ./browsers/firefox.nix
     ./browsers/librewolf.nix
-    ./browsers/zen-browser.nix
     ./browsers/google-chrome.nix
     ./browsers/qutebroser.nix
 

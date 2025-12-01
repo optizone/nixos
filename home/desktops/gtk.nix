@@ -5,7 +5,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
     twemoji-color-font
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   gtk = {

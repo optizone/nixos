@@ -19,19 +19,19 @@ in
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''
-    [Lenovo Thinkbook G6+ IMH - Goodix GT7868Q]
-    MatchDMIModalias=dmi:bvnLENOVO:*:pvrThinkBook*G6+IMH*:*
-    MatchVendor=0x27C6
-    MatchProduct=0x01E9
+  # environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''
+  #   [Lenovo Thinkbook G6+ IMH - Goodix GT7868Q]
+  #   MatchDMIModalias=dmi:bvnLENOVO:*:pvrThinkBook*G6+IMH*:*
+  #   MatchVendor=0x27C6
+  #   MatchProduct=0x01E9
+  #
+  #   #AttrEventCode=-ABS_MT_PRESSURE;-ABS_PRESSURE;
+  #   AttrPressureRange=2:0
+  #   AttrPalmPressureThreshold=600
+  #   AttrThumbPressureThreshold=1000
+  # '';
 
-    #AttrEventCode=-ABS_MT_PRESSURE;-ABS_PRESSURE;
-    AttrPressureRange=2:0
-    AttrPalmPressureThreshold=600
-    AttrThumbPressureThreshold=1000
-  '';
-
-  boot = {
-    extraModulePackages = [ goodix-gt7868q ];
-  };
+  # boot = {
+  #   extraModulePackages = [ goodix-gt7868q ];
+  # };
 }

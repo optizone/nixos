@@ -2,7 +2,7 @@
 with lib;
 let
   defaultApps = {
-    browser = [ "qutebrowser.desktop" ];
+    browser = [ "org.qutebrowser.qutebrowser.desktop" ];
     text = [ "org.gnome.TextEditor.desktop" ];
     image = [ "oculante.desktop" ];
     audio = [ "mpv.desktop" ];
