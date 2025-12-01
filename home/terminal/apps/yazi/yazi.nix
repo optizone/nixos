@@ -2,7 +2,7 @@
 {
   programs.yazi.settings = {
     # yazi.toml
-    manager = {
+    mgr = {
       ratio = [
         1
         4

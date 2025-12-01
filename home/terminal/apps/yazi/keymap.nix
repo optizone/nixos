@@ -1,7 +1,7 @@
 { ... }:
 {
   programs.yazi.keymap = {
-    manager.keymap = [
+    mgr.keymap = [
       {
         on = "<Esc>";
         run = "escape";
@@ -1379,7 +1379,7 @@
       }
     ];
 
-    manager.prepend_keymap = [
+    mgr.prepend_keymap = [
       # Wayland
       {
         on = "y";
