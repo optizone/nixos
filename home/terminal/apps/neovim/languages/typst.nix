@@ -1,6 +1,5 @@
-{ ... }:
-{
-  programs.nvf.settings.config.vim = {
+_: {
+  config.vim = {
     languages.typst = {
       enable = true;
       # extensions.typst-concealer.enable = true;

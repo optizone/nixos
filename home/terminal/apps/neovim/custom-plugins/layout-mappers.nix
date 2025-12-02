@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  programs.nvf.settings.config.vim = {
+  config.vim = {
     augroups = [
       {
         name = "layout-switch";

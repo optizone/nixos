@@ -1,4 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  customNeovim = inputs.nvf.lib.neovimConfiguration {
+    inherit pkgs;
+    modules = [ ./neovim ];
+  };
+in
 {
   home.packages = with pkgs; [
     jq
@@ -13,6 +19,7 @@
     wget
     file
     netcat
+    customNeovim.neovim
   ];
 
   imports = [
@@ -20,7 +27,6 @@
     ./fd.nix
     ./dust.nix
     ./fastfetch/default.nix
-    ./neovim/default.nix
     ./yazi/default.nix
     ./bat.nix
     ./btop.nix
@@ -29,4 +35,5 @@
     ./starship.nix
     ./zoxide.nix
   ];
+
 }

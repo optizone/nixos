@@ -1,6 +1,5 @@
-{ ... }:
-{
-  programs.nvf.settings.config.vim.keymaps = [
+_: {
+  config.vim.keymaps = [
     # TODO: else vim.lsp.buf.codeAction()
     {
       key = "<leader>ca";

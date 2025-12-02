@@ -5,7 +5,7 @@
     ./typst.nix
   ];
 
-  programs.nvf.settings.config.vim.languages = {
+  config.vim.languages = {
     enableFormat = true;
     enableTreesitter = true;
     enableExtraDiagnostics = true;

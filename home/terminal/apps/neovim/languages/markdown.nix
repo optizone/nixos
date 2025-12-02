@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  programs.nvf.settings.config.vim = {
+  config.vim = {
     languages.markdown = {
       enable = true;
       format.enable = true;

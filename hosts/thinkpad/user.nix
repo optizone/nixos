@@ -14,11 +14,11 @@
 
     extraSpecialArgs = {
       inherit inputs;
-    } // specialArgs;
+    }
+    // specialArgs;
 
     users.${username} = {
       imports = [
-        inputs.nvf.homeManagerModules.default
         ../../home
       ];
       home = {

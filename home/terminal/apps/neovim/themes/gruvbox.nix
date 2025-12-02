@@ -1,5 +1,5 @@
 _: {
-  programs.nvf.settings.config.vim = {
+  config.vim = {
     theme = {
       enable = true;
       name = "gruvbox";
