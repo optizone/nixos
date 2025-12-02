@@ -7,7 +7,7 @@ in
     ../laptop-common/default.nix
     ./hardware-configuration.nix
 
-    ./user.nix
+    ../../home/flavours/nixos-module.nix
 
     ../../core/services/lubelogger.nix
     ../../core/services/smb.nix

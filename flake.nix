@@ -60,6 +60,7 @@
       nixpkgs,
       self,
       nix-index-database,
+      home-manager,
       ...
     }@inputs:
     let
@@ -77,6 +78,28 @@
       };
     in
     {
+      homeConfigurations = {
+        protei = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          extraSpecialArgs = {
+            gitUsername = "boicov";
+            gitEmail = "boicov@protei.ru";
+            username = "boicov";
+
+            inherit
+              self
+              inputs
+              font
+              fontMono
+              shell
+              ;
+          };
+
+          modules = [ ./home/flavours/standalone.nix ];
+        };
+      };
+
       nixosConfigurations = {
         thinkpad = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -95,27 +118,6 @@
               shell
               gitUsername
               gitEmail
-              ;
-          };
-        };
-
-        protei = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/protei
-            nix-index-database.nixosModules.nix-index
-          ];
-          specialArgs = {
-            host = "thinkpad";
-            username = "thinkpad";
-            gitUsername = "boicov";
-            gitEmail = "boicov@protei-lab.ru";
-            inherit
-              self
-              inputs
-              font
-              fontMono
-              shell
               ;
           };
         };

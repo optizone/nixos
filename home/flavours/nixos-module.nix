@@ -7,6 +7,7 @@
 }:
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
+
   home-manager = {
     useUserPackages = true;
     backupFileExtension = "bak";
@@ -19,7 +20,7 @@
 
     users.${username} = {
       imports = [
-        ../../home
+        ../default.nix
       ];
       home = {
         username = "${username}";
