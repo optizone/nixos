@@ -22,6 +22,10 @@ in
     customNeovim.neovim
   ];
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   imports = [
     ./eza/default.nix
     ./fd.nix
