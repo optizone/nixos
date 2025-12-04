@@ -162,10 +162,10 @@
         "$mainMod, X, exec, power-menu"
         "$mainMod, P, pseudo,"
         "$mainMod, S, togglesplit,"
-        "$mainMod, V, exec, hyprctl dispatch exec '[centerwindow; size 925 615] pavucontrol'"
+        "$mainMod, V, exec, hyprctl dispatch exec '[centerwindow; size monitor_w*0.5 monitor_h*0.5] pavucontrol'"
         "$mainMod SHIFT, B, exec, toggle-waybar"
         "$mainMod, C ,exec, hyprpicker -a"
-        "$mainMod SHIFT, W,exec, hyprctl dispatch exec '[centerwindow; size 925 615] waypaper'"
+        "$mainMod SHIFT, W,exec, hyprctl dispatch exec '[centerwindow; size monitor_w*0.5 monitor_h*0.5] waypaper'"
         "$mainMod, N, exec, swaync-client -t -sw"
 
         # screenshot
@@ -280,7 +280,7 @@
         "match:title ^(Volume Control)$ float"
         "match:title ^(Firefox — Sharing Indicator)$ float"
         "match:title ^(Firefox — Sharing Indicator)$ move 0 0"
-        "match:title ^(Volume Control)$ size 700 450"
+        "match:title ^(Volume Control)$ size monitor_w*0.5 monitor_h*0.5"
         "match:title ^(Volume Control)$ move 40 55%"
 
         "match:title ^(Picture-in-Picture)$ float"
@@ -297,10 +297,8 @@
         "match:class ^(org.gnome.Calculator)$ float"
         # TODO: does not resize when called from rofi
         "match:class ^(waypaper)$, float true"
-        "match:class ^(waypaper)$, size 50% 50%"
+        "match:class ^(waypaper)$, size monitor_w*0.5 monitor_h*0.5"
         "match:class ^(zenity)$ float"
-        "match:class ^(zenity)$ size 850 500"
-        "match:class ^(SoundWireServer)$ size 725 330"
         "match:class ^(org.gnome.FileRoller)$ float"
         "match:class ^(org.pulseaudio.pavucontrol)$ float"
         "match:class ^(SoundWireServer)$ float"

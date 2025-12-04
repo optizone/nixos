@@ -141,7 +141,7 @@ in
         warning = 70;
         critical = 90;
       };
-      on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=11 --title float_kitty btop'";
+      on-click-right = "hyprctl dispatch exec '[float; center; size monitor_w*0.5 monitor_h*0.5] kitty --title float_kitty btop'";
     };
 
     "hyprland/language" = {
@@ -161,7 +161,7 @@ in
         critical = 90;
       };
       tooltip = false;
-      on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=11 --title float_kitty btop'";
+      on-click-right = "hyprctl dispatch exec '[float; center; size monitor_w*0.5 monitor_h*0.5] kitty --title float_kitty btop'";
     };
 
     network = {
@@ -176,7 +176,7 @@ in
     #   path = "/";
     #   format = "<span foreground='${orange}'>󰋊 </span>{percentage_used}%";
     #   interval = 60;
-    #   on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=14 --title float_kitty dust'";
+    #   on-click-right = "hyprctl dispatch exec '[float; center; monitor_w*0.5 monitor_h*0.5] kitty --title float_kitty dust'";
     # };
 
     "hyprland/mode" = {
@@ -216,7 +216,7 @@ in
       scroll-step = 1;
       on-click = "pamixer -t";
       # TODO: floating center
-      on-click-right = "pavucontrol";
+      on-click-right = "hyprctl dispatch exec '[float; center; size monitor_w*0.5 monitor_h*0.5] pavucontrol'";
       tooltip = false;
     };
 
