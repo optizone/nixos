@@ -52,6 +52,27 @@
           }
         ];
       }
+
+      {
+        profile = {
+          name = "protei-work";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              scale = 1.25;
+            }
+            {
+              criteria = "HDMI-A-1";
+              status = "enable";
+            }
+            {
+              criteria = "DP-2";
+              status = "enable";
+            }
+          ];
+        };
+      }
     ];
   };
 }
