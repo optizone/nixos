@@ -322,13 +322,9 @@
         "match:class ^(xwaylandvideobridge)$ maxsize 1 1"
         "match:class ^(xwaylandvideobridge)$ noblur"
 
-        # No gaps when only one window on workspace
-        "match:float false workspace w[t1], border_size 0"
-        "match:float false workspace w[t1], rounding 0"
-        "match:float false workspace w[tg1], border_size 0"
-        "match:float false workspace w[tg1], rounding 0"
-        "match:float false workspace f[1], border_size 0"
-        "match:float false workspace f[1], rounding 0"
+        # No border when only one tiled window on workspace
+        "match:float false, match:workspace w[t1], border_size 0"
+        "match:float false, match:workspace w[t1], rounding 0"
       ];
 
       # No gaps when only
