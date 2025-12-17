@@ -9,6 +9,7 @@
     ./desktops/default.nix
 
     ./gui-apps/obsidian.nix
+    ./gui-apps/electrum.nix
     ./gui-apps/file-managers/nemo.nix
     ./gui-apps/images/gimp.nix
     ./gui-apps/images/inkscape.nix
