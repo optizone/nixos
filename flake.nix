@@ -53,6 +53,12 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -61,6 +67,7 @@
       self,
       nix-index-database,
       home-manager,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -106,6 +113,7 @@
           modules = [
             ./hosts/thinkpad
             nix-index-database.nixosModules.nix-index
+            sops-nix.nixosModules.sops
           ];
           specialArgs = {
             host = "thinkpad";

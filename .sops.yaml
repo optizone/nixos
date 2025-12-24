@@ -1,0 +1,11 @@
+keys:
+  - &zroot age1prdcdxufzzpxtufcjzw40w4xpu5e6tyg5gg9fadm5as3jjm03gws3gza9d
+  - &thinkpad age19y20q5xtde7m6hll73efnapefwqwazfq6lm6zqf89c49wpj4ug6s3jsg4e
+  - &rpi516g-k age1nyncl9kqwm9tljs6ctct0h7jwwzet3kyvgk60znlwmxu6fk8ld0suau45t
+creation_rules:
+  - path_regex: ^secrets\.yaml$
+    key_groups:
+    - age:
+      - *zroot
+      - *thinkpad
+      - *rpi516g-k
