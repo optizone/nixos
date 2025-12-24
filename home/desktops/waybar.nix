@@ -1,7 +1,7 @@
 { pkgs, font, ... }:
 let
   colors = rec {
-    c_black = "#282828";
+    c_black = "#1d2021";
     c_red = "#cc241d";
     c_green = "#98971a";
     c_yellow = "#d79921";
@@ -221,7 +221,7 @@ in
     };
 
     temperature = {
-      critical-threshold = 90;
+      critical-threshold = 65;
       interval = 5;
       format = "{icon} {temperatureC}°";
       format-icons = [
@@ -405,6 +405,7 @@ in
     }
 
     #window {
+      font-weight: bold;
       margin-right: 35pt;
       margin-left: 35pt;
     }
