@@ -1,5 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    pv
+    zip
+    unzip
+  ];
+
   programs.fish = {
     enable = true;
 
@@ -7,6 +13,8 @@
       eval $(ssh-agent -c) &>/dev/null
       ssh-add $HOME/.ssh/id_github &>/dev/null
       ssh-add $HOME/.ssh/id_work &>/dev/null
+      ssh-add $HOME/.ssh/zroot &>/dev/null
+
     '';
 
     interactiveShellInit = ''
@@ -97,6 +105,37 @@
         end
       '';
 
+      compress = ''
+        function compress -d "Create an archive" -a filename
+            if [ -e $filename ]
+                echo "$filename already exists."
+                return
+            end
+            set -l args $argv[2..-1]
+            set -l size (du -ck $args | tail -n 1 | cut -f 1)
+
+            echo "Creating a tarball of $filename"
+            switch $filename
+                case '*.tar.gz'
+                    tar cf - $args | pv -p -s {$size}k | gzip -c > $filename
+                case '*.tgz'
+                    tar cf - $args | pv -p -s {$size}k | gzip -c > $filename
+                case '*.tar.bz'
+                    tar cf - $args | pv -p -s {$size}k | bzip2 -c > $filename
+                case '*.tbz'
+                    tar cf - $args | pv -p -s {$size}k | bzip2 -c > $filename
+                case '*.zip'
+                    zip $filename $args
+                case '*'
+                    set -l extension (echo $filename | awk -F . '{print $NF}')
+                    echo "I don't know how to make a '$extension' file."
+                    return
+                end
+            set -l shrunk (du -sk $filename | cut -f 1)
+            set -l ratio ( math 100 - "$shrunk * 100.0 / $size")
+            echo Reduced {$size}k to {$shrunk}k \({$ratio}%\)
+        end
+      '';
     };
   };
 }
