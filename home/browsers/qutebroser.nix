@@ -320,13 +320,13 @@
       c.colors.tabs.pinned.odd.fg = base07
 
       # Background color of pinned selected even tabs.
-      c.colors.tabs.pinned.selected.even.bg = "#B16286"
+      c.colors.tabs.pinned.selected.even.bg = "#458588"
 
       # Foreground color of pinned selected even tabs.
       c.colors.tabs.pinned.selected.even.fg = base05
 
       # Background color of pinned selected odd tabs.
-      c.colors.tabs.pinned.selected.odd.bg = "#B16286"
+      c.colors.tabs.pinned.selected.odd.bg = "#458588"
 
       # Foreground color of pinned selected odd tabs.
       c.colors.tabs.pinned.selected.odd.fg = base05
@@ -335,13 +335,13 @@
       c.colors.tabs.selected.odd.fg = base05
 
       # Background color of selected odd tabs.
-      c.colors.tabs.selected.odd.bg = "#B16286"
+      c.colors.tabs.selected.odd.bg = "#458588"
 
       # Foreground color of selected even tabs.
       c.colors.tabs.selected.even.fg = base05
 
       # Background color of selected even tabs.
-      c.colors.tabs.selected.even.bg = "#B16286"
+      c.colors.tabs.selected.even.bg = "#458588"
 
       # Background color for webpages if unset (or empty to use the theme's
       # color).
