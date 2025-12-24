@@ -197,6 +197,13 @@
         desc = "Spot hovered file";
       }
 
+      # Task manager
+      {
+        on = "w";
+        run = "tasks:show";
+        desc = "Show task manager";
+      }
+
       # Operation
       {
         on = "o";
@@ -660,13 +667,6 @@
         desc = "Swap current tab with next tab";
       }
 
-      # Tasks
-      {
-        on = "w";
-        run = "tasks_show";
-        desc = "Show task manager";
-      }
-
       # Help
       {
         on = "~";
@@ -682,26 +682,15 @@
 
     tasks.keymap = [
       {
-        on = "<Esc>";
-        run = "close";
-        desc = "Close task manager";
-      }
-      {
-        on = "<C-[>";
-        run = "close";
-        desc = "Close task manager";
-      }
-      {
-        on = "<C-c>";
-        run = "close";
-        desc = "Close task manager";
-      }
-      {
         on = "w";
         run = "close";
         desc = "Close task manager";
       }
-
+      {
+        on = "<Esc>";
+        run = "close";
+        desc = "Close task manager";
+      }
       {
         on = "k";
         run = "arrow -1";
