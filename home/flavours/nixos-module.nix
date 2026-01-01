@@ -36,6 +36,7 @@
     description = "${username}";
     extraGroups = [
       "networkmanager"
+      "users"
       "wheel"
     ];
     ignoreShellProgramCheck = true;
@@ -43,4 +44,5 @@
   };
 
   nix.settings.allowed-users = [ "${username}" ];
+  nix.settings.trusted-users = [ "${username}" ];
 }
