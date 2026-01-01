@@ -94,7 +94,7 @@
           passes = 2;
           brightness = 1;
           contrast = 1.4;
-          ignore_opacity = true;
+          # ignore_opacity = true;
           noise = 0;
           new_optimizations = true;
           xray = true;
@@ -165,7 +165,7 @@
         "$mainMod, V, exec, hyprctl dispatch exec '[centerwindow; size monitor_w*0.5 monitor_h*0.5] pavucontrol'"
         "$mainMod SHIFT, B, exec, toggle-waybar"
         "$mainMod, C ,exec, hyprpicker -a"
-        "$mainMod SHIFT, W,exec, hyprctl dispatch exec '[centerwindow; size monitor_w*0.5 monitor_h*0.5] waypaper'"
+        "$mainMod SHIFT, W,exec, hyprctl dispatch exec '[center true; size monitor_w*0.5 monitor_h*0.5] waypaper'"
         "$mainMod, N, exec, swaync-client -t -sw"
 
         # screenshot
@@ -269,58 +269,28 @@
 
       # windowrule
       windowrule = [
-        "match:class ^(Viewnior)$ float"
-        "match:class ^(imv)$ float"
-        "match:class ^(mpv)$ float"
-        "match:class ^(Aseprite)$ tile"
-        "match:class ^(Audacious)$ float"
-        "match:class ^(rofi)$ pin"
-        "match:class ^(waypaper)$, pin true"
-        "match:title ^(Transmission)$ float"
-        "match:title ^(Volume Control)$ float"
-        "match:title ^(Firefox — Sharing Indicator)$ float"
-        "match:title ^(Firefox — Sharing Indicator)$ move 0 0"
-        "match:title ^(Volume Control)$ size monitor_w*0.5 monitor_h*0.5"
-        "match:title ^(Volume Control)$ move 40 55%"
+        "match:class ^(mpv)$, float true, size monitor_w*0.5 monitor_h*0.5, center true"
+        "match:class ^(rofi)$, pin true"
+        "match:class ^(waypaper)$, float true, size monitor_w*0.5 monitor_h*0.5, center true, pin true"
+        "match:title ^(Transmission)$, float true, size monitor_w*0.5 monitor_h*0.5, center true"
+        "match:title ^(Volume Control)$, float true, size monitor_w*0.5 monitor_h*0.5, center true"
 
-        "match:title ^(Picture-in-Picture)$ float"
-        "match:title ^(Picture-in-Picture)$ opacity 1.0 override 1.0 override"
-        "match:title ^(Picture-in-Picture)$ pin"
-        "match:title ^(.*imv.*)$ opacity 1.0 override 1.0 override"
-        "match:title ^(.*mpv.*)$ opacity 1.0 override 1.0 override"
-        "match:class (Aseprite) opacity 1.0 override 1.0 override"
-        "match:class (Unity) opacity 1.0 override 1.0 override"
-        "match:class (zen) opacity 1.0 override 1.0 override"
-        "match:class (evince) opacity 1.0 override 1.0 override"
-        "match:class ^(mpv)$ idleinhibit focus"
-        "match:class ^(firefox)$ idleinhibit fullscreen"
-        "match:class ^(org.gnome.Calculator)$ float"
+        "match:title ^(Picture-in-Picture)$, float true"
+        "match:class ^(org.gnome.Calculator)$, float true, center true"
         # TODO: does not resize when called from rofi
-        "match:class ^(waypaper)$, float true"
-        "match:class ^(waypaper)$, size monitor_w*0.5 monitor_h*0.5"
-        "match:class ^(zenity)$ float"
-        "match:class ^(org.gnome.FileRoller)$ float"
-        "match:class ^(org.pulseaudio.pavucontrol)$ float"
-        "match:class ^(SoundWireServer)$ float"
-        "match:class ^(.sameboy-wrapped)$ float"
-        "match:class ^(file_progress)$ float"
-        "match:class ^(confirm)$ float"
-        "match:class ^(dialog)$ float"
-        "match:class ^(download)$ float"
-        "match:class ^(notification)$ float"
-        "match:class ^(error)$ float"
-        "match:class ^(confirmreset)$ float"
-        "match:title ^(Open File)$ float"
-        "match:title ^(File Upload)$ float"
-        "match:title ^(branchdialog)$ float"
-        "match:title ^(Confirm to replace files)$ float"
-        "match:title ^(File Operation Progress)$ float"
-
-        "match:class ^(xwaylandvideobridge)$ opacity 0.0 override"
-        "match:class ^(xwaylandvideobridge)$ noanim"
-        "match:class ^(xwaylandvideobridge)$ noinitialfocus"
-        "match:class ^(xwaylandvideobridge)$ maxsize 1 1"
-        "match:class ^(xwaylandvideobridge)$ noblur"
+        "match:class ^(waypaper)$, float true, center true, size monitor_w*0.5 monitor_h*0.5"
+        "match:class ^(org.pulseaudio.pavucontrol)$, float true"
+        "match:class ^(SoundWireServer)$, float true"
+        "match:class ^(file_progress)$, float true"
+        "match:class ^(confirm)$, float true"
+        "match:class ^(dialog)$, float true"
+        "match:class ^(download)$, float true"
+        "match:class ^(notification)$, float true"
+        "match:class ^(error)$, float true"
+        "match:class ^(confirmreset)$, float true"
+        "match:title ^(Open File)$, float true"
+        "match:title ^(File Upload)$, float true"
+        "match:title ^(branchdialog)$, float true"
 
         # No border when only one tiled window on workspace
         "match:float false, match:workspace w[t1], border_size 0"
