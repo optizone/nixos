@@ -30,11 +30,8 @@ delete mine) or you can use `generic-pc` or `generic-laptop`.
 # CLI at this moment) assume that $HOME/nixos is your system flake.
 cd ~
 
-# Obtain the source code
-git clone https://github.com/optizone/nixos.git && cd nixos
-
-# Obtain wallpapers (optional: more on this at Installing wallpapers section)
-git clone git@github.com:optizone/wallpapers.git ~/Pictures/wallpapers
+# Obtain the source code (--recurse-submodules for wallpappers)
+git clone --recurse-submodules https://github.com/optizone/nixos.git && cd nixos
 
 # Set git credentials with your own
 sed -i 's/gitUsername = "optizone"/gitUsername = "git-username"/' flake.nix
