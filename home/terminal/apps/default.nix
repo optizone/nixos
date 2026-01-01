@@ -27,11 +27,11 @@ in
   };
 
   imports = [
-    ./eza/default.nix
+    ./eza
     ./fd.nix
     ./dust.nix
-    ./fastfetch/default.nix
-    ./yazi/default.nix
+    ./fastfetch
+    ./yazi
     ./bat.nix
     ./btop.nix
     ./fzf.nix

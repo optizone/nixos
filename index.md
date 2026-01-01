@@ -64,7 +64,7 @@ reboot
 nh --help
 ```
 
-> NOTE: There is a module at `home/flavours/standalone` for generic linux
+> [!NOTE]: There is a module at `home/flavours/standalone` for generic linux
 > installation, but it isn't tested so you can try to figure that one out if you
 > want to (PR's are welcomed).
 

@@ -1400,6 +1400,7 @@
       # Dropping to the shell
       {
         on = "!";
+        # TODO: user defined shell
         run = "shell fish --block";
         desc = "Open $SHELL here";
         for = "linux";

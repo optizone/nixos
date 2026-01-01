@@ -36,7 +36,6 @@
       enabled_layouts = "grid";
     };
 
-    extraConfig = "include current-theme.conf";
 
     keybindings = {
       ## Tabs
