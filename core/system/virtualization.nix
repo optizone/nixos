@@ -2,7 +2,6 @@
 {
   users.users.${username}.extraGroups = [ "libvirtd" ];
 
-  # Install necessary packages
   environment.systemPackages = with pkgs; [
     virt-manager
     virt-viewer
@@ -14,7 +13,6 @@
     adwaita-icon-theme
   ];
 
-  # Manage the virtualisation services
   virtualisation = {
     libvirtd = {
       enable = true;
