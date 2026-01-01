@@ -1,7 +1,7 @@
 keys:
-  - &zroot age1prdcdxufzzpxtufcjzw40w4xpu5e6tyg5gg9fadm5as3jjm03gws3gza9d
+  - &zroot age1fju47f2mtxvp0e7ty9arxvj3r5g74wquqm6ta2nmdt53j0kzqegq4v8rrh
   - &thinkpad age19y20q5xtde7m6hll73efnapefwqwazfq6lm6zqf89c49wpj4ug6s3jsg4e
-  - &rpi516g-k age1nyncl9kqwm9tljs6ctct0h7jwwzet3kyvgk60znlwmxu6fk8ld0suau45t
+  - &rpi516g-k age1ds0335ylww0stvwlm4fdwtkf95zpte7vjr57cmasvcthjkff3u9qgt4eaz
 creation_rules:
   - path_regex: ^secrets\.yaml$
     key_groups:
