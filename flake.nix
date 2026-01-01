@@ -59,6 +59,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+
+    # ============ RaspberryPi related inputs ============
+
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
+
+    sops-nix-rpi = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
+    };
+
+    disko-rpi = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
+    };
+    # ====================================================
   };
 
   outputs =
@@ -67,7 +85,11 @@
       self,
       nix-index-database,
       home-manager,
+      nixos-raspberrypi,
+      disko-rpi,
+      impermanence,
       sops-nix,
+      sops-nix-rpi,
       ...
     }@inputs:
     let
@@ -108,6 +130,22 @@
       };
 
       nixosConfigurations = {
+        rpi5-k = nixos-raspberrypi.lib.nixosSystemFull {
+          specialArgs = {
+            inherit inputs nixos-raspberrypi;
+            username = "nixos";
+            host = "rpi5-k";
+            hostId = "deadb33f";
+          };
+
+          modules = [
+            ./hosts/rpi5-k
+            sops-nix-rpi.nixosModules.sops
+            disko-rpi.nixosModules.disko
+            impermanence.nixosModules.impermanence
+          ];
+        };
+
         thinkpad = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [

@@ -1,14 +1,17 @@
-# NixOS Flake gruv-rice-box
+# ZROOT INFRA
 
-My personal Gruvbox themed rice of NixOS based on Hyprland. It also contains all
-necessary integrations with zroot-infra and NixOS Flake configs of some of its
-services.
+Personal infrastructure config and Hyrpand rice.
+
+Content:
+
+- [Hyrland rice](#gruv-rice-box)
+- [Infrastructure](#infrastructure)
+
+## Gruv-Rice-Box
 
 ![nvim-btop](./screenshots/nvim-btop.png)
 
-## About
-
-Workflow based around these programs:
+Workflow is based around these programs:
 
 - Hyprland (Wayland)
 - fish
@@ -61,16 +64,11 @@ reboot
 nh --help
 ```
 
-### Installing wallpapers
+> NOTE: There is a module at `home/flavours/standalone` for generic linux
+> installation, but it isn't tested so you can try to figure that one out if you
+> want to (PR's are welcomed).
 
-At this point wallpapers are expected to be located at `~/Pictures/wallpapers`.
-This repository does not contain wallpapers because I'm not sure at the moment
-how to best approach storing and linking them to the config. So you have 2
-options: manually install your wallpappers into `~Pictures/wallpappers` or run
-`git clone git@github.com:optizone/wallpapers.git ~/Pictures/wallpapers` to
-download mine.
-
-### Fine grained configuration
+### Configuration
 
 Each module contains `default.nix` file that is used in `generic-*` systems. If
 you want to select what software to install (for example you only need `firefox`
@@ -85,6 +83,68 @@ line in `user.nix` with the list of modules you want to enable (for example
 
 ![all-terminal](./screenshots/all-terminal.png)
 
+## Infrastructure
+
+> [!WARNING]
+> This section (as also this very git repo) is under heavy development. Use
+> wisely, don't run commands that you don't understand or haven't read.
+
+All servers are using impermanence (`/` gets wiped at every boot) and sops to
+manage secrets. This combo creates some challenges in provisioning systems on
+new servers and also in configuring new, so be causious on what you really need
+to persist and don't forget to do so.
+
+### Quick start
+
+How to provision config to remote host. Tested on RaspberryPi 5 running custom
+installer image. You can build one yourself fillowing instructions at
+<https://github.com/nvmd/nixos-raspberrypi>.
+
+This is how to setup `rpi5-k` host. Assuming it has IP 192.168.68.118.
+
+```Bash
+# On remote host:
+# Print remote host age
+cat /etc/ssh/ssh_host_ed25519_key.pub | nix run nixpkgs#ssh-to-age
+
+# On local machine:
+# Add age key to .sops.yaml 
+nvim .sops.yaml
+
+# Update secrets.yaml with new host key
+nix run nixpkgs#sops updatekeys secrets.yaml
+
+nix run github:nix-community/nixos-anywhere -- --build-on remote \
+    --flake ./#rpi5-k \
+    --target-host root@192.168.68.118 \
+    # This will create `hardware-configuration.nix` module. In this particular
+    # example it is already created, but for new hosts you won't have one.
+    # So don't forget to import it.
+    --generate-hardware-config nixos-generate-config \
+        ./hosts/rpi5-k/hardware-configuration.nix \
+    --copy-host-keys \
+    # Omit default `restart` phase so we can move host keys to persistent storage
+    --phases kexec,disko,install
+
+# On remote host:
+# Copy ssh keys to persistent location 
+cp /etc/ssh/ssh_host_ed25519_key* /mnt/persist/etc/ssh
+
+# At this point configuration is done
+reboot
+
+# On local host:
+# Now you can provision the system using --target-host option
+nixos-rebuild switch \
+    --use-remote-sudo \
+    --ask-sudo-password \
+    --flake ./#rpi5-k \
+    --target-host nixos@192.168.68.118 \
+    --build-host nixos@192.168.68.118
+```
+
 ## Special thanks
 
-To @Frost-Phoenix's rice of NixOS for inspiration.
+To @Frost-Phoenix for inspiration (and configs).\
+To @grahamc for his post
+["Erase your darlings"](https://grahamc.com/blog/erase-your-darlings/).
