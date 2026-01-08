@@ -18,7 +18,7 @@
 
     users.${username} = {
       imports = [
-        ../default.nix
+        ../headless.nix
       ];
       home = {
         username = "${username}";
@@ -36,6 +36,7 @@
       "networkmanager"
       "users"
       "wheel"
+      "${username}"
     ];
     ignoreShellProgramCheck = true;
     inherit shell;

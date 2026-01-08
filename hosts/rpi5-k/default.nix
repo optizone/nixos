@@ -50,6 +50,7 @@
     ../../core/services/jellyfin.nix
     ../../core/services/grocy.nix
 
+    ../../home/flavours/headless-module.nix
     ../../home/terminal/apps/starship.nix
   ];
 
