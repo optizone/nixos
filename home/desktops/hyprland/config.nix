@@ -155,8 +155,9 @@
         "$mainMod SHIFT, SPACE, fullscreen, 1"
         "$mainMod, F, exec, toggle-float"
         "$mainMod SHIFT, D, exec, rofi -show drun || pkill rofi"
-        "$mainMod SHIFT, Return, exec, $term fish -c y"
         "$mainMod SHIFT, N, exec, $term --session zroot"
+        # FIXME: env hack
+        "$mainMod SHIFT, Return, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] EDITOR=$$EDITOR SHELL=$$SHELL $term yazi"
         "$mainMod SHIFT, O, exec, qutebrowser"
         "$mainMod, Escape, exec, swaylock"
         "ALT, Escape, exec, hyprlock"
