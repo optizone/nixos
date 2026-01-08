@@ -1,0 +1,17 @@
+separator=">"
+separator_color="red"
+key_color="red"
+prefer_small_ascii = true
+
+# [custom_ascii]
+# color="red"
+# path="~/.dotfiles/macchina/themes/ascii-arch.txt"
+
+[keys]
+host="HOST"
+kernel="KERNEL"
+distro="DISTRO"
+packages="PKGS"
+cpu="CPU"
+memory="MEM"
+battery="BAT"

@@ -1,8 +1,10 @@
 { pkgs, font, ... }:
 {
   fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
+    nerd-fonts.bigblue-terminal
     nerd-fonts.symbols-only
     twemoji-color-font
     noto-fonts-color-emoji

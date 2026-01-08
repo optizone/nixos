@@ -26,7 +26,9 @@
       set -g theme_nerd_fonts yes
 
       if not test $FISH_INIT_SUPPRESS_FASTFETCH;
-        fastfetch
+        # fastfetch
+        # pfetch
+        macchina -t theme -o host -o kernel -o distribution -o packages -o processor -o memory
       end
     '';
 

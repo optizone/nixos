@@ -31,6 +31,7 @@ in
     ./fd.nix
     ./dust.nix
     ./fastfetch
+    ./macchina
     ./yazi
     ./bat.nix
     ./btop.nix
