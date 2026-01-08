@@ -35,10 +35,15 @@
       colors.webpage.preferred_color_scheme = "dark";
     };
 
+    aliases = {
+      "darkmode" = "config-cycle colors.webpage.darkmode.enabled";
+    };
+
     keyBindings = {
       "normal" = {
         "J" = "tab-prev";
         "K" = "tab-next";
+        "V" = "darkmode";
       };
     };
 
