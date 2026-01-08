@@ -1,10 +1,4 @@
-{ pkgs, inputs, ... }:
-let
-  customNeovim = inputs.nvf.lib.neovimConfiguration {
-    inherit pkgs;
-    modules = [ ./neovim ];
-  };
-in
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     jq
@@ -19,12 +13,7 @@ in
     wget
     file
     netcat
-    customNeovim.neovim
   ];
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 
   imports = [
     ./eza
@@ -33,6 +22,7 @@ in
     ./fastfetch
     ./macchina
     ./yazi
+    ./neovim
     ./bat.nix
     ./btop.nix
     ./fzf.nix
