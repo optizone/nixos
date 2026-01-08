@@ -1,4 +1,5 @@
 {
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
@@ -72,6 +73,11 @@
 
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
+    home-manager-rpi = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
+    };
+
     sops-nix-rpi = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
@@ -90,6 +96,7 @@
       self,
       nix-index-database,
       home-manager,
+      home-manager-rpi,
       nixos-raspberrypi,
       disko-rpi,
       impermanence,
@@ -101,6 +108,8 @@
       system = "x86_64-linux";
       font = "JetBrainsMono Nerd Font";
       fontMono = "${font} Mono";
+      # font = "BigBlueTermPlus Nerd Font";
+      # fontMono = "${font} Mono";
       shell = pkgs.fish;
 
       gitUsername = "optizone";
@@ -135,12 +144,13 @@
       };
 
       nixosConfigurations = {
-        rpi5-k = nixos-raspberrypi.lib.nixosSystemFull {
+        rpi5-k = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = {
             inherit inputs nixos-raspberrypi;
             username = "nixos";
             host = "rpi5-k";
             hostId = "deadb33f";
+            shell = pkgs.bash;
           };
 
           modules = [
@@ -148,6 +158,7 @@
             sops-nix-rpi.nixosModules.sops
             disko-rpi.nixosModules.disko
             impermanence.nixosModules.impermanence
+            home-manager-rpi.nixosModules.home-manager
           ];
         };
 
@@ -157,6 +168,7 @@
             ./hosts/thinkpad
             nix-index-database.nixosModules.nix-index
             sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
           ];
           specialArgs = {
             host = "thinkpad";
