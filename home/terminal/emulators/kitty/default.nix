@@ -1,5 +1,7 @@
 { fontMono, ... }:
 {
+  imports = [ ./sessions ];
+
   programs.kitty = {
     enable = true;
 
@@ -29,13 +31,14 @@
       active_tab_background = "#7C6F64";
       inactive_tab_foreground = "#FBF1C7";
       inactive_tab_background = "#3C3836";
+      active_border_color = "#b16286";
+      inactive_border_color = "#3c3836";
 
       shell = "fish";
       shell_integration = "enabled";
 
       enabled_layouts = "grid";
     };
-
 
     keybindings = {
       ## Tabs
@@ -56,8 +59,8 @@
       ## Windows
       "alt+w" = "close_window";
       "alt+enter" = "new_window";
-      "alt+]" = "next_window";
-      "alt+[" = "previous_window";
+      "alt+l" = "next_window";
+      "alt+h" = "previous_window";
 
       ## Scrolling
       "alt+k" = "scroll_line_up";

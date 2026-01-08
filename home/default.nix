@@ -23,7 +23,7 @@
     ./scripts
 
     ./terminal/apps
-    ./terminal/emulators/kitty.nix
+    ./terminal/emulators/kitty
     ./terminal/shells/fish.nix
 
     ./ui/kanshi.nix

@@ -1,0 +1,21 @@
+new_tab
+layout grid
+enabled_layouts grid
+
+launch --cwd=~/zroot fish -C "nvim -c 'Neotree reveal' tasks.md"
+
+new_tab
+layout grid
+enabled_layouts grid
+
+launch --cwd=~/zroot/nixos fish -C "nvim -c 'Neotree reveal' flake.nix"
+
+new_tab
+layout grid
+enabled_layouts grid
+cd ~/zroot/nixos
+
+launch --cwd=~/zroot/nixos fish
+launch --env FISH_INIT_SUPPRESS_FASTFETCH=true --cwd=~/zroot/nixos fish -C "kitten ssh nixos@192.168.68.118"
+
+focus_tab 0

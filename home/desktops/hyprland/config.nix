@@ -156,6 +156,7 @@
         "$mainMod, F, exec, toggle-float"
         "$mainMod SHIFT, D, exec, rofi -show drun || pkill rofi"
         "$mainMod SHIFT, Return, exec, $term fish -c y"
+        "$mainMod SHIFT, N, exec, $term --session zroot"
         "$mainMod SHIFT, O, exec, qutebrowser"
         "$mainMod, Escape, exec, swaylock"
         "ALT, Escape, exec, hyprlock"
