@@ -41,7 +41,7 @@
     python.enable = true;
     rust = {
       enable = true;
-      crates.enable = true;
+      # crates.enable = true;
       lsp.opts = ''
         ['rust-analyzer'] = {
           cargo = { allFeature = true },

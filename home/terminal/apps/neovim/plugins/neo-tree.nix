@@ -37,7 +37,7 @@
       git_status_async = true;
 
       filesystem = {
-        follow_current_file.enabled = false;
+        follow_current_file.enabled = true;
         use_libuv_file_watcher = true;
       };
     };

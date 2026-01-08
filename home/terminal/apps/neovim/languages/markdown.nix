@@ -7,6 +7,7 @@
       lsp.enable = true;
       treesitter.enable = true;
       extensions.render-markdown-nvim.enable = true;
+      # extensions.markview-nvim.enable = true;
     };
 
     utility = {
