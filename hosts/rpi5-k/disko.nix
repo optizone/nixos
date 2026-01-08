@@ -5,6 +5,8 @@ _: {
 
     directories = [
       "/var/lib/nixos"
+      "/var/lib/jellyfin"
+      "/var/lib/grocy"
     ];
 
     files = [

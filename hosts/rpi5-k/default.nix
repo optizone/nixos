@@ -36,7 +36,7 @@
   imports = with nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.page-size-16k
-    # raspberry-pi-5.bluetooth
+    raspberry-pi-5.bluetooth
 
     ./disko.nix
     ./hardware-configuration.nix
@@ -44,9 +44,13 @@
 
     ../../core/system/nh.nix
 
+    ./nginx.nix
     ../../core/services/smb.nix
     ../../core/services/nfs.nix
+    ../../core/services/jellyfin.nix
+    ../../core/services/grocy.nix
 
+    ../../home/terminal/apps/starship.nix
   ];
 
   networking.hostName = "${host}";
