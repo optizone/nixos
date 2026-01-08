@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   services.kanshi = {
     enable = true;
     systemdTarget = "hyprland-session.target";
@@ -10,7 +9,7 @@
           {
             criteria = "eDP-1";
             status = "enable";
-            scale = 1.25;
+            scale = 1.33;
           }
         ];
       }
@@ -21,7 +20,6 @@
           {
             criteria = "eDP-1";
             status = "disable";
-            scale = 1.25;
           }
           {
             criteria = "DP-5";
@@ -40,7 +38,6 @@
           {
             criteria = "eDP-1";
             status = "disable";
-            scale = 1.25;
           }
           {
             criteria = "DP-7";
