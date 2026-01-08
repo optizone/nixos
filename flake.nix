@@ -34,6 +34,11 @@
       };
     };
 
+    wallpapers = {
+      url = "git+file:wallpapers"; # the submodule is in the ./subproject dir
+      flake = false;
+    };
+
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;

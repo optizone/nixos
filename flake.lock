@@ -823,6 +823,7 @@
         "sops-nix": "sops-nix",
         "sops-nix-rpi": "sops-nix-rpi",
         "spicetify-nix": "spicetify-nix",
+        "wallpapers": "wallpapers",
         "yazi-plugins": "yazi-plugins"
       }
     },
@@ -931,6 +932,22 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1758292277,
+        "narHash": "sha256-UxLU5E2swrLeWo9BKrHDqVwF6dEVZJZcVjjl+YmW++E=",
+        "ref": "refs/heads/main",
+        "rev": "aa3b59b89b7b2138d6735528760051956724d87f",
+        "revCount": 1,
+        "type": "git",
+        "url": "file:wallpapers"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:wallpapers"
       }
     },
     "xdph": {
