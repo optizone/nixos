@@ -41,14 +41,14 @@ _: {
       };
     };
 
-    # virtualHosts."grocy.local" = {
-    #   # enableACME = true;
-    #   # forceSSL = true;
-    #
-    #   locations."/" = {
-    #     proxyPass = "http://localhost:7878/";
-    #     proxyWebsockets = true; # needed if you need to use WebSocket
-    #   };
-    # };
+    virtualHosts."adguard.local" = {
+      # enableACME = true;
+      # forceSSL = true;
+
+      locations."/" = {
+        proxyPass = "http://localhost:3000/";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
   };
 }

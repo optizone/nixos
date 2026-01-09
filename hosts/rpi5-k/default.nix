@@ -29,6 +29,7 @@
     ../../core/services/jellyfin.nix
     ../../core/services/grocy.nix
     ../../core/services/openssh.nix
+    ../../core/services/adguard.nix
 
     ../../home/flavours/headless-module.nix
     ../../home/terminal/apps/starship.nix
