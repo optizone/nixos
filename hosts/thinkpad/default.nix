@@ -10,6 +10,8 @@
     ../../home/flavours/nixos-module.nix
 
     ../../core/services/lubelogger.nix
+
+    ./rsync.nix
   ];
 
   # =======================================================
