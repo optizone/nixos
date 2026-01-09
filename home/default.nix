@@ -45,6 +45,9 @@
     gnome-calculator
     wineWowPackages.wayland
 
+    caligula # TUI disk burner
+    pastel # CLI colors
+
     # todo: package
     thunderbird
 
