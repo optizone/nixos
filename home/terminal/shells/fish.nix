@@ -28,7 +28,7 @@
       if not test $FISH_INIT_SUPPRESS_FASTFETCH;
         # fastfetch
         # pfetch
-        macchina -t theme -o host -o kernel -o distribution -o packages -o processor -o memory
+        macchina -t theme -o host -o machine -o kernel -o distribution -o packages -o processor -o memory
       end
     '';
 

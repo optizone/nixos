@@ -9,9 +9,10 @@ prefer_small_ascii = true
 
 [keys]
 host="HOST"
-kernel="KERNEL"
-distro="DISTRO"
+kernel="KRNL"
+distro="DSTR"
 packages="PKGS"
 cpu="CPU"
 memory="MEM"
 battery="BAT"
+machine="HRDW"
