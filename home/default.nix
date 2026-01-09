@@ -25,7 +25,7 @@
     ./terminal/apps
     ./terminal/emulators/kitty
     ./terminal/shells/fish.nix
-    ./terminal/shells/bash.nix
+    # ./terminal/shells/bash.nix
 
     ./ui/kanshi.nix
     ./ui/wallpapers.nix
