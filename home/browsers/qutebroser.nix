@@ -3,6 +3,10 @@
   programs.qutebrowser = {
     enable = true;
 
+    searchEngines = {
+      g = "https://www.google.com/search?q={}";
+    };
+
     settings = {
       auto_save.session = true;
       colors.webpage.darkmode = {
@@ -26,7 +30,7 @@
         ];
       };
 
-      # TODO: greasemonkey; editor.command
+      # TODO: greasemonkey; editor.command; castnow usercript; pass userscript
 
       tabs.max_width = 255;
 
