@@ -1,37 +1,48 @@
-{ pkgs, config, ... }:
-let
-  goodix-gt7868q = config.boot.kernelPackages.callPackage ./goodix-gt7868q.nix { };
-in
+{ username, lib, ... }:
 {
+  # =======================================================
+
   imports = [
-    ../laptop-common/default.nix
+    ../../core
+    ../../core/laptop.nix
     ./hardware-configuration.nix
 
     ../../home/flavours/nixos-module.nix
 
     ../../core/services/lubelogger.nix
-    ../../core/services/smb.nix
   ];
+
+  # =======================================================
+
+  nix.settings = {
+    substituters = [
+      "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
+
+  nixpkgs.config.allowUnfree = true;
+  system.stateVersion = "24.05";
+  home-manager.users.${username}.home.stateVersion = lib.mkForce "24.05";
+
+  # =======================================================
+
+  time.timeZone = "Europe/Moscow";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];
+
+  # =======================================================
 
   programs.winbox = {
     enable = true;
     openFirewall = true;
   };
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  # environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''
-  #   [Lenovo Thinkbook G6+ IMH - Goodix GT7868Q]
-  #   MatchDMIModalias=dmi:bvnLENOVO:*:pvrThinkBook*G6+IMH*:*
-  #   MatchVendor=0x27C6
-  #   MatchProduct=0x01E9
-  #
-  #   #AttrEventCode=-ABS_MT_PRESSURE;-ABS_PRESSURE;
-  #   AttrPressureRange=2:0
-  #   AttrPalmPressureThreshold=600
-  #   AttrThumbPressureThreshold=1000
-  # '';
+  # =======================================================
 
-  # boot = {
-  #   extraModulePackages = [ goodix-gt7868q ];
-  # };
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

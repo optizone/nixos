@@ -36,7 +36,7 @@
     };
 
     wallpapers = {
-      url = "git+file:wallpapers"; # the submodule is in the ./subproject dir
+      url = "git+file:wallpapers";
       flake = false;
     };
 

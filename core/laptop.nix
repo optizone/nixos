@@ -1,23 +1,18 @@
 { pkgs, config, ... }:
 {
-  imports = [
-    ../../core
-  ];
-
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
-
-  services.logind.settings.Login.HandleLidSwitch = "ignore";
 
   environment.systemPackages = with pkgs; [
     acpi
     brightnessctl
-    cpupower-gui
     powertop
   ];
 
   services = {
+    blueman.enable = true;
+    logind.settings.Login.HandleLidSwitch = "ignore";
+
     tlp.enable = true;
     tlp.settings = {
       # CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
@@ -52,24 +47,22 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = "performance";
+  # powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "low-power";
 
   boot = {
     kernelModules = [
       "acpi_call"
       "thinkpad_acpi"
     ];
+
     kernel.sysctl = {
       "vm.swappiness" = 10;
     };
-    extraModulePackages =
-      with config.boot.kernelPackages;
-      [
-        acpi_call
-        cpupower
-      ]
-      ++ [
-        pkgs.cpupower-gui
-      ];
+
+    extraModulePackages = with config.boot.kernelPackages; [
+      acpi_call
+      cpupower
+    ];
   };
 }

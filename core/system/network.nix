@@ -9,6 +9,10 @@
       ];
     };
 
+    hosts = {
+      "192.168.68.118" = [ "rpi5-k" ];
+    };
+
     firewall = {
       enable = true;
 
