@@ -1,7 +1,8 @@
-_: {
+{ domain, ... }:
+{
   services.grocy = {
     enable = true;
-    hostName = "grocy.local";
+    hostName = "grocy.${domain}";
 
     nginx = {
       enableSSL = false;

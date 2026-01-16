@@ -1,4 +1,5 @@
-_: {
+{ domain, ... }:
+{
 
   networking.firewall = {
     enable = false;
@@ -24,7 +25,7 @@ _: {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts."jellyfin.local" = {
+    virtualHosts."jellyfin.${domain}" = {
       # enableACME = true;
       # forceSSL = true;
 
@@ -41,12 +42,12 @@ _: {
       };
     };
 
-    virtualHosts."adguard.local" = {
+    virtualHosts."adguard.${domain}" = {
       # enableACME = true;
       # forceSSL = true;
 
       locations."/" = {
-        proxyPass = "http://localhost:3000/";
+        proxyPass = "http://localhost:3000";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
