@@ -12,6 +12,7 @@
     ../../core/services/lubelogger.nix
 
     ./rsync.nix
+    ./smb-rpi5-k.nix
   ];
 
   # =======================================================
