@@ -161,6 +161,11 @@ _: {
             type = "zfs_fs";
             mountpoint = "/export/media";
           };
+
+          home = {
+            type = "zfs_fs";
+            mountpoint = "/export/home";
+          };
         };
       };
     };

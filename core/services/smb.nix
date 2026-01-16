@@ -76,6 +76,16 @@ in
         "force user" = "${username}";
         "force group" = "users";
       };
+
+      home = {
+        "path" = "/export/home/";
+        "browseable" = "yes";
+        "public" = "no";
+        "writeable" = "yes";
+        "valid users" = "smbuser";
+        "force user" = "${username}";
+        "force group" = "users";
+      };
     };
   };
 
@@ -91,6 +101,7 @@ in
     "d /export/disk-images 0750 ${username} users"
     "d /export/kiwix-images 0750 ${username} users"
     "d /export/media 0750 ${username} users"
+    "d /export/home 0750 ${username} users"
   ];
 
   systemd.services.samba-smbd.serviceConfig.ExecStartPre = [
