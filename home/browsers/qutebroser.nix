@@ -5,6 +5,7 @@
 
     searchEngines = {
       g = "https://www.google.com/search?q={}";
+      d = "https://duckduckgo.com/?q={}";
     };
 
     settings = {
