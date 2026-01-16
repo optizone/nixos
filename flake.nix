@@ -115,6 +115,8 @@
       gitUsername = "optizone";
       gitEmail = "ilya.kek.lol.orbidol@gmail.com";
 
+      domain = "home.arpa";
+
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -146,8 +148,8 @@
       nixosConfigurations = {
         rpi5-k = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = {
-            inherit inputs nixos-raspberrypi;
-            username = "nixos";
+            inherit inputs nixos-raspberrypi domain;
+            username = "rpi5-k";
             host = "rpi5-k";
             hostId = "deadb33f";
             shell = pkgs.bash;

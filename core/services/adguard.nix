@@ -1,4 +1,5 @@
-_: {
+{ domain, ... }:
+{
   services.adguardhome = {
     enable = true;
     openFirewall = true;
@@ -6,8 +7,6 @@ _: {
     settings = {
       dns = {
         upstream_dns = [
-          "[/local/]192.168.68.1"
-          "[/optizone.duckdns.org/]192.168.68.1"
           "https://dns10.quad9.net/dns-query"
         ];
 
@@ -17,7 +16,81 @@ _: {
       filtering = {
         protection_enabled = true;
         filtering_enabled = true;
+
+        rewrites = [
+          {
+            domain = "*.${domain}";
+            answer = "192.168.68.118";
+          }
+
+          {
+            domain = "rpi5-k";
+            answer = "192.168.68.118";
+          }
+        ];
       };
+
+      filters = [
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt";
+          name = "AdGuard DNS filter";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt";
+          name = "AdAway Default Blocklist";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_59.txt";
+          name = "AdGuard DNS Popup Hosts filter";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_49.txt";
+          name = "HaGeZi's Ultimate Blocklist";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_46.txt";
+          name = "HaGeZi's Anti-Piracy Blocklist";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt";
+          name = "Phishing URL Blocklist (PhishTank and OpenPhish)";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_67.txt";
+          name = "HaGeZi's Apple Tracker Blocklist";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_37.txt";
+          name = "No Google";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt";
+          name = "Malicious URL Blocklist (URLHaus)";
+        }
+
+        {
+          enabled = true;
+          url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_50.txt";
+          name = "uBlock₀ filters – Badware risks";
+        }
+      ];
     };
   };
 }

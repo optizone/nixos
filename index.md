@@ -97,7 +97,7 @@ How to provision config to remote host. Tested on RaspberryPi 5 running custom
 installer image. You can build one yourself fillowing instructions at
 <https://github.com/nvmd/nixos-raspberrypi>.
 
-This is how to setup `rpi5-k` host. Assuming it has IP 192.168.68.118.
+This is how to setup `rpi5-k` host.
 
 ```Bash
 # On remote host:
@@ -113,7 +113,7 @@ nix run nixpkgs#sops updatekeys secrets.yaml
 
 nix run github:nix-community/nixos-anywhere -- --build-on remote \
     --flake ./#rpi5-k \
-    --target-host root@192.168.68.118 \
+    --target-host root@rpi5-k \
     # This will create `hardware-configuration.nix` module. In this particular
     # example it is already created, but for new hosts you won't have one.
     # So don't forget to import it.
@@ -136,8 +136,8 @@ nixos-rebuild switch \
     --use-remote-sudo \
     --ask-sudo-password \
     --flake ./#rpi5-k \
-    --target-host nixos@192.168.68.118 \
-    --build-host nixos@192.168.68.118
+    --target-host rpi5-k@rpi5-k \
+    --build-host rpi5-k@rpi5-k
 ```
 
 ## Special thanks
