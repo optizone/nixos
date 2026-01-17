@@ -22,9 +22,11 @@
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKSc1iIJ63VM55CIWnu4U8/YoqkKXr8QK+N74UcltYvY"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/cBsavT5TcgtRKwvfF64jTUgfIEEBGn75gHv7GuIc6 thinkpad"
   ];
 
   users.users.${username}.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKSc1iIJ63VM55CIWnu4U8/YoqkKXr8QK+N74UcltYvY"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/cBsavT5TcgtRKwvfF64jTUgfIEEBGn75gHv7GuIc6 thinkpad"
   ];
 }
