@@ -262,13 +262,13 @@
       }
       {
         on = "d";
-        run = "remove";
-        desc = "Trash selected files";
+        run = "remove --permanently";
+        desc = "Permanently delete selected files";
       }
       {
         on = "D";
-        run = "remove --permanently";
-        desc = "Permanently delete selected files";
+        run = "remove";
+        desc = "Trash selected files";
       }
       {
         on = "a";
