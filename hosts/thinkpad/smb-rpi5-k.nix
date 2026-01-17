@@ -3,38 +3,40 @@ let
   automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
   uid = "${username}";
   gid = "users";
-  credentialsPath = "/run/secrets/thinkpad/smb-client-auth";
+  credentialsPath = "/run/secrets/${username}/smb-client-auth";
 
   options = [ "${automount_opts},credentials=${credentialsPath},rw,uid=${uid},gid=${gid}" ];
   fsType = "cifs";
+
+  nasPath = "/home/${username}/zroot/nas/rpi5-k";
 in
 {
-  sops.secrets."thinkpad/smb-client-auth" = { };
+  sops.secrets."${username}/smb-client-auth" = { };
 
   services.samba.enable = true;
 
   fileSystems = {
-    "/home/${username}/zroot/nas/rpi5-k/backups" = {
+    "${nasPath}/backups" = {
       device = "//rpi5-k/backups";
       inherit options fsType;
     };
 
-    "/home/${username}/zroot/nas/rpi5-k/disk-images" = {
+    "${nasPath}/disk-images" = {
       device = "//rpi5-k/disk-images";
       inherit options fsType;
     };
 
-    "/home/${username}/zroot/nas/rpi5-k/kiwix-images" = {
+    "${nasPath}/kiwix-images" = {
       device = "//rpi5-k/kiwix-images";
       inherit options fsType;
     };
 
-    "/home/${username}/zroot/nas/rpi5-k/media" = {
+    "${nasPath}/media" = {
       device = "//rpi5-k/media";
       inherit options fsType;
     };
 
-    "/home/${username}/zroot/nas/rpi5-k/home" = {
+    "${nasPath}/home" = {
       device = "//rpi5-k/home/optizone";
       inherit options fsType;
     };
