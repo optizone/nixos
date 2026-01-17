@@ -1,4 +1,30 @@
 { username, pkgs, ... }:
+let
+  rsync-bak = pkgs.writeShellScript "rsync-bak" ''
+    ${pkgs.rsync}/bin/rsync -rpu \
+        -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/${username}' \
+        $@
+  '';
+
+  zrootPath = "/home/${username}/zroot";
+  dataPath = "${zrootPath}/ldata";
+  nasesPath = "${zrootPath}/nas";
+
+  backup-all = pkgs.writeShellScript "backup-all" ''
+    # local -> nas
+    ${rsync-bak} "${dataPath}/kiwix-images/" "${nasesPath}/rpi5-k/kiwix-images"
+    ${rsync-bak} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
+    ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media"
+    ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code"
+
+    ${rsync-bak} "${zrootPath}/" "${nasesPath}/rpi5-k/backups/zroot" \
+        --exclude-from "${zrootPath}/.gitignore"
+
+    # nas -> local
+    ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/kiwix-images"
+    ${rsync-bak} -a --delete-after "/persist" "${dataPath}/backups/rpi5-k/"
+  '';
+in
 {
   systemd.timers."backup-timer" = {
     wantedBy = [ "timers.target" ];
@@ -10,32 +36,10 @@
   };
 
   systemd.services."backup-all" = {
-    script = ''
-      ${pkgs.rsync}/bin/rsync -rpu \
-          -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/id_github' \
-          /home/${username}/zroot/data/kiwix-images/ \
-          rpi5-k@rpi5-k:/export/kiwix-images
-
-      ${pkgs.rsync}/bin/rsync -rpu \
-          -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/id_github' \
-          /home/${username}/zroot/data/disk-images/ \
-          rpi5-k@rpi5-k:/export/disk-images
-
-      ${pkgs.rsync}/bin/rsync -rpu \
-          -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/id_github' \
-          /home/${username}/code/
-          rpi5-k@rpi5-k:/export/backups/code
-
-      ${pkgs.rsync}/bin/rsync -rpu \
-          -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/id_github' \
-          --exclude-from /home/${username}/zroot/.gitignore \
-          /home/${username}/zroot/ \
-          rpi5-k@rpi5-k:/export/backups/zroot
-    '';
+    script = "${backup-all}";
 
     serviceConfig = {
       Type = "oneshot";
-      # TODO: username: default shell cant start
       User = "root";
     };
   };
