@@ -13,7 +13,10 @@
 
     settings = {
       PasswordAuthentication = true;
-      AllowUsers = [ "${username}" ];
+      AllowUsers = [
+        "${username}"
+        "root"
+      ];
       UseDns = true;
       X11Forwarding = false;
       PermitRootLogin = "prohibit-password";
