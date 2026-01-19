@@ -1,7 +1,7 @@
 { username, pkgs, ... }:
 let
   rsync-bak = pkgs.writeShellScript "rsync-bak" ''
-    ${pkgs.rsync}/bin/rsync -rpu \
+    ${pkgs.rsync}/bin/rsync --recursive --update \
         -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/${username}' \
         $@
   '';
@@ -22,7 +22,12 @@ let
 
     # nas -> local
     ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/kiwix-images"
-    ${rsync-bak} -a --delete-after "/persist" "${dataPath}/backups/rpi5-k/"
+
+    # FIXME:  please ):
+    rm -r "${dataPath}/backups/rpi5-k/stale"
+    cp -r "${dataPath}/backups/rpi5-k/latest" "${dataPath}/backups/rpi5-k/stale"
+    ${rsync-bak} "root@rpi5-k:/persist" "${dataPath}/backups/rpi5-k/latest" \
+        --archive --delete-after
   '';
 in
 {
