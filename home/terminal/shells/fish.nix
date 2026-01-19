@@ -13,7 +13,7 @@
       eval $(ssh-agent -c) &>/dev/null
       ssh-add $HOME/.ssh/id_github &>/dev/null
       ssh-add $HOME/.ssh/id_work &>/dev/null
-      ssh-add $HOME/.ssh/zroot &>/dev/null
+      ssh-add $HOME/.ssh/thinkpad &>/dev/null
 
     '';
 
