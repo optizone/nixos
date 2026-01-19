@@ -11,6 +11,8 @@ Content:
 
 ![nvim-btop](./screenshots/nvim-btop.png)
 
+> [!WARNING] Images are out of date.
+
 Workflow is based around these programs:
 
 - Hyprland (Wayland)
