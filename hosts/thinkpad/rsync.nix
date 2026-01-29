@@ -1,7 +1,7 @@
 { username, pkgs, ... }:
 let
   rsync-bak = pkgs.writeShellScript "rsync-bak" ''
-    ${pkgs.rsync}/bin/rsync --recursive --update \
+    ${pkgs.rsync}/bin/rsync --recursive --update --compress --partial --times \
         -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/${username}' \
         $@
   '';
@@ -14,14 +14,14 @@ let
     # local -> nas
     ${rsync-bak} "${dataPath}/kiwix-images/" "${nasesPath}/rpi5-k/kiwix-images"
     ${rsync-bak} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
-    ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media"
-    ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code"
+    ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media" 
+    ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code" 
 
     ${rsync-bak} "${zrootPath}/" "${nasesPath}/rpi5-k/backups/zroot" \
-        --exclude-from "${zrootPath}/.gitignore"
+        --exclude-from "${zrootPath}/.gitignore" 
 
     # nas -> local
-    ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/kiwix-images"
+    ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/kiwix-images" 
 
     # FIXME:  please ):
     rm -r "${dataPath}/backups/rpi5-k/stale"
