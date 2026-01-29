@@ -18,18 +18,23 @@
 
     ./disko.nix
     ./hardware-configuration.nix
-    ../../core/system/sops.nix
 
+    ../../core/system/sops.nix
     ../../core/system/common.nix
     ../../core/system/nh.nix
 
     ./nginx.nix
-    ../../core/services/smb.nix
-    ../../core/services/nfs.nix
-    ../../core/services/jellyfin.nix
-    ../../core/services/grocy.nix
-    ../../core/services/openssh.nix
-    ../../core/services/adguard.nix
+
+    ../../core/services/srv-utils/smb.nix
+    ../../core/services/srv-utils/nfs.nix
+    ../../core/services/srv-utils/openssh.nix
+    ../../core/services/srv-utils/adguard.nix
+
+    ../../core/services/media/jellyfin.nix
+
+    ../../core/services/web-utils/grocy.nix
+
+    ../../core/services/iot/home-assistant.nix
 
     ../../home/flavours/headless-module.nix
     ../../home/terminal/apps/starship.nix

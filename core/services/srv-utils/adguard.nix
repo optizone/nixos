@@ -74,7 +74,7 @@
         }
 
         {
-          enabled = true;
+          enabled = false;
           url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_37.txt";
           name = "No Google";
         }

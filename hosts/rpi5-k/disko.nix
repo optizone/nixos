@@ -7,6 +7,8 @@ _: {
       "/var/lib/nixos"
       "/var/lib/jellyfin"
       "/var/lib/grocy"
+      "/var/lib/AdGuardHome"
+      "/var/lib/containers/storage/home-assistant"
     ];
 
     files = [
