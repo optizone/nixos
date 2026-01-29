@@ -5,6 +5,13 @@
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.bigblue-terminal
+
+    # needed for CV
+    source-sans-pro
+    source-sans
+    roboto
+    font-awesome
+
     nerd-fonts.symbols-only
     twemoji-color-font
     noto-fonts-color-emoji
