@@ -16,7 +16,7 @@
     raspberry-pi-5.page-size-16k
     raspberry-pi-5.bluetooth
 
-    ./disko.nix
+    ./disks.nix
     ./hardware-configuration.nix
 
     ../../core/system/sops.nix
