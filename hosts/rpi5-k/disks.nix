@@ -137,6 +137,7 @@ _: {
       rpool = {
         type = "zpool";
         mode = "mirror";
+        rootFsOptions.compression = "lz4";
 
         datasets = {
           persist = {
