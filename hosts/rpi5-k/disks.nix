@@ -7,7 +7,11 @@ _: {
       "/var/lib/nixos"
       "/var/lib/jellyfin"
       "/var/lib/grocy"
-      "/var/lib/AdGuardHome"
+      {
+        directory = "/var/lib/private/AdGuardHome";
+        user = "nobody";
+        group = "nogroup";
+      }
       "/var/lib/containers/storage/home-assistant"
     ];
 
@@ -17,6 +21,11 @@ _: {
       "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
   };
+
+  # Needed for AdGuardHome
+  systemd.tmpfiles.rules = [
+    "d /var/lib/private 0700 root root"
+  ];
 
   sops.age.sshKeyPaths = [
     "/persist/etc/ssh/ssh_host_ed25519_key"
