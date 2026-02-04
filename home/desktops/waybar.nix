@@ -119,7 +119,7 @@ in
       format-wifi = "[WIFI {essid} ({signalStrength}%)]";
       format-ethernet = "[ETH]";
       # format-ethernet = "[ETH {ifname}]";
-      format-disconnected = "NO CONN";
+      format-disconnected = "[NO CONN]";
       format-alt = "[IP {ipaddr}/{cidr}]";
     };
 
