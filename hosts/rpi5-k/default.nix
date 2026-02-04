@@ -79,7 +79,7 @@
   users.users.root.hashedPasswordFile = config.sops.secrets."${host}/root-pass-hash".path;
   users.users.${username}.hashedPasswordFile = config.sops.secrets."${host}/user-pass-hash".path;
 
-  boot.loader.raspberryPi.bootloader = "kernel";
+  boot.loader.raspberry-pi.bootloader = "kernel";
   hardware.raspberry-pi.extra-config = ''
     dtparam=pciex1
     dtparam=pciex1_gen=3
