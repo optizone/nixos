@@ -9,6 +9,10 @@ _: {
         "home-assistant:/config"
         "/var/run/dbus:/run/dbus:ro" # Bluetooth support
       ];
+      capabilities = {
+        "NET_ADMIN" = true;
+        "NET_RAW" = true;
+      };
       environment.TZ = "Europe/Berlin";
       image = "ghcr.io/home-assistant/home-assistant:2026.1.2";
       extraOptions = [
