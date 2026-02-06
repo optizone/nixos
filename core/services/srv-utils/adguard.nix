@@ -10,7 +10,7 @@
           "https://dns10.quad9.net/dns-query"
         ];
 
-        bootstrap_dns = [ "1.1.1.1" ];
+        bootstrap_dns = [ "tls://1.1.1.1" ];
       };
 
       filtering = {
