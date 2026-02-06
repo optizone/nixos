@@ -34,6 +34,9 @@
 
     ../../core/services/web-utils/grocy.nix
 
+    ../../core/services/iot/zigbee2mqtt.nix
+    ../../core/services/iot/mqtt.nix
+    ../../core/services/iot/matter.nix
     ../../core/services/iot/home-assistant.nix
 
     ../../home/flavours/headless-module.nix

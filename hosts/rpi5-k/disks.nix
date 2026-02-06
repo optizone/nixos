@@ -7,12 +7,14 @@ _: {
       "/var/lib/nixos"
       "/var/lib/jellyfin"
       "/var/lib/grocy"
+      "/var/lib/zigbee2mqtt"
+      "/var/lib/mosquitto"
       {
-        directory = "/var/lib/private/AdGuardHome";
-        user = "nobody";
-        group = "nogroup";
+        # matter-server AdGuardHome
+        directory = "/var/lib/private/";
+        mode = "0700";
       }
-      "/var/lib/containers/storage/home-assistant"
+      "/var/lib/containers/storage/volumes/home-assistant"
     ];
 
     files = [
@@ -21,11 +23,6 @@ _: {
       "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
   };
-
-  # Needed for AdGuardHome
-  systemd.tmpfiles.rules = [
-    "d /var/lib/private 0700 root root"
-  ];
 
   sops.age.sshKeyPaths = [
     "/persist/etc/ssh/ssh_host_ed25519_key"
