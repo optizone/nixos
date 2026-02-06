@@ -10,6 +10,7 @@
     ../../home/flavours/nixos-module.nix
 
     ../../core/services/lubelogger.nix
+    ../../core/services/media/mpd.nix
 
     ./rsync.nix
     ./smb-rpi5-k.nix

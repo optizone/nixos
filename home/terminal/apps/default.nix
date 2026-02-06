@@ -22,6 +22,7 @@
     ./fastfetch
     ./macchina
     ./yazi
+    ./rmpc
     ./neovim
     ./bat.nix
     ./btop.nix
