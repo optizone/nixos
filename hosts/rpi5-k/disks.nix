@@ -112,7 +112,7 @@ _: {
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "rpool";
+                pool = "tank";
               };
             };
           };
@@ -131,7 +131,7 @@ _: {
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "rpool";
+                pool = "tank";
               };
             };
           };
@@ -140,25 +140,27 @@ _: {
     };
 
     zpool = {
-      rpool = {
+      tank = {
         type = "zpool";
         mode = "mirror";
-        rootFsOptions.compression = "lz4";
 
         datasets = {
           persist = {
             type = "zfs_fs";
             mountpoint = "/persist";
+            options.compression = "lz4";
           };
 
           backups = {
             type = "zfs_fs";
             mountpoint = "/export/backups";
+            options.compression = "lz4";
           };
 
           disk-images = {
             type = "zfs_fs";
             mountpoint = "/export/disk-images";
+            options.compression = "lz4";
           };
 
           kiwix-images = {
@@ -174,6 +176,7 @@ _: {
           home = {
             type = "zfs_fs";
             mountpoint = "/export/home";
+            options.compression = "lz4";
           };
         };
       };
