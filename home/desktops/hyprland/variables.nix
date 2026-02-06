@@ -5,7 +5,8 @@
     __GL_GSYNC_ALLOWED = 0;
     __GL_VRR_ALLOWED = 0;
     _JAVA_AWT_WM_NONEREPARENTING = 1;
-    SSH_AUTH_SOCK = "/run/user/1000/ssh-agent";
+    # TODO: uid
+    SSH_AUTH_SOCK = "/run/user/1001/ssh-agent";
     DISABLE_QT5_COMPAT = 0;
     GDK_BACKEND = "wayland";
     ANKI_WAYLAND = 1;
