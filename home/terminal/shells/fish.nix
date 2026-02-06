@@ -43,13 +43,13 @@
       "....." = "cd ../../../../";
 
       ",," = "..";
-      ",,," = ",,,";
-      ",,,," = ",,,,";
-      ",,,,," = ",,,,,";
+      ",,," = "...";
+      ",,,," = "....";
+      ",,,,," = ".....";
 
       "ct" = "clean-trash-bin";
-      "ns" = "FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix-shell --command fish -p";
-      "nd" = "FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix develop --command fish";
+      "ns" = "NIXPKGS_ALLOW_UNFREE=1 FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix-shell --command fish -p";
+      "nd" = "NIXPKGS_ALLOW_UNFREE=1 FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix develop --command fish";
       "ndl" =
         "git reset -- flake.nix flake.lock && git add --intent-to-add flake.nix flake.lock && nd && git update-index --assume-unchanged flake.nix flake.lock";
       "ndhide" =
