@@ -8,7 +8,7 @@
     "rofi/power-menu.rasi".source = ./power-menu.rasi;
     "rofi/shared/fonts.rasi".text = ''
       * {
-          font: "${font} 10";
+          font: "${font} 12";
       }'';
     "rofi/shared/colors.rasi".text = ''
       * {

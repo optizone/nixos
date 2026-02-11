@@ -11,6 +11,8 @@
     Modified: Mon Feb 12 2018 06:04:37 PST -0800
     ========================================================================== */
 
+@import "shared/fonts.rasi"
+
 * {
     /* Theme settings */
     highlight: bold italic;
