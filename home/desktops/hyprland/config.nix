@@ -158,6 +158,7 @@
         "$mainMod SHIFT, N, exec, $term --session zroot"
         # FIXME: env hack
         "$mainMod SHIFT, P, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] $term rmpc"
+        "$mainMod SHIFT, P, exec, [float true; move monitor_w*0.025 monitor_h*0.55; size monitor_w*0.4 monitor_h*0.4] $term rmpc"
         # FIXME: env hack
         "$mainMod SHIFT, Return, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] EDITOR=$$EDITOR SHELL=$$SHELL $term yazi"
         "$mainMod SHIFT, O, exec, qutebrowser"
