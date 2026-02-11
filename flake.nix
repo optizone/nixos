@@ -106,10 +106,10 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      font = "JetBrainsMono Nerd Font";
-      fontMono = "${font} Mono";
-      # font = "BigBlueTermPlus Nerd Font";
+      # font = "JetBrainsMono Nerd Font";
       # fontMono = "${font} Mono";
+      font = "BigBlueTermPlus Nerd Font";
+      fontMono = "${font} Mono";
       shell = pkgs.fish;
 
       gitUsername = "optizone";

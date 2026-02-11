@@ -9,10 +9,7 @@ Content:
 
 ## Gruv-Rice-Box
 
-![nvim-btop](./screenshots/nvim-btop.png)
-
-> [!WARNING]
-> Images are out of date.
+![rmpc-yazi-float](./screenshots/rmpc-yazi-float.png)
 
 Workflow is based around these programs:
 
@@ -45,6 +42,8 @@ sed -i 's/gitEmail = "ilya.kek.lol.orbidol@gmail.com"/gitEmail = "email@email.co
 sed -i 's/host = "generic-pc"/host = "host"/' flake.nix
 sed -i 's/username = "pc-user"/username = "username"/' flake.nix
 
+# NOTE: it is recommended to check out all parameters in flake.nix
+
 # Copy your hardware config
 # Assuming you are using clean NixOS install. In case not check paths.
 cp /etc/nixos/hardware-configuration.nix ./hosts/generic/hardware-configuration.nix
@@ -64,6 +63,10 @@ reboot
 nh --help
 ```
 
+For default keybinds check out
+[./home/desktops/hyprland/config.nix](./home/desktops/hyprland/config.nix)
+(dmenu: WIN+SHIFT+D; kitty: WIN+ENTER).
+
 > [!NOTE]
 > There is a module at `home/flavours/standalone` for generic linux
 > installation, but it isn't tested so you can try to figure that one out if you
@@ -80,9 +83,11 @@ line in `user.nix` with the list of modules you want to enable (for example
 
 ### Gallery
 
-![nvim-btop](./screenshots/nvim-btop.png)
+![rmpc-yazi-float](./screenshots/rmpc-yazi-float.png)
 
-![all-terminal](./screenshots/all-terminal.png)
+![hyrp-tiling](./screenshots/hyrp-tiling.png)
+
+![fullscreen](./screenshots/fullscreen.png)
 
 ## Infrastructure
 
@@ -92,8 +97,8 @@ line in `user.nix` with the list of modules you want to enable (for example
 
 All servers are using impermanence (`/` gets wiped at every boot) and sops to
 manage secrets. This combo creates some challenges in provisioning systems on
-new servers and also in configuring new, so be causious on what you really need
-to persist and don't forget to do so.
+new servers and also in configuring new services, so be causious on what you
+really need to persist and don't forget to do so.
 
 ### Quick start
 
