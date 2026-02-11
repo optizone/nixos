@@ -49,4 +49,9 @@
   # =======================================================
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # needed for MKD2 work project
+  systemd.tmpfiles.rules = [
+    "d /var/run/protei-config-manager 0777 ${username} users"
+  ];
 }
