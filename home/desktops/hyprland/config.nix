@@ -30,8 +30,7 @@
         kb_options = "grp:alt_shift_toggle";
         numlock_by_default = true;
         repeat_delay = 300;
-        follow_mouse = 1;
-        float_switch_override_focus = 0;
+        follow_mouse = true;
         mouse_refocus = 0;
         sensitivity = 0;
         touchpad = {
@@ -43,13 +42,11 @@
         "$mainMod" = "SUPER";
         "$term" = "kitty";
         layout = "dwindle";
-        gaps_in = 2;
-        gaps_out = 4;
+        gaps_in = 6;
+        gaps_out = 12;
         border_size = 2;
         "col.active_border" = "0xffbdae93";
-        "col.inactive_border" = "0xff1d2021";
-        # border_part_of_window = false;
-        # no_border_on_floating = false;
+        "col.inactive_border" = "0xff665c54";
       };
 
       cursor = {
@@ -84,62 +81,11 @@
 
       decoration = {
         rounding = 0;
-        # active_opacity = 0.90;
-        # inactive_opacity = 0.90;
-        # fullscreen_opacity = 1.0;
-
-        blur = {
-          enabled = false;
-          size = 3;
-          passes = 2;
-          brightness = 1;
-          contrast = 1.4;
-          # ignore_opacity = true;
-          noise = 0;
-          new_optimizations = true;
-          xray = true;
-        };
-
-        shadow = {
-          enabled = false;
-
-          ignore_window = true;
-          offset = "0 2";
-          range = 20;
-          render_power = 3;
-          color = "rgba(00000055)";
-        };
+        blur.enabled = false;
+        shadow.enabled = false;
       };
 
-      animations = {
-        enabled = false;
-
-        bezier = [
-          "fluent_decel, 0, 0.2, 0.4, 1"
-          "easeOutCirc, 0, 0.55, 0.45, 1"
-          "easeOutCubic, 0.33, 1, 0.68, 1"
-          "fade_curve, 0, 0.55, 0.45, 1"
-        ];
-
-        animation = [
-          # name, enable, speed, curve, style
-
-          # Windows
-          "windowsIn,   0, 8, easeOutCubic,  popin 20%" # window open
-          "windowsOut,  0, 8, fluent_decel,  popin 80%" # window close.
-          "windowsMove, 1, 2, fluent_decel, slide" # everything in between, moving, dragging, resizing.
-
-          # Fade
-          "fadeIn,      1, 6,   fade_curve" # fade in (open) -> layers and windows
-          "fadeOut,     1, 6,   fade_curve" # fade out (close) -> layers and windows
-          "fadeSwitch,  0, 2,   easeOutCirc" # fade on changing activewindow and its opacity
-          "fadeShadow,  1, 20,  easeOutCirc" # fade on changing activewindow for shadows
-          "fadeDim,     1, 8,   fluent_decel" # the easing of the dimming of inactive windows
-          # "border,      1, 2.7, easeOutCirc"  # for animating the border's color switch speed
-          # "borderangle, 1, 30,  fluent_decel, once" # for animating the border's gradient angle - styles: once (default), loop
-          "workspaces,  1, 8,   easeOutCubic, fade" # styles: slide, slidevert, fade, slidefade, slidefadevert
-        ];
-      };
+      animations.enabled = false;
 
       binds = {
         movefocus_cycles_fullscreen = true;
@@ -154,10 +100,9 @@
         "$mainMod, SPACE, fullscreen, 0"
         "$mainMod SHIFT, SPACE, fullscreen, 1"
         "$mainMod, F, exec, toggle-float"
+        # FIXME: theme
         "$mainMod SHIFT, D, exec, rofi -show drun || pkill rofi"
         "$mainMod SHIFT, N, exec, $term --session zroot"
-        # FIXME: env hack
-        "$mainMod SHIFT, P, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] $term rmpc"
         "$mainMod SHIFT, P, exec, [float true; move monitor_w*0.025 monitor_h*0.55; size monitor_w*0.4 monitor_h*0.4] $term rmpc"
         # FIXME: env hack
         "$mainMod SHIFT, Return, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] EDITOR=$$EDITOR SHELL=$$SHELL $term yazi"
@@ -188,19 +133,12 @@
         "$mainMod, k, movefocus, u"
         "$mainMod, l, movefocus, r"
 
-        "$mainMod, left,  alterzorder, top"
-        "$mainMod, right, alterzorder, top"
-        "$mainMod, up,    alterzorder, top"
-        "$mainMod, down,  alterzorder, top"
-        "$mainMod, h, alterzorder, top"
-        "$mainMod, j, alterzorder, top"
-        "$mainMod, k, alterzorder, top"
-        "$mainMod, l, alterzorder, top"
+        "$mainMod, TAB, exec, hyprctl dispatch focuswindow floating"
+        "$mainMod SHIFT, TAB, exec, hyprctl dispatch focuswindow tiled"
 
-        "CTRL ALT, up, exec, hyprctl dispatch focuswindow floating"
-        "CTRL ALT, down, exec, hyprctl dispatch focuswindow tiled"
+        "$mainMod, w, alterzorder, top"
 
-        # switch workspace
+        # workspace control
         "$mainMod, 1, focusworkspaceoncurrentmonitor, 1"
         "$mainMod, 2, focusworkspaceoncurrentmonitor, 2"
         "$mainMod, 3, focusworkspaceoncurrentmonitor, 3"
@@ -212,7 +150,6 @@
         "$mainMod, 9, focusworkspaceoncurrentmonitor, 9"
         "$mainMod, 0, focusworkspaceoncurrentmonitor, 10"
 
-        # same as above, but switch to the workspace
         "$mainMod SHIFT, 1, movetoworkspace, 1"
         "$mainMod SHIFT, 2, movetoworkspace, 2"
         "$mainMod SHIFT, 3, movetoworkspace, 3"
