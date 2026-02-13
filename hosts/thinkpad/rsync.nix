@@ -46,7 +46,7 @@ in
 
     serviceConfig = {
       Type = "oneshot";
-      User = "root";
+      User = "${username}";
     };
   };
 }
