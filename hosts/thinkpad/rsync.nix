@@ -22,7 +22,8 @@ let
 
     # nas -> local
     ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/kiwix-images" 
-    ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" "${dataPath}/backups/home-assistant"
+    ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" "${dataPath}/backups/home-assistant" \
+        --delete-after
 
     # FIXME:  please ):
     rm -r "${dataPath}/backups/rpi5-k/stale"
