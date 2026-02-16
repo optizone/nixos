@@ -1,6 +1,6 @@
 { domain, ... }:
 {
-
+  # TODO: move to a different section + enable firewall
   networking.firewall = {
     enable = false;
 
