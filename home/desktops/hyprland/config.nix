@@ -96,7 +96,7 @@
       };
 
       bind = [
-        "$mainMod, F1, exec, show-keybinds"
+        "$mainMod, F1, exec, rofi-show-keybinds"
 
         "$mainMod, Return, exec, $term"
         "$mainMod, Q, killactive,"
@@ -112,7 +112,7 @@
         "$mainMod SHIFT, O, exec, qutebrowser"
         "$mainMod, Escape, exec, swaylock"
         "ALT, Escape, exec, hyprlock"
-        "$mainMod, X, exec, power-menu"
+        "$mainMod, X, exec, rofi-power-menu"
         "$mainMod, P, pseudo,"
         "$mainMod, S, togglesplit,"
         "$mainMod, V, exec, hyprctl dispatch exec '[centerwindow; size monitor_w*0.5 monitor_h*0.5] pavucontrol'"

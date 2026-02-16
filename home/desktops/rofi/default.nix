@@ -1,15 +1,20 @@
-{ pkgs, font, ... }:
+{ font, ... }:
 {
-  home.packages = with pkgs; [ rofi ];
+  imports = [
+    ./scripts
+  ];
+
+  programs.rofi = {
+    enable = true;
+
+    theme = "gruvbox-dark-soft";
+    font = "${font} 12";
+    terminal = "kitty";
+  };
 
   xdg.configFile = {
     "rofi/gruvbox-dark-soft.rasi".source = ./gruvbox-dark-soft.rasi;
-    "rofi/config.rasi".text = ''@theme "gruvbox-dark-soft"'';
     "rofi/power-menu.rasi".source = ./power-menu.rasi;
-    "rofi/shared/fonts.rasi".text = ''
-      * {
-          font: "${font} 12";
-      }'';
     "rofi/shared/colors.rasi".text = ''
       * {
           background:     #32302FFF;
