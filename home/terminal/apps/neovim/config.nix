@@ -74,6 +74,26 @@
       indent-blankline.enable = true;
     };
 
+    utility.images = {
+      image-nvim = {
+        enable = true;
+
+        setupOpts = {
+          backend = "kitty";
+
+          integrations.markdown = {
+            enable = true;
+            only_render_image_at_cursor = true;
+            only_render_image_at_cursor_mode = "popup";
+          };
+        };
+      };
+
+      img-clip = {
+        enable = true;
+      };
+    };
+
     # ------------------------------------------------------------
 
     autopairs.nvim-autopairs.enable = true;
@@ -108,7 +128,11 @@
       hardtime-nvim.enable = false;
     };
 
-    git.enable = true;
+    git = {
+      enable = true;
+      gitsigns.enable = true;
+      gitsigns.codeActions.enable = true;
+    };
 
     minimap = {
       codewindow = {

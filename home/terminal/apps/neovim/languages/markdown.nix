@@ -12,14 +12,6 @@
 
     utility = {
       preview.markdownPreview.enable = true;
-      images.img-clip.enable = true;
-      images.image-nvim = {
-        enable = false;
-        setupOpts = {
-          backend = "kitty";
-          integrations.markdown.enable = true;
-        };
-      };
     };
 
     lazy.plugins = {
