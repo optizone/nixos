@@ -6,12 +6,15 @@
   ];
 
   wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+
     settings = {
       # autostart
       exec-once = [
         # "hash dbus-update-activation-environment 2>/dev/null"
-        "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --all --systemd"
+        "systemctl --user import-environment"
 
         "nm-applet &"
         "poweralertd &"
@@ -100,12 +103,12 @@
         "$mainMod, SPACE, fullscreen, 0"
         "$mainMod SHIFT, SPACE, fullscreen, 1"
         "$mainMod, F, exec, toggle-float"
-        # FIXME: theme
-        "$mainMod SHIFT, D, exec, rofi -show drun || pkill rofi"
+        # FIXME: env hack
+        "$mainMod SHIFT, D, exec, QT_QPA_PLATFORMTHEME=qt5ct rofi -show drun"
         "$mainMod SHIFT, N, exec, $term --session zroot"
         "$mainMod SHIFT, P, exec, [float true; move monitor_w*0.025 monitor_h*0.55; size monitor_w*0.4 monitor_h*0.4] $term rmpc"
         # FIXME: env hack
-        "$mainMod SHIFT, Return, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] EDITOR=$$EDITOR SHELL=$$SHELL $term yazi"
+        "$mainMod SHIFT, Return, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] QT_QPA_PLATFORMTHEME=qt5ct EDITOR=$$EDITOR SHELL=$$SHELL $term yazi"
         "$mainMod SHIFT, O, exec, qutebrowser"
         "$mainMod, Escape, exec, swaylock"
         "ALT, Escape, exec, hyprlock"

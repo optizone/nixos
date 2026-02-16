@@ -5,7 +5,7 @@
     ./rofi
     ./swaync
     ./gnome.nix
-    ./gtk.nix
+    ./qt-gtk.nix
     ./swaylock.nix
     ./swayosd.nix
     ./waybar.nix
