@@ -49,6 +49,7 @@
 
     caligula # TUI disk burner
     pastel # CLI colors
+    calcure # TUI calendar
 
     kiwix
   ];
