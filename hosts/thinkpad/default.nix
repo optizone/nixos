@@ -14,7 +14,7 @@
 
     ../../home/flavours/nixos-module.nix
 
-    ../../core/services/lubelogger.nix
+    ../../core/services/web-utils/lubelogger.nix
     ../../core/services/media/mpd.nix
 
     ./rsync.nix
