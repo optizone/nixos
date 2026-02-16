@@ -38,6 +38,7 @@
 
   home.packages = with pkgs; [
     libnotify
+    kicad
     mpv
     xdg-utils
 
