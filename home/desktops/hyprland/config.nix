@@ -210,34 +210,41 @@
       ];
 
       # windowrule
-      windowrule = [
-        "match:class ^(mpv)$, float true, size monitor_w*0.5 monitor_h*0.5, center true"
-        "match:class ^(rofi)$, pin true"
-        "match:class ^(waypaper)$, float true, size monitor_w*0.5 monitor_h*0.5, center true, pin true"
-        "match:title ^(Transmission)$, float true, size monitor_w*0.5 monitor_h*0.5, center true"
-        "match:title ^(Volume Control)$, float true, size monitor_w*0.5 monitor_h*0.5, center true"
+      windowrule =
+        let
+          w50 = "monitor_w*0.5";
+          h50 = "monitor_h*0.5";
+        in
+        [
+          "match:class ^(mpv)$, float true, size ${w50} ${h50}, center true"
+          "match:class ^(rofi)$, pin true"
+          "match:class ^(waypaper)$, float true, size ${w50} ${h50}, center true, pin true"
+          "match:title ^(Transmission)$, float true, size ${w50} ${h50}, center true"
+          "match:title ^(Volume Control)$, float true, size ${w50} ${h50}, center true"
 
-        "match:title ^(Picture-in-Picture)$, float true"
-        "match:class ^(org.gnome.Calculator)$, float true, center true"
-        # TODO: does not resize when called from rofi
-        "match:class ^(waypaper)$, float true, center true, size monitor_w*0.5 monitor_h*0.5"
-        "match:class ^(org.pulseaudio.pavucontrol)$, float true"
-        "match:class ^(SoundWireServer)$, float true"
-        "match:class ^(file_progress)$, float true"
-        "match:class ^(confirm)$, float true"
-        "match:class ^(dialog)$, float true"
-        "match:class ^(download)$, float true"
-        "match:class ^(notification)$, float true"
-        "match:class ^(error)$, float true"
-        "match:class ^(confirmreset)$, float true"
-        "match:title ^(Open File)$, float true"
-        "match:title ^(File Upload)$, float true"
-        "match:title ^(branchdialog)$, float true"
+          "match:class ^(evince)$, float true, size ${w50} ${h50}, center true"
 
-        # No border when only one tiled window on workspace
-        "match:float false, match:workspace w[t1], border_size 0"
-        "match:float false, match:workspace w[t1], rounding 0"
-      ];
+          "match:title ^(Picture-in-Picture)$, float true"
+          "match:class ^(org.gnome.Calculator)$, float true, center true"
+          # TODO: does not resize when called from rofi
+          "match:class ^(waypaper)$, float true, center true, size ${w50} ${h50}"
+          "match:class ^(org.pulseaudio.pavucontrol)$, float true"
+          "match:class ^(SoundWireServer)$, float true"
+          "match:class ^(file_progress)$, float true"
+          "match:class ^(confirm)$, float true"
+          "match:class ^(dialog)$, float true"
+          "match:class ^(download)$, float true"
+          "match:class ^(notification)$, float true"
+          "match:class ^(error)$, float true"
+          "match:class ^(confirmreset)$, float true"
+          "match:title ^(Open File)$, float true"
+          "match:title ^(File Upload)$, float true"
+          "match:title ^(branchdialog)$, float true"
+
+          # No border when only one tiled window on workspace
+          "match:float false, match:workspace w[t1], border_size 0"
+          "match:float false, match:workspace w[t1], rounding 0"
+        ];
 
       # No gaps when only
       workspace = [
