@@ -8,17 +8,21 @@
 
     ./desktops/default.nix
 
-    ./gui-apps/obsidian.nix
     ./gui-apps/electrum.nix
+
     ./gui-apps/file-managers/nemo.nix
+
     ./gui-apps/images/gimp.nix
     ./gui-apps/images/inkscape.nix
     ./gui-apps/images/oculante.nix
+
     ./gui-apps/multimedia/kdenlive.nix
     ./gui-apps/multimedia/mpv.nix
     ./gui-apps/multimedia/transmission.nix
     ./gui-apps/multimedia/spotify.nix
+
     ./gui-apps/office/libreoffice.nix
+
     ./gui-apps/social/telegram.nix
     ./gui-apps/social/thunderbird.nix
 
@@ -27,7 +31,6 @@
     ./terminal/apps
     ./terminal/emulators/kitty
     ./terminal/shells/fish.nix
-    # ./terminal/shells/bash.nix
 
     ./ui/kanshi.nix
     ./ui/wallpapers.nix
