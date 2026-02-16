@@ -9,7 +9,7 @@ _: {
           {
             criteria = "eDP-1";
             status = "enable";
-            scale = 1.33;
+            scale = 1.25;
           }
         ];
       }
