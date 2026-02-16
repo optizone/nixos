@@ -61,6 +61,10 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  networking.hosts = {
+    "192.168.68.118" = [ "rpi5-k" ];
+  };
+
   # needed for MKD2 work project
   systemd.tmpfiles.rules = [
     "d /var/run/protei-config-manager 0777 ${username} users"
