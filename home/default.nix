@@ -14,6 +14,7 @@
     ./gui-apps/images/gimp.nix
     ./gui-apps/images/inkscape.nix
     ./gui-apps/images/oculante.nix
+    ./gui-apps/multimedia/kdenlive.nix
     ./gui-apps/multimedia/mpv.nix
     ./gui-apps/multimedia/transmission.nix
     ./gui-apps/multimedia/spotify.nix
