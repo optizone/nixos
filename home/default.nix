@@ -19,6 +19,7 @@
     ./gui-apps/multimedia/spotify.nix
     ./gui-apps/office/libreoffice.nix
     ./gui-apps/social/telegram.nix
+    ./gui-apps/social/thunderbird.nix
 
     ./scripts
 
@@ -48,9 +49,6 @@
 
     caligula # TUI disk burner
     pastel # CLI colors
-
-    # todo: package
-    thunderbird
 
     kiwix
   ];
