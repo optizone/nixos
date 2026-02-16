@@ -33,6 +33,7 @@
     isNormalUser = true;
     description = "${username}";
     extraGroups = [
+      "wireshark"
       "networkmanager"
       "users"
       "wheel"

@@ -1,4 +1,9 @@
-{ username, lib, ... }:
+{
+  username,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # =======================================================
 
@@ -44,6 +49,12 @@
   programs.winbox = {
     enable = true;
     openFirewall = true;
+  };
+
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+
   };
 
   # =======================================================
