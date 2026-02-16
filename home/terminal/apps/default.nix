@@ -13,6 +13,7 @@
     wget
     file
     netcat
+    wiremix
   ];
 
   imports = [
