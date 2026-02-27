@@ -7,6 +7,7 @@ _: {
     containers.homeassistant = {
       volumes = [
         "home-assistant:/config"
+        "/export/backups/home-assistant:/config/backups"
         "/var/run/dbus:/run/dbus:ro" # Bluetooth support
       ];
       capabilities = {
