@@ -25,30 +25,35 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts."jellyfin.${domain}" = {
-      # enableACME = true;
-      # forceSSL = true;
-
-      locations."/" = {
-        proxyPass = "http://localhost:8096";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-        extraConfig =
-          # required when the server wants to use HTTP Authentication
-          "proxy_pass_header Authorization;";
-        # + "proxy_set_header Upgrade $http_upgrade;"
-        # + "proxy_set_header Connection 'upgrade';"
-        # + "proxy_set_header Host $host;"
-        # + "proxy_cache_bypass $http_upgrade;";
+    virtualHosts = {
+      "jellyfin.${domain}" = {
+        locations."/" = {
+          proxyPass = "http://localhost:8096";
+          proxyWebsockets = true;
+          extraConfig = "proxy_pass_header Authorization;";
+        };
       };
-    };
 
-    virtualHosts."adguard.${domain}" = {
-      # enableACME = true;
-      # forceSSL = true;
+      "adguard.${domain}" = {
+        locations."/" = {
+          proxyPass = "http://localhost:3000";
+          proxyWebsockets = true;
+        };
+      };
 
-      locations."/" = {
-        proxyPass = "http://localhost:3000";
-        proxyWebsockets = true; # needed if you need to use WebSocket
+      "matter-server.${domain}" = {
+        locations."/" = {
+          proxyPass = "http://localhost:5580";
+          proxyWebsockets = true;
+        };
+      };
+
+
+      "zigbee2mqtt.${domain}" = {
+        locations."/" = {
+          proxyPass = "http://localhost:10801";
+          proxyWebsockets = true;
+        };
       };
     };
   };
