@@ -1,4 +1,16 @@
 { pkgs, ... }:
+let
+  w50 = "monitor_w*0.5";
+  h50 = "monitor_h*0.5";
+
+  centerFloat =
+    wr: hr:
+    ''[float true; center true; size monitor_w*${builtins.toString wr} monitor_h*${builtins.toString hr}]'';
+
+  positionedFloat =
+    xr: yr: wr: hr:
+    "[float true; move monitor_w*${builtins.toString xr} monitor_h*${builtins.toString yr}; size monitor_w*${builtins.toString wr} monitor_h*${builtins.toString hr}]";
+in
 {
   home.packages = with pkgs; [
     playerctl
@@ -6,8 +18,8 @@
   ];
 
   wayland.windowManager.hyprland = {
-    enable = true;
-    systemd.enable = true;
+    # enable = true;
+    # systemd.enable = true;
 
     settings = {
       # autostart
@@ -100,26 +112,35 @@
 
         "$mainMod, Return, exec, $term"
         "$mainMod, Q, killactive,"
-        "$mainMod, SPACE, fullscreen, 0"
-        "$mainMod SHIFT, SPACE, fullscreen, 1"
+
+        "$mainMod, SPACE, fullscreen, 1"
+        "$mainMod SHIFT, SPACE, fullscreen, 0"
+
         "$mainMod, F, exec, toggle-float"
         # FIXME: env hack
         "$mainMod SHIFT, D, exec, QT_QPA_PLATFORMTHEME=qt5ct rofi -show drun"
         "$mainMod SHIFT, N, exec, $term --session zroot"
-        "$mainMod SHIFT, P, exec, [float true; move monitor_w*0.025 monitor_h*0.55; size monitor_w*0.4 monitor_h*0.4] $term rmpc"
+        "$mainMod SHIFT, C, exec, cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"
+        "$mainMod SHIFT, M, exec, ${centerFloat 0.5 0.5} $term calcure"
+        "$mainMod SHIFT, B, exec, ${centerFloat 0.5 0.5} $term btop"
+        "$mainMod SHIFT, P, exec, ${positionedFloat 0.025 0.55 0.4 0.4} $term rmpc"
+        "$mainMod SHIFT, W, exec, ${centerFloat 0.5 0.5} waypaper"
         # FIXME: env hack
-        "$mainMod SHIFT, Return, exec, [float true; center true; size monitor_w*0.5 monitor_h*0.5] QT_QPA_PLATFORMTHEME=qt5ct EDITOR=$$EDITOR SHELL=$$SHELL $term yazi"
+        "$mainMod SHIFT, Return, exec, ${centerFloat 0.5 0.5} QT_QPA_PLATFORMTHEME=qt5ct EDITOR=$$EDITOR SHELL=$$SHELL $term yazi"
         "$mainMod SHIFT, O, exec, qutebrowser"
-        "$mainMod, Escape, exec, swaylock"
-        "ALT, Escape, exec, hyprlock"
+        "$mainMod SHIFT, V, exec, ${centerFloat 0.5 0.5} pavucontrol"
+
         "$mainMod, X, exec, rofi-power-menu"
+
         "$mainMod, P, pseudo,"
         "$mainMod, S, togglesplit,"
-        "$mainMod, V, exec, hyprctl dispatch exec '[centerwindow; size monitor_w*0.5 monitor_h*0.5] pavucontrol'"
-        "$mainMod SHIFT, B, exec, toggle-waybar"
-        "$mainMod, C ,exec, hyprpicker -a"
-        "$mainMod SHIFT, W,exec, hyprctl dispatch exec '[center true; size monitor_w*0.5 monitor_h*0.5] waypaper'"
+        "$mainMod, B, exec, toggle-waybar"
+        "$mainMod, C, exec, hyprpicker -a"
         "$mainMod, N, exec, swaync-client -t -sw"
+
+        # locking
+        "$mainMod, Escape, exec, swaylock"
+        "ALT, Escape, exec, hyprlock"
 
         # screenshot
         ",Print, exec, screenshot --copy"
@@ -201,9 +222,6 @@
 
         "$mainMod, mouse_down, workspace, e-1"
         "$mainMod, mouse_up, workspace, e+1"
-
-        # clipboard manager
-        "$mainMod SHIFT, C, exec, cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"
       ];
 
       # mouse binding
