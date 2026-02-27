@@ -9,7 +9,7 @@ Content:
 
 ## Gruv-Rice-Box
 
-![rmpc-yazi-float](./screenshots/rmpc-yazi-float.png)
+![rmpc-yazi-float](./assets/screenshots/rmpc-yazi-float.png)
 
 Workflow is based around these programs:
 
@@ -83,11 +83,11 @@ line in `user.nix` with the list of modules you want to enable (for example
 
 ### Gallery
 
-![rmpc-yazi-float](./screenshots/rmpc-yazi-float.png)
+![rmpc-yazi-float](./assets/screenshots/rmpc-yazi-float.png)
 
-![hyrp-tiling](./screenshots/hyrp-tiling.png)
+![hyrp-tiling](./assets/screenshots/hyrp-tiling.png)
 
-![fullscreen](./screenshots/fullscreen.png)
+![fullscreen](./assets/screenshots/fullscreen.png)
 
 ## Infrastructure
 
