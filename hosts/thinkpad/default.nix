@@ -58,6 +58,7 @@
   home-manager.users.${username} = {
     imports = [
       ../../home
+      ../../home/gui-apps/utils/pyobd/pyobd.nix
     ];
   };
 
