@@ -42,8 +42,10 @@
 
       formatOnSave = true;
       lspkind.enable = true;
+      # lspsignature.enable = true;
+      # lspconfig.enable = true;
       lightbulb.enable = true;
-      lspsaga.enable = false;
+      lspsaga.enable = false; # TODO: maybe enable??
       trouble.enable = true;
       otter-nvim.enable = true;
       nvim-docs-view.enable = true;
