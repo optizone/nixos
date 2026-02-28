@@ -1,11 +1,20 @@
 # ZROOT INFRA
 
+<!--toc:start-->
+
+- [ZROOT INFRA](#zroot-infra)
+  - [Gruv-Rice-Box](#gruv-rice-box)
+    - [Quick start](#quick-start)
+    - [Configuration](#configuration)
+    - [Gallery](#gallery)
+  - [Infrastructure](#infrastructure)
+    - [Quick start](#quick-start)
+    - [Devices](#devices)
+  - [Special thanks](#special-thanks)
+
+<!--toc:end-->
+
 Personal infrastructure config and Hyrpand rice.
-
-Content:
-
-- [Hyrland rice](#gruv-rice-box)
-- [Infrastructure](#infrastructure)
 
 ## Gruv-Rice-Box
 
@@ -148,6 +157,10 @@ nixos-rebuild switch \
     --target-host rpi5-k@rpi5-k \
     --build-host rpi5-k@rpi5-k
 ```
+
+### Devices
+
+Device descriptions can be found [at docs/devices.md](./docs/devices.md).
 
 ## Special thanks
 
