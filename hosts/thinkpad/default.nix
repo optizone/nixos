@@ -1,7 +1,7 @@
 {
   username,
-  lib,
   pkgs,
+  stateVersion,
   ...
 }:
 {
@@ -35,8 +35,7 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "24.05";
-  home-manager.users.${username}.home.stateVersion = lib.mkForce "24.05";
+  system.stateVersion = "${stateVersion}";
 
   # =======================================================
 
@@ -54,10 +53,23 @@
   programs.wireshark = {
     enable = true;
     package = pkgs.wireshark;
+  };
 
+  home-manager.users.${username} = {
+    imports = [
+      ../../home
+    ];
   };
 
   # =======================================================
+
+  users.users.${username} = {
+    extraGroups = [
+      "wireshark"
+      "dialout"
+      "tty"
+    ];
+  };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 

@@ -3,6 +3,7 @@
   username,
   specialArgs,
   shell,
+  stateVersion,
   ...
 }:
 {
@@ -17,13 +18,10 @@
     // specialArgs;
 
     users.${username} = {
-      imports = [
-        ../default.nix
-      ];
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
-        stateVersion = "24.05";
+        stateVersion = "${stateVersion}";
       };
       programs.home-manager.enable = true;
     };
@@ -33,10 +31,10 @@
     isNormalUser = true;
     description = "${username}";
     extraGroups = [
-      "wireshark"
       "networkmanager"
       "users"
       "wheel"
+      "${username}"
     ];
     ignoreShellProgramCheck = true;
     inherit shell;

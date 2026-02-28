@@ -39,7 +39,7 @@
     ../../core/services/iot/matter.nix
     ../../core/services/iot/home-assistant.nix
 
-    ../../home/flavours/headless-module.nix
+    ../../home/flavours/nixos-module.nix
     ../../home/terminal/apps/starship.nix
   ];
 
@@ -56,7 +56,6 @@
 
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
-  home-manager.users.${username}.home.stateVersion = lib.mkForce "25.05";
 
   # =======================================================
 
@@ -71,6 +70,12 @@
     htop
     iotop
   ];
+
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/headless.nix
+    ];
+  };
 
   # =======================================================
 

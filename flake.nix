@@ -152,6 +152,7 @@
             username = "rpi5-k";
             host = "rpi5-k";
             hostId = "deadb33f";
+            stateVersion = "25.11";
             shell = pkgs.bash;
           };
 
@@ -175,6 +176,7 @@
           specialArgs = {
             host = "thinkpad";
             username = "thinkpad";
+            stateVersion = "24.05";
             inherit
               self
               inputs
@@ -196,6 +198,7 @@
           specialArgs = {
             host = "generic-laptop";
             username = "laptop-user";
+            stateVersion = "25.11";
             inherit
               self
               inputs
@@ -217,6 +220,7 @@
           specialArgs = {
             host = "generic-pc";
             username = "pc-user";
+            stateVersion = "25.11";
             inherit
               self
               inputs
