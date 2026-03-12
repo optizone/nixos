@@ -58,7 +58,7 @@
         }
 
         {
-          enabled = true;
+          enabled = false;
           url = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_46.txt";
           name = "HaGeZi's Anti-Piracy Blocklist";
         }
