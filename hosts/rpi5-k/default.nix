@@ -69,6 +69,7 @@
     vim
     htop
     iotop
+    iperf
   ];
 
   home-manager.users.${username} = {
