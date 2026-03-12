@@ -131,6 +131,7 @@ in
         "$mainMod SHIFT, V, exec, ${centerFloat 0.5 0.5} pavucontrol"
 
         "$mainMod, X, exec, rofi-power-menu"
+        "$mainMod, Z, exec, systemctl suspend"
 
         "$mainMod, P, pseudo,"
         "$mainMod, S, togglesplit,"
