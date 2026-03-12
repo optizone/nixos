@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
 
     ../../home/flavours/nixos-module.nix
+    ../../core/virtualization/host.nix
 
     ../../core/services/web-utils/lubelogger.nix
     ../../core/services/media/mpd.nix

@@ -7,6 +7,5 @@ _: {
     ./pipewire.nix
     ./security.nix
     ./sops.nix
-    ./virtualization.nix
   ];
 }
