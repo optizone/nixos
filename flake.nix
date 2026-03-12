@@ -1,12 +1,29 @@
 {
-
   inputs = {
+    # ====================== System =======================
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # ===================== Hyprland ======================
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -35,8 +52,24 @@
       };
     };
 
+    # ====================== NeoVim =======================
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.ndg.follows = "ndg";
+    };
+
+    ndg = {
+      url = "github:feel-co/ndg";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # ======================= Misc ========================
+
+    self.submodules = true;
     wallpapers = {
-      url = "git+file:wallpapers";
+      url = ./assets/wallpapers;
       flake = false;
     };
 
@@ -55,21 +88,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
-
-    # ============ RaspberryPi related inputs ============
+    # ==================== RaspberryPi ====================
 
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
@@ -87,7 +106,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
     };
-    # ====================================================
+
+    # =====================================================
   };
 
   outputs =
@@ -99,6 +119,7 @@
       home-manager-rpi,
       nixos-raspberrypi,
       disko-rpi,
+      disko,
       impermanence,
       sops-nix,
       sops-nix-rpi,
@@ -106,20 +127,19 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      shell = pkgs.fish;
+      domain = "home.arpa";
+
       # font = "JetBrainsMono Nerd Font";
-      # fontMono = "${font} Mono";
       font = "BigBlueTermPlus Nerd Font";
       fontMono = "${font} Mono";
-      shell = pkgs.fish;
+      fontSIze = 11;
 
       gitUsername = "optizone";
       gitEmail = "ilya.kek.lol.orbidol@gmail.com";
 
-      domain = "home.arpa";
-
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfree = true;
       };
     in
     {
@@ -146,12 +166,17 @@
       };
 
       nixosConfigurations = {
+
+        # ==== ARM ====
+
+        # NAS + services
+
         rpi5-k = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = {
             inherit inputs nixos-raspberrypi domain;
             username = "rpi5-k";
             host = "rpi5-k";
-            hostId = "deadb33f";
+            hostId = "d100d000";
             stateVersion = "25.11";
             shell = pkgs.bash;
           };
@@ -164,6 +189,31 @@
             home-manager-rpi.nixosModules.home-manager
           ];
         };
+
+        # RnD
+
+        rpi4-f = nixos-raspberrypi.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs nixos-raspberrypi domain;
+            username = "rpi4-f";
+            host = "rpi4-f";
+            hostId = "d101d000";
+            stateVersion = "25.11";
+            shell = pkgs.bash;
+          };
+
+          modules = [
+            ./hosts/rpi4-f
+            sops-nix-rpi.nixosModules.sops
+            disko-rpi.nixosModules.disko
+            impermanence.nixosModules.impermanence
+            home-manager-rpi.nixosModules.home-manager
+          ];
+        };
+
+        # ==== x86-64 ====
+
+        # Personal
 
         thinkpad = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -188,6 +238,38 @@
               ;
           };
         };
+
+        # ==== VMs ====
+
+        # RnD
+
+        vm0 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/vm0
+            nix-index-database.nixosModules.nix-index
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            disko.nixosModules.disko
+          ];
+
+          specialArgs = {
+            host = "vm0";
+            username = "vm0";
+            stateVersion = "25.11";
+            inherit
+              self
+              inputs
+              font
+              fontMono
+              shell
+              gitUsername
+              gitEmail
+              ;
+          };
+        };
+
+        # === Generic x86-64 ===
 
         generic-laptop = nixpkgs.lib.nixosSystem {
           inherit system;
