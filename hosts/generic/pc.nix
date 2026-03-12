@@ -1,4 +1,9 @@
-{ username, lib, ... }:
+{
+  username,
+  lib,
+  stateVersion,
+  ...
+}:
 {
   # =======================================================
 
@@ -22,9 +27,8 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "24.05";
-  home-manager.users.${username}.home.stateVersion = lib.mkForce "24.05";
+  nixpkgs.config.allowUnfree = false;
+  system.stateVersion = "${stateVersion}";
 
   # =======================================================
 
@@ -38,5 +42,7 @@
 
   # =======================================================
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = [
+    # "aarch64-linux"
+  ];
 }
