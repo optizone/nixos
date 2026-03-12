@@ -49,6 +49,8 @@
         "J" = "tab-prev";
         "K" = "tab-next";
         "V" = "darkmode";
+        # NOTE: shadows some build-in actions (opening tabs from clipboard)
+        "P" = "tab-pin";
       };
     };
 
