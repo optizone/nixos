@@ -160,14 +160,13 @@ in
         warning = 30;
         critical = 15;
       };
-      format-time = "{H}:{M:02}";
       format = "[BAT {capacity}%]";
-      # format-charging = "[BAT {capacity}% {time}]";
-      # format-charging-full = "[BAT {capacity}%]";
-      # format-full = "[BAT {capacity}%]";
-      format-alt = "[BAT {power}W]";
+      format-charging = "[CHRG {capacity}%]";
+      format-plugged = "[AC {capacity}%]";
+      format-alt = "[PWR {power}W]";
       tooltip = true;
       tooltip-format = "{time}";
+      format-time = "{H}:{M:02}";
     };
 
     "hyprland/language" = {
@@ -201,9 +200,9 @@ in
 
     # disk = {
     #   path = "/";
-    #   format = "<span foreground='${orange}'>󰋊 </span>{percentage_used}%";
+    #   format = "[DISK {used}/{total}]";
     #   interval = 60;
-    #   on-click-right = "hyprctl dispatch exec '[float; center; monitor_w*0.5 monitor_h*0.5] kitty --title float_kitty dust'";
+    #   on-click-right = "hyprctl dispatch exec '[float; center; monitor_w*0.5 monitor_h*0.5] kitty dust'";
     # };
 
     tray = {
