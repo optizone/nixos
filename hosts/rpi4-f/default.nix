@@ -6,6 +6,7 @@
   host,
   hostId,
   lib,
+  stateVersion,
   ...
 }:
 {
@@ -26,7 +27,7 @@
 
     ../../core/services/srv-utils/openssh.nix
 
-    ../../home/flavours/headless-module.nix
+    ../../home/flavours/nixos-module.nix
     ../../home/terminal/apps/starship.nix
   ];
 
@@ -41,9 +42,8 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "25.05";
-  home-manager.users.${username}.home.stateVersion = lib.mkForce "25.05";
+  nixpkgs.config.allowUnfree = false;
+  system.stateVersion = "${stateVersion}";
 
   # =======================================================
 

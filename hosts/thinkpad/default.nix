@@ -10,13 +10,15 @@
   imports = [
     ../../core
     ../../core/laptop.nix
+
     ./hardware-configuration.nix
 
-    ../../home/flavours/nixos-module.nix
     ../../core/virtualization/host.nix
 
     ../../core/services/web-utils/lubelogger.nix
     ../../core/services/media/mpd.nix
+
+    ../../home/flavours/nixos-module.nix
 
     ./rsync.nix
     ./smb-rpi5-k.nix
@@ -58,7 +60,7 @@
 
   home-manager.users.${username} = {
     imports = [
-      ../../home
+      ../../home/default.nix
       ../../home/gui-apps/utils/pyobd/pyobd.nix
     ];
   };

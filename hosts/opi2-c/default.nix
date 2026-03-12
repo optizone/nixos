@@ -6,12 +6,13 @@
   host,
   hostId,
   username,
+  stateVersion,
   ...
 }:
 let
   pkgs = import nixpkgs {
     inherit system;
-    config.allowUnfree = true;
+    config.allowUnfree = false;
     overlays = [
       (final: prev: {
         ubootOrangePiZero2W = prev.buildUBoot {
@@ -57,7 +58,7 @@ in
     ../../core/system/common.nix
     ../../core/system/nh.nix
 
-    ../../home/flavours/headless-module.nix
+    ../../home/flavours/nixos-module.nix
     ../../home/terminal/apps/starship.nix
   ];
 
@@ -73,8 +74,7 @@ in
   };
 
   nixpkgs.pkgs = pkgs;
-  system.stateVersion = "25.11";
-  home-manager.users.${username}.home.stateVersion = lib.mkForce "25.11";
+  system.stateVersion = "${stateVersion}";
 
   # =======================================================
 
