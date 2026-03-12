@@ -16,6 +16,10 @@ _: {
       NetreeGitAdded = {
         fg = "#fabd2f";
       };
+
+      NeoTreeGitStaged = {
+        fg = "#98971a";
+      };
     };
 
     # -- NeoTreeDirectoryName = { link = "Directory" },
