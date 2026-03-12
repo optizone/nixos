@@ -38,7 +38,7 @@
             state.other_kl = kl
           end
 
-          local switch_template = string.format( 'hyprctl switchxkblayout %s ', state.kb_name)..'%d'
+          local switch_template = string.format('hyprctl switchxkblayout %s ', state.kb_name)..'%d'
           if into_insert then
             state.other_kl = kl
             vim.fn.system(switch_template:format(state.insert_kl))
