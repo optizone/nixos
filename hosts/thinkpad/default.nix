@@ -65,6 +65,12 @@
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    socat
+    iperf
+    ffmpeg
+  ];
+
   # =======================================================
 
   users.users.${username} = {
