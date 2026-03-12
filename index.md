@@ -117,6 +117,14 @@ installer image. You can build one yourself fillowing instructions at
 
 This is how to setup `rpi5-k` host.
 
+You can either run:
+
+```Bash
+just provision rpi5-k
+```
+
+or do it manually:
+
 ```Bash
 # On remote host:
 # Print remote host age
