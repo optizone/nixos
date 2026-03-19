@@ -13,11 +13,11 @@ _: {
         fg = "#fabd2f";
       };
 
-      NetreeGitAdded = {
+      NeoTreeGitStaged = {
         fg = "#fabd2f";
       };
 
-      NeoTreeGitStaged = {
+      NeoTreeGitAdded = {
         fg = "#98971a";
       };
     };
