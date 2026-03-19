@@ -69,6 +69,7 @@
     socat
     iperf
     ffmpeg
+    contact # mestasthic TUI
   ];
 
   # =======================================================
