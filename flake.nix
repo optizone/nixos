@@ -220,6 +220,9 @@
           modules = [
             ./hosts/thinkpad
             nix-index-database.nixosModules.nix-index
+            {
+              programs.nix-index-database.comma.enable = true;
+            }
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
           ];
