@@ -12,16 +12,16 @@ let
 
   backup-all = pkgs.writeShellScript "backup-all" ''
     # local -> nas
-    ${rsync-bak} "${dataPath}/kiwix-images/" "${nasesPath}/rpi5-k/kiwix-images"
+    ${rsync-bak} "${dataPath}/mwiki/kiwix-images/" "${nasesPath}/rpi5-k/kiwix-images"
     ${rsync-bak} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
-    ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media" 
-    ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code" 
+    ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media"
+    ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code"
 
     ${rsync-bak} "${zrootPath}/" "${nasesPath}/rpi5-k/backups/zroot" \
         --exclude-from "${zrootPath}/.gitignore" 
 
     # nas -> local
-    ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/kiwix-images" 
+    ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/mwiki/kiwix-images"
     ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" "${dataPath}/backups/home-assistant" \
         --delete-after
 
