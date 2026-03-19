@@ -150,6 +150,8 @@ in
     temperature = {
       critical-threshold = 65;
       interval = 5;
+      hwmon-path-abs = "/sys/devices/platform/coretemp.0/hwmon";
+      input-filename = "temp1_input";
       format = "[TEMP {temperatureC}°]";
       tooltip = false;
     };
