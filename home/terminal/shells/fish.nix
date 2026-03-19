@@ -55,6 +55,7 @@
         "git add --intent-to-add flake.nix flake.lock &&
         git update-index --assume-unchanged flake.nix flake.lock";
       "nv" = "nvim .";
+      "kssh" = "kitten ssh";
     };
 
     functions = {
