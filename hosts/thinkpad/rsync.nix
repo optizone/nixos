@@ -12,7 +12,7 @@ let
 
   backup-all = pkgs.writeShellScript "backup-all" ''
     # local -> nas
-    ${rsync-bak} "${dataPath}/wiki/kiwix-images/" "${nasesPath}/rpi5-k/kiwix-images"
+    ${rsync-bak} "${dataPath}/wiki/" "${nasesPath}/rpi5-k/wiki"
     ${rsync-bak} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
     ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media"
     ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code"
@@ -21,11 +21,11 @@ let
         --exclude-from "${zrootPath}/.gitignore" 
 
     # nas -> local
-    ${rsync-bak} "${nasesPath}/rpi5-k/kiwix-images/" "${dataPath}/wiki/kiwix-images"
+    ${rsync-bak} "${nasesPath}/rpi5-k/wiki/" "${dataPath}/wiki"
     ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" "${dataPath}/backups/home-assistant" \
         --delete-after
 
-    # FIXME:  please ):
+    # FIXME:  please ): + user
     rm -r "${dataPath}/backups/rpi5-k/stale"
     cp -r "${dataPath}/backups/rpi5-k/latest" "${dataPath}/backups/rpi5-k/stale"
     ${rsync-bak} "root@rpi5-k:/persist" "${dataPath}/backups/rpi5-k/latest" \

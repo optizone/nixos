@@ -26,8 +26,8 @@ in
       inherit options fsType;
     };
 
-    "${nasPath}/kiwix-images" = {
-      device = "//rpi5-k/kiwix-images";
+    "${nasPath}/wiki" = {
+      device = "//rpi5-k/wiki";
       inherit options fsType;
     };
 

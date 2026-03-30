@@ -57,8 +57,8 @@ in
         "force group" = "users";
       };
 
-      kiwix-images = {
-        "path" = "/export/kiwix-images/";
+      wiki = {
+        "path" = "/export/wiki/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";

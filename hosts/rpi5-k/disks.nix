@@ -163,9 +163,9 @@ _: {
             options.compression = "lz4";
           };
 
-          kiwix-images = {
+          wiki = {
             type = "zfs_fs";
-            mountpoint = "/export/kiwix-images";
+            mountpoint = "/export/wiki";
           };
 
           media = {
