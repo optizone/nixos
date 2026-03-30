@@ -1,5 +1,4 @@
-{ host, ... }:
-{
+_: {
   sops = {
     defaultSopsFile = ../../secrets.yaml;
     age = {

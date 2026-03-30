@@ -2,6 +2,7 @@
 {
   networking = {
     hostName = "${host}";
+
     networkmanager = {
       enable = true;
       plugins = with pkgs; [

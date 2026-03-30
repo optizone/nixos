@@ -1,5 +1,17 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./graphics
+
+    ./system/bootloader.nix
+    ./system/network/pc.nix
+    ./system/nh.nix
+    ./system/settings.nix
+    ./system/pipewire.nix
+    ./system/security.nix
+    ./system/sops.nix
+  ];
+
   services = {
     gvfs.enable = true;
     gnome = {
@@ -15,8 +27,18 @@
       gnome-settings-daemon
     ];
   };
+
   services.logind.settings.Login = {
     # don’t shutdown when power button is short-pressed
     HandlePowerKey = "ignore";
   };
+
+  services = {
+    tlp.enable = true;
+  };
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+  };
+
 }

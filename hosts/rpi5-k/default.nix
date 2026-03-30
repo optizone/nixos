@@ -4,8 +4,6 @@
   nixos-raspberrypi,
   username,
   host,
-  hostId,
-  lib,
   ...
 }:
 {
@@ -16,13 +14,10 @@
     raspberry-pi-5.page-size-16k
     raspberry-pi-5.bluetooth
 
+    ../../core/znode.nix
+
     ./disks.nix
     ./hardware-configuration.nix
-
-    ../../core/system/sops.nix
-    ../../core/system/common.nix
-    ../../core/system/nh.nix
-
     ./nginx.nix
 
     ../../core/services/srv-utils/smb.nix
@@ -40,7 +35,6 @@
     ../../core/services/iot/home-assistant.nix
 
     ../../home/flavours/nixos-module.nix
-    ../../home/terminal/apps/starship.nix
   ];
 
   # =======================================================
@@ -53,9 +47,6 @@
       "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
     ];
   };
-
-  nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "25.05";
 
   # =======================================================
 
@@ -75,13 +66,11 @@
   home-manager.users.${username} = {
     imports = [
       ../../home/headless.nix
+      ../../home/terminal/apps/starship.nix
     ];
   };
 
   # =======================================================
-
-  networking.hostName = "${host}";
-  networking.hostId = "${hostId}";
 
   sops.secrets."${host}/user-pass-hash".neededForUsers = true;
   sops.secrets."${host}/root-pass-hash".neededForUsers = true;

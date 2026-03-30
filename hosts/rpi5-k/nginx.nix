@@ -1,25 +1,5 @@
 { domain, ... }:
 {
-  # TODO: move to a different section + enable firewall
-  networking.firewall = {
-    enable = false;
-
-    allowedTCPPorts = [
-      22
-      80
-      443
-      59010
-      59011
-      57621
-    ];
-
-    allowedUDPPorts = [
-      59010
-      59011
-      5353
-    ];
-  };
-
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
@@ -47,7 +27,6 @@
           proxyWebsockets = true;
         };
       };
-
 
       "zigbee2mqtt.${domain}" = {
         locations."/" = {

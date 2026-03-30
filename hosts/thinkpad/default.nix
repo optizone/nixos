@@ -1,19 +1,17 @@
 {
   username,
   pkgs,
-  stateVersion,
   ...
 }:
 {
   # =======================================================
 
   imports = [
-    ../../core
     ../../core/laptop.nix
+    ../../core/virtualization/host.nix
+    ../../core/programs/steam.nix
 
     ./hardware-configuration.nix
-
-    ../../core/virtualization/host.nix
 
     ../../core/services/web-utils/lubelogger.nix
     ../../core/services/media/mpd.nix
@@ -38,7 +36,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "${stateVersion}";
 
   # =======================================================
 
