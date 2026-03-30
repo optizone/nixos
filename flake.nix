@@ -69,7 +69,7 @@
 
     self.submodules = true;
     wallpapers = {
-      url = ./assets/wallpapers;
+      url = "git+file:assets/wallpapers";
       flake = false;
     };
 

@@ -49,6 +49,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773889306,
+        "narHash": "sha256-PAqwnsBSI9SVC2QugvQ3xeYCB0otOwCacB1ueQj2tgw=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "5ad85c82cc52264f4beddc934ba57f3789f28347",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "disko-rpi": {
       "inputs": {
         "nixpkgs": [
@@ -682,6 +702,26 @@
         "type": "github"
       }
     },
+    "ndg": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773478949,
+        "narHash": "sha256-8rMpSs2OWGaDlDFO5FS6Pf9WutHBXxM2omPr6hfKydI=",
+        "owner": "feel-co",
+        "repo": "ndg",
+        "rev": "c3bc1541668e6f6632a7005c7e4963c0a5dedc7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "feel-co",
+        "repo": "ndg",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -831,6 +871,7 @@
     },
     "root": {
       "inputs": {
+        "disko": "disko",
         "disko-rpi": "disko-rpi",
         "home-manager": "home-manager",
         "home-manager-rpi": "home-manager-rpi",
@@ -839,6 +880,7 @@
         "hyprlock": "hyprlock",
         "hyprpicker": "hyprpicker",
         "impermanence": "impermanence",
+        "ndg": "ndg",
         "nix-index-database": "nix-index-database",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs_2",
@@ -966,11 +1008,11 @@
         "rev": "aa3b59b89b7b2138d6735528760051956724d87f",
         "revCount": 1,
         "type": "git",
-        "url": "file:wallpapers"
+        "url": "file:assets/wallpapers"
       },
       "original": {
         "type": "git",
-        "url": "file:wallpapers"
+        "url": "file:assets/wallpapers"
       }
     },
     "xdph": {
