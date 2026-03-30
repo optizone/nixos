@@ -12,6 +12,8 @@
         enable = true;
         setupOpts = {
           html.comment.conceal = false;
+          checkbox.enabled = false;
+          bullet.enabled = false;
         };
       };
     };
