@@ -36,8 +36,6 @@ in
         "swaync &"
         "hyprctl setcursor Simp1e 24 &"
         "swww-daemon &"
-
-        "hyprlock"
       ];
 
       input = {
