@@ -1,0 +1,215 @@
+input {
+    keyboard {
+        xkb {
+            layout "us,ru"
+            options "grp:alt_shift_toggle"
+        }
+
+        numlock
+    }
+
+    touchpad {
+        tap
+        dwt // disable-when-typing
+        drag-lock
+        drag true
+        natural-scroll
+        scroll-method "two-finger"
+    }
+
+    warp-mouse-to-focus mode="center-xy"
+    focus-follows-mouse
+
+    workspace-auto-back-and-forth
+
+    mod-key "Super"
+}
+
+layout {
+    gaps 16
+
+    center-focused-column "never"
+
+    border {
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+        urgent-color "#9b0000"
+    }
+
+    default-column-width { proportion 1.0; }
+}
+
+spawn-at-startup "dbus-update-activation-environment --all --systemd"
+spawn-at-startup "systemctl --user import-environment"
+
+spawn-at-startup "nm-applet"
+spawn-at-startup "poweralertd"
+spawn-at-startup "wl-clip-persist --clipboard both"
+spawn-at-startup "wl-paste --watch cliphist store"
+spawn-at-startup "waybar"
+spawn-at-startup "swaync"
+spawn-at-startup "swww-daemon"
+
+cursor {
+    xcursor-theme "Simp1e"
+    xcursor-size 24
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/screenshot_%Y-%m-%d_%H:%M:%S.png"
+
+animations {
+    off
+}
+
+binds {
+    Mod+F1 { show-hotkey-overlay; }
+
+    Mod+Return         { spawn "kitty"; }
+    Mod+Q repeat=false { close-window; }
+
+    Mod+Space        { maximize-window-to-edges; }
+    Mod+Shift+Space  { fullscreen-window; }
+
+    Mod+F            { toggle-window-floating; }
+
+    Mod+Shift+D      { spawn    "rofi" "-show" "drun"; }
+    Mod+Shift+N      { spawn    "kitty" "--session" "zroot"; }
+    Mod+Shift+C      { spawn-sh "cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"; }
+    Mod+Shift+M      { spawn    "kitty" "--title kitty_calcure" "calcure"; }
+    Mod+Shift+B      { spawn    "kitty" "--title kitty_btop" "btop"; }
+    Mod+Shift+P      { spawn    "kitty" "--title kitty_rmpc" "rmpc"; }
+    Mod+Shift+W      { spawn    "waypaper"; }
+    Mod+Shift+Return { spawn    "kitty" "--title kitty_yazi" "yazi"; }
+    Mod+Shift+O      { spawn    "qutebrowser"; }
+    Mod+Shift+V      { spawn    "pavucontrol"; }
+
+    Mod+X            { spawn "rofi-power-menu"; }
+    Mod+Z            { spawn "systemctl" "suspend"; }
+
+    // Mod+S            { spawn "togglesplit"; }
+    Mod+B            { spawn "toggle-waybar"; }
+    Mod+C            { spawn "niri" "msg" "pick-color"; }
+    Mod+N            { spawn "swaync-client" "-t" "-sw"; }
+
+    // locking
+    Mod+Escape       { spawn "swaylock"; }
+    // Alt+Escape       { spawn "hyprlock"; }
+
+    // screenshot
+    // https://github.com/niri-wm/niri/discussions/1737
+    Print            { screenshot;                            }
+    Mod+Print        { screenshot-window write-to-disk=false; }
+    // Mod+Shift+Print  { screenshot        write-to-disk=true;  }
+    Ctrl+Print       { screenshot-screen write-to-disk=false; }
+
+    // switch focus
+    Mod+H     { focus-column-left; }
+    Mod+L     { focus-column-right; }
+    Mod+J     { focus-window-or-workspace-down; }
+    Mod+K     { focus-window-or-workspace-up; }
+
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L     { move-column-right; }
+
+    Mod+Tab { switch-focus-between-floating-and-tiling; }
+
+    // workspace control
+    Mod+1 { focus-workspace "zroot"; }
+    Mod+2 { focus-workspace "browser"; }
+    Mod+3 { focus-workspace "workbench"; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-window-to-workspace "zroot"; }
+    Mod+Shift+2 { move-window-to-workspace "browser"; }
+    Mod+Shift+3 { move-window-to-workspace "workbench"; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
+ 
+    Mod+Minus       { set-column-width "-10%"; }
+    Mod+Equal       { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    Mod+Ctrl+H { spawn "niri" "msg" "action" "move-floating-window" "-x" "-80"; }
+    Mod+Ctrl+L { spawn "niri" "msg" "action" "move-floating-window" "-x" "80"; }
+    Mod+Ctrl+J { spawn "niri" "msg" "action" "move-floating-window" "-x" "80"; }
+    Mod+Ctrl+K { spawn "niri" "msg" "action" "move-floating-window" "-x" "-80"; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+    Mod+O repeat=false { toggle-overview; }
+
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+    Mod+Shift+U         { move-workspace-down; }
+    Mod+Shift+I         { move-workspace-up; }
+
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    Mod+Shift+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    Mod+Shift+E { quit; }
+}
+
+workspace "zroot"
+workspace "browser"
+workspace "workbench"
+
+window-rule {
+    match title="kitty_yazi"
+    open-floating true 
+    default-column-width  { proportion 0.5; }
+    default-window-height { proportion 0.5; }
+}
+
+window-rule {
+    match title="kitty_btop"
+    open-floating true 
+    default-column-width  { proportion 0.5; }
+    default-window-height { proportion 0.5; }
+}
+
+window-rule {
+    match title="kitty_calcure"
+    open-floating true 
+    default-column-width  { proportion 0.5; }
+    default-window-height { proportion 0.5; }
+}
+
+window-rule {
+    match title="kitty_rmpc"
+    open-floating true 
+    default-floating-position x=100 y=100 relative-to="bottom-left"
+    default-column-width  { proportion 0.4; }
+    default-window-height { proportion 0.4; }
+}

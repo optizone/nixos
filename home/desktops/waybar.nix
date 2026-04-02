@@ -59,6 +59,7 @@ in
 
     modules-left = [
       "hyprland/workspaces"
+      "niri/workspaces"
       "custom/delim-workspaces"
       "pulseaudio"
       "network"
@@ -76,6 +77,14 @@ in
       "tray"
       # "custom/weather"
     ];
+
+    "niri/workspaces" = {
+      format = "{icon}{value}{icon}";
+      format-icons = {
+        default = " ";
+        active = "|";
+      };
+    };
 
     "hyprland/window" = {
       format = " $ {}";

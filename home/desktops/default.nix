@@ -2,6 +2,7 @@
 {
   imports = [
     ./hyprland
+    ./niri
     ./rofi
     ./swaync
     ./gnome.nix
