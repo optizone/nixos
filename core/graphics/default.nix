@@ -7,4 +7,6 @@
     ./niri.nix
     ./program.nix
   ];
+
+  services.displayManager.ly.enable = true;
 }
