@@ -129,6 +129,7 @@
       system = "x86_64-linux";
       shell = pkgs.fish;
       domain = "home.arpa";
+      username = "optizone";
 
       # font = "JetBrainsMono Nerd Font";
       font = "BigBlueTermPlus Nerd Font";
@@ -173,8 +174,12 @@
 
         rpi5-k = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = {
-            inherit inputs nixos-raspberrypi domain;
-            username = "rpi5-k";
+            inherit
+              inputs
+              username
+              nixos-raspberrypi
+              domain
+              ;
             host = "rpi5-k";
             hostId = "d100d000";
             stateVersion = "25.11";
@@ -194,8 +199,12 @@
 
         rpi4-f = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = {
-            inherit inputs nixos-raspberrypi domain;
-            username = "rpi4-f";
+            inherit
+              inputs
+              username
+              nixos-raspberrypi
+              domain
+              ;
             host = "rpi4-f";
             hostId = "d101d000";
             stateVersion = "25.11";
@@ -258,7 +267,6 @@
 
           specialArgs = {
             host = "vm0";
-            username = "vm0";
             stateVersion = "25.11";
             inherit
               self
