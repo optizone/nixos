@@ -1,5 +1,7 @@
 { host, hostId, ... }:
 {
+  networking.nftables.enable = true;
+
   networking = {
     hostName = "${host}";
     hostId = "${hostId}";

@@ -1,5 +1,7 @@
 { pkgs, host, ... }:
 {
+  networking.nftables.enable = true;
+
   networking = {
     hostName = "${host}";
 
