@@ -60,6 +60,7 @@
       ../../home/default.nix
       ../../home/gui-apps/utils/pyobd/pyobd.nix
     ];
+
   };
 
   environment.systemPackages = with pkgs; [
@@ -67,7 +68,13 @@
     iperf
     ffmpeg
     contact # mestasthic TUI
+
+    man-pages
+    man-pages-posix
   ];
+
+  documentation.man.generateCaches = true;
+  documentation.dev.enable = true;
 
   # =======================================================
 

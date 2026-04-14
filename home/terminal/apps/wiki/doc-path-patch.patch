@@ -1,0 +1,65 @@
+diff --git a/sources/arch.sh b/sources/arch.sh
+index 74487be..99dadc5 100755
+--- a/sources/arch.sh
++++ b/sources/arch.sh
+@@ -2,7 +2,7 @@
+ 
+ name='arch'
+ description='ArchWiki'
+-path="$conf_sys_usr/share/doc/arch-wiki/html"
++path="/usr/share/doc/arch-wiki/html"
+ 
+ available() {
+ 
+diff --git a/sources/devdocs.sh b/sources/devdocs.sh
+index 42b8fc1..6ff4990 100755
+--- a/sources/devdocs.sh
++++ b/sources/devdocs.sh
+@@ -2,7 +2,7 @@
+ 
+ name='devdocs'
+ description='Collection of all DevDocs'
+-path="$conf_sys_usr/share/doc/devdocs"
++path="/usr/share/doc/devdocs"
+ 
+ available() {
+ 
+diff --git a/sources/fbsd.sh b/sources/fbsd.sh
+index 8a9b557..c21767e 100755
+--- a/sources/fbsd.sh
++++ b/sources/fbsd.sh
+@@ -2,7 +2,7 @@
+ 
+ name='fbsd'
+ description='FreeBSD Documentation'
+-path="$conf_sys_usr/share/doc/freebsd-docs"
++path="/usr/share/doc/freebsd-docs"
+ 
+ available() {
+ 
+diff --git a/sources/gentoo.sh b/sources/gentoo.sh
+index a902c68..8c67002 100755
+--- a/sources/gentoo.sh
++++ b/sources/gentoo.sh
+@@ -2,7 +2,7 @@
+ 
+ name='gentoo'
+ description='Gentoo Wiki'
+-path="$conf_sys_usr/share/doc/gentoo-wiki/wiki"
++path="/usr/share/doc/gentoo-wiki/wiki"
+ 
+ available() {
+ 
+diff --git a/sources/tldr.sh b/sources/tldr.sh
+index 73fe00a..f02afb7 100755
+--- a/sources/tldr.sh
++++ b/sources/tldr.sh
+@@ -2,7 +2,7 @@
+ 
+ name='tldr'
+ description='Console commands cheatsheets'
+-path="$conf_sys_usr/share/doc/tldr-pages"
++path="/usr/share/doc/tldr-pages"
+ 
+ available() {
+ 

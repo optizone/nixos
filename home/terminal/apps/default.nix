@@ -30,6 +30,8 @@
     ./fzf.nix
     ./lazygit.nix
     ./starship.nix
+    ./wiki/wikiman.nix
+    ./wiki/tldr.nix
     ./zoxide.nix
   ];
 
