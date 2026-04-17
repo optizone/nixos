@@ -16,19 +16,25 @@ let
     ${rsync-bak} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
     ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media"
     ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code"
+    ${rsync-bak} "${dataPath}/code/protei" \
+        "${nasesPath}/rpi5-k/backups/code/protei" \
+        --del
 
-    ${rsync-bak} "${zrootPath}/" "${nasesPath}/rpi5-k/backups/zroot" \
+    ${rsync-bak} "${zrootPath}/" \
+        "${nasesPath}/rpi5-k/backups/zroot" \
         --exclude-from "${zrootPath}/.gitignore" 
 
     # nas -> local
     ${rsync-bak} "${nasesPath}/rpi5-k/wiki/" "${dataPath}/wiki"
-    ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" "${dataPath}/backups/home-assistant" \
+    ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" \
+        "${dataPath}/backups/home-assistant" \
         --delete-after
 
     # FIXME:  please ): + user
     rm -r "${dataPath}/backups/rpi5-k/stale"
     cp -r "${dataPath}/backups/rpi5-k/latest" "${dataPath}/backups/rpi5-k/stale"
-    ${rsync-bak} "root@rpi5-k:/persist" "${dataPath}/backups/rpi5-k/latest" \
+    ${rsync-bak} "root@rpi5-k:/persist" \
+        "${dataPath}/backups/rpi5-k/latest" \
         --archive --delete-after
   '';
 in
