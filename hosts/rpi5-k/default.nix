@@ -61,6 +61,7 @@
     htop
     iotop
     iperf
+    lsof
   ];
 
   home-manager.users.${username} = {
