@@ -14,7 +14,7 @@ _: {
         "NET_ADMIN" = true;
         "NET_RAW" = true;
       };
-      environment.TZ = "Europe/Berlin";
+      environment.TZ = "Europe/Moscow";
       image = "ghcr.io/home-assistant/home-assistant:2026.1.3";
       extraOptions = [
         "--network=host"
