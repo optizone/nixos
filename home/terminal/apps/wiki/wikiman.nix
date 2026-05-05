@@ -1,17 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 let
-  wikiman-update-sources-sh = pkgs.writeShellScript "wikiman-update-source" ''
+  wikiman-update-archwiki = pkgs.writeShellScript "wikiman-update-archwiki" ''
     ${pkgs.curl}/bin/curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile'
 
     ${pkgs.gnumake}/bin/make -f ./wikiman-makefile source-arch
-    sudo ${pkgs.gnumake}/bin/make -f ./wikiman-makefile source-install
-    sudo ${pkgs.gnumake}/bin/make -f ./wikiman-makefile clean
+    ${pkgs.gnumake}/bin/make -f ./wikiman-makefile clean
 
     rm wikiman-makefile
-    rm srcbuild
+    rm -rf srcbuild
   '';
 
-  wikiman-update-sources = pkgs.writeScriptBin "wikiman-update-source" wikiman-update-sources-sh;
+  wikiman-update-sources = pkgs.writeScriptBin "wikiman-update-archwiki" wikiman-update-archwiki;
 in
 {
   home.packages = with pkgs; [
@@ -24,9 +23,13 @@ in
     wikiman-update-sources
   ];
 
+  # systemd.tmpfiles.rules = [
+  #   "L /usr/share/doc - - - - /home/thinkpad/zroot/ldata/wiki/wikiman-sources/srcbuild/"
+  # ];
+
   xdg.configFile."wikiman/wikiman.conf".text = ''
     # Sources (if empty, use all available)
-    sources = arch
+    sources = arch man
 
     # Fuzzy finder
     fuzzy_finder = fzf
