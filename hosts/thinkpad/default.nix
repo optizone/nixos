@@ -66,6 +66,7 @@
       ../../home/gui-apps/utils/pyobd/pyobd.nix
     ];
 
+    home.packages = [ pkgs.zeal ];
   };
 
   environment.systemPackages = with pkgs; [
