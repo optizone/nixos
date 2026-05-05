@@ -45,6 +45,8 @@
 
   # =======================================================
 
+  services.v2raya.enable = true;
+
   programs.winbox = {
     enable = true;
     openFirewall = true;
