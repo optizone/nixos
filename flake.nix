@@ -126,8 +126,6 @@
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
-      shell = pkgs.fish;
       domain = "home.arpa";
       username = "optizone";
 
@@ -139,26 +137,30 @@
       gitUsername = "optizone";
       gitEmail = "ilya.kek.lol.orbidol@gmail.com";
 
-      pkgs = import nixpkgs {
-        inherit system;
+      pkgs-x86 = import nixpkgs {
+        system = "x86_64-linux";
+      };
+
+      pkgs-arm = import nixpkgs {
+        system = "aarch64-linux";
       };
     in
     {
       homeConfigurations = {
         protei = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+          pkgs = pkgs-x86;
 
           extraSpecialArgs = {
             gitUsername = "boicov";
             gitEmail = "boicov@protei.ru";
             username = "boicov";
+            shell = pkgs-x86.fish;
 
             inherit
               self
               inputs
               font
               fontMono
-              shell
               ;
           };
 
@@ -183,7 +185,7 @@
             host = "rpi5-k";
             hostId = "d100d000";
             stateVersion = "25.11";
-            shell = pkgs.bash;
+            shell = pkgs-arm.bash;
           };
 
           modules = [
@@ -208,7 +210,7 @@
             host = "rpi4-f";
             hostId = "d101d000";
             stateVersion = "25.11";
-            shell = pkgs.bash;
+            shell = pkgs-x86.bash;
           };
 
           modules = [
@@ -225,7 +227,8 @@
         # Personal
 
         thinkpad = nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
+
           modules = [
             ./hosts/thinkpad
             nix-index-database.nixosModules.nix-index
@@ -239,12 +242,13 @@
             host = "thinkpad";
             username = "thinkpad";
             stateVersion = "24.05";
+            shell = pkgs-x86.fish;
+
             inherit
               self
               inputs
               font
               fontMono
-              shell
               gitUsername
               gitEmail
               ;
@@ -256,7 +260,8 @@
         # RnD
 
         vm0 = nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
+
           modules = [
             ./hosts/vm0
             nix-index-database.nixosModules.nix-index
@@ -268,12 +273,13 @@
           specialArgs = {
             host = "vm0";
             stateVersion = "25.11";
+            shell = pkgs-x86.fish;
+
             inherit
               self
               inputs
               font
               fontMono
-              shell
               gitUsername
               gitEmail
               ;
@@ -283,7 +289,8 @@
         # === Generic x86-64 ===
 
         generic-laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
+
           modules = [
             ./hosts/generic/laptop.nix
             nix-index-database.nixosModules.nix-index
@@ -292,12 +299,13 @@
             host = "generic-laptop";
             username = "laptop-user";
             stateVersion = "25.11";
+            shell = pkgs-x86.fish;
+
             inherit
               self
               inputs
               font
               fontMono
-              shell
               gitUsername
               gitEmail
               ;
@@ -305,7 +313,8 @@
         };
 
         generic-pc = nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
+
           modules = [
             ./hosts/generic/pc.nix
             nix-index-database.nixosModules.nix-index
@@ -314,12 +323,13 @@
             host = "generic-pc";
             username = "pc-user";
             stateVersion = "25.11";
+            shell = pkgs-x86.fish;
+
             inherit
               self
               inputs
               font
               fontMono
-              shell
               gitUsername
               gitEmail
               ;
