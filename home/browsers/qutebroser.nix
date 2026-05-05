@@ -37,6 +37,8 @@
 
       tabs.max_width = 255;
 
+      zoom.default = "125%";
+
       fonts.default_family = "${fontMono}";
 
       colors.webpage.preferred_color_scheme = "dark";
