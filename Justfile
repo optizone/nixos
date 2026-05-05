@@ -1,7 +1,7 @@
 # Provision remote host
 @provision host:
     # Update
-    echo "Adding '{{host}}' age key:"
+    echo "'{{host}}' age key:"
     ssh "root@{{host}}" "cat /etc/ssh/ssh_host_ed25519_key.pub | nix run nixpkgs#ssh-to-age" | tee .__tmp_ssh_age_key
 
     sed -i "/{{host}} age.*/d" .sops.yaml
@@ -18,6 +18,8 @@
     nix run "nixpkgs#sops" updatekeys secrets.yaml
 
     nix run github:nix-community/nixos-anywhere -- --build-on remote \
+    echo ""
+    echo "Provisioning:"
         --flake "./#{{host}}" \
         --target-host root@{{host}} \
         --generate-hardware-config nixos-generate-config \
@@ -26,10 +28,12 @@
         --phases kexec,disko,install
 
     # Copy ssh keys to persistent location 
+    echo ""
     echo "Copying SSH keys to persistent location..."
     ssh "root@{{host}}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/persist/etc/ssh"
 
     # At this point configuration is done
+    echo ""
     echo "Rebooting..."
     ssh "root@{{host}}" "reboot"
 
