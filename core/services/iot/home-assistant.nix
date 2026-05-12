@@ -27,4 +27,5 @@
     "d /znode/share/backups/home-assistant 0750 ${username} users"
   ];
 
+  networking.firewall.allowedTCPPorts = [ 8123 ];
 }
