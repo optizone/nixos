@@ -20,7 +20,6 @@
     users.${username} = {
       home = {
         username = "${username}";
-        homeDirectory = "/home/${username}";
         stateVersion = "${stateVersion}";
       };
       programs.home-manager.enable = true;

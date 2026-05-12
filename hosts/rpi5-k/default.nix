@@ -68,6 +68,7 @@
     imports = [
       ../../home/headless.nix
       ../../home/terminal/apps/starship.nix
+      ../../home/terminal/shells/bash.nix
     ];
   };
 
@@ -76,8 +77,10 @@
   sops.secrets."${host}/user-pass-hash".neededForUsers = true;
   sops.secrets."${host}/root-pass-hash".neededForUsers = true;
 
-  users.users.root.hashedPasswordFile = config.sops.secrets."${host}/root-pass-hash".path;
-  users.users.${username}.hashedPasswordFile = config.sops.secrets."${host}/user-pass-hash".path;
+  users.users = {
+    root.hashedPasswordFile = config.sops.secrets."${host}/root-pass-hash".path;
+    ${username}.hashedPasswordFile = config.sops.secrets."${host}/user-pass-hash".path;
+  };
 
   boot.loader.raspberry-pi.bootloader = "kernel";
   hardware.raspberry-pi.extra-config = ''

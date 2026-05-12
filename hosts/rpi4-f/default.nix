@@ -5,7 +5,6 @@
   username,
   host,
   hostId,
-  lib,
   stateVersion,
   ...
 }:
@@ -56,7 +55,18 @@
   environment.systemPackages = with pkgs; [
     vim
     htop
+    iotop
+    iperf
+    lsof
   ];
+
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/headless.nix
+      ../../home/terminal/apps/starship.nix
+      ../../home/terminal/shells/bash.nix
+    ];
+  };
 
   # =======================================================
 

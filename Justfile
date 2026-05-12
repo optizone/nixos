@@ -17,11 +17,12 @@
     echo "Updating keys:"
     nix run "nixpkgs#sops" updatekeys secrets.yaml
 
-    nix run github:nix-community/nixos-anywhere -- --build-on remote \
     echo ""
     echo "Provisioning:"
+    nix run github:nix-community/nixos-anywhere -- \
         --flake "./#{{host}}" \
         --target-host root@{{host}} \
+        --no-substitute-on-destination \
         --generate-hardware-config nixos-generate-config \
             ./hosts/{{host}}/hardware-configuration.nix \
         --copy-host-keys \
@@ -44,6 +45,7 @@
     sleep 1
     iperf -c {{host}}
 
+
 @secrets-edit:
      nix run "nixpkgs#sops" secrets.yaml
 
@@ -58,8 +60,8 @@ test host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
-          --target-host "{{host}}@{{host}}" \
-          --build-host "{{host}}@{{host}}"
+          --target-host "root@{{host}}" \
+          --build-host "root@{{host}}"
 
 # `nixos-rebuild boot` remote host
 boot host:
@@ -67,8 +69,8 @@ boot host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
-          --target-host "{{host}}@{{host}}" \
-          --build-host "{{host}}@{{host}}"
+          --target-host "root@{{host}}" \
+          --build-host "root@{{host}}"
 
 # `nixos-rebuild switch` remote host
 switch host:
@@ -76,8 +78,8 @@ switch host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
-          --target-host "{{host}}@{{host}}" \
-          --build-host "{{host}}@{{host}}"
+          --target-host "root@{{host}}" \
+          --build-host "root@{{host}}"
 
 # VM related
 
