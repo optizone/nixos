@@ -20,13 +20,13 @@
         rewrites = [
           {
             domain = "*.${domain}";
-            answer = "192.168.68.118";
+            answer = "192.168.88.118";
             enabled = true;
           }
 
           {
             domain = "rpi5-k";
-            answer = "192.168.68.118";
+            answer = "192.168.88.118";
             enabled = true;
           }
         ];

@@ -28,8 +28,8 @@ in
         "netbios name" = "smbnix";
         "security" = "user";
         # note: localhost is the ipv6 localhost ::1
-        "hosts allow" = "192.168.68. 127.0.0.1 localhost";
         "min protocol" = "SMB3";
+        "hosts allow" = "192.168.88. 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0";
         "guest account" = "nobody";
         "map to guest" = "bad user";
