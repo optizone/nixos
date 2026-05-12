@@ -24,6 +24,9 @@
       set -x MANROFFOPT -c
       set -g theme_nerd_fonts yes
 
+      # TODO: global env var
+      set -gx EDITOR nvim
+
       if not test $FISH_INIT_SUPPRESS_FASTFETCH;
         # fastfetch
         # pfetch
