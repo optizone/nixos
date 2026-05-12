@@ -1,5 +1,5 @@
 _: {
-  environment.persistence."/persist" = {
+  environment.persistence."/znode/persist" = {
     enable = true;
     hideMounts = true;
 
@@ -15,10 +15,10 @@ _: {
   };
 
   sops.age.sshKeyPaths = [
-    "/persist/etc/ssh/ssh_host_ed25519_key"
+    "/znode/persist/etc/ssh/ssh_host_ed25519_key"
   ];
 
-  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/znode/persist".neededForBoot = true;
 
   disko.devices = {
     nodev."/" = {
@@ -82,6 +82,18 @@ _: {
               content = {
                 type = "filesystem";
                 mountpoint = "/nix";
+                format = "ext4";
+                mountOptions = [ "noatime" ];
+              };
+            };
+
+            persist = {
+              label = "PERSIST";
+              size = "2G";
+
+              content = {
+                type = "filesystem";
+                mountpoint = "/znode/persist";
                 format = "ext4";
                 mountOptions = [ "noatime" ];
               };

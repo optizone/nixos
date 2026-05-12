@@ -30,7 +30,7 @@
     # Copy ssh keys to persistent location 
     echo ""
     echo "Copying SSH keys to persistent location..."
-    ssh "root@{{host}}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/persist/etc/ssh"
+    ssh "root@{{host}}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/znode/persist/etc/ssh"
 
     # At this point configuration is done
     echo ""

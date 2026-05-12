@@ -13,10 +13,8 @@ let
 in
 {
   users.users.smbuser = {
-    isNormalUser = true;
-    extraGroups = [
-      "users"
-    ];
+    isSystemUser = true;
+    group = "users";
   };
 
   services.samba = {
@@ -38,7 +36,7 @@ in
       };
 
       backups = {
-        "path" = "/export/backups/";
+        "path" = "/znode/share/backups/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -48,7 +46,7 @@ in
       };
 
       disk-images = {
-        "path" = "/export/disk-images/";
+        "path" = "/znode/share/disk-images/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -58,7 +56,7 @@ in
       };
 
       wiki = {
-        "path" = "/export/wiki/";
+        "path" = "/znode/share/wiki/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -68,7 +66,7 @@ in
       };
 
       media = {
-        "path" = "/export/media/";
+        "path" = "/znode/share/media/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -78,7 +76,7 @@ in
       };
 
       home = {
-        "path" = "/export/home/";
+        "path" = "/znode/share/home/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -97,11 +95,12 @@ in
   networking.firewall.allowPing = true;
 
   systemd.tmpfiles.rules = [
-    "d /export/backups 0750 ${username} users"
-    "d /export/disk-images 0750 ${username} users"
-    "d /export/kiwix-images 0750 ${username} users"
-    "d /export/media 0750 ${username} users"
-    "d /export/home 0750 ${username} users"
+    "d /znode/share/backups 0750 ${username} users"
+    "d /znode/share/disk-images 0750 ${username} users"
+    "d /znode/share/kiwix-images 0750 ${username} users"
+    "d /znode/share/media 0750 ${username} users"
+    "d /znode/share/home 0750 ${username} users"
+    "d /znode/share/wiki 0750 ${username} users"
   ];
 
   systemd.services.samba-smbd.serviceConfig.ExecStartPre = [

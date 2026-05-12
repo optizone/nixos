@@ -1,20 +1,33 @@
 _: {
-  environment.persistence."/persist" = {
+  environment.persistence."/znode/persist" = {
     enable = true;
     hideMounts = true;
 
     directories = [
       "/var/lib/nixos"
-      "/var/lib/jellyfin"
-      "/var/lib/grocy"
-      "/var/lib/zigbee2mqtt"
-      "/var/lib/mosquitto"
+      "/var/lib/containers/storage/volumes/home-assistant"
+
+      {
+        directory = "/var/lib/grocy";
+        user = "grocy";
+      }
+      {
+        directory = "/var/lib/jellyfin";
+        user = "jellyfin";
+      }
+      {
+        directory = "/var/lib/zigbee2mqtt";
+        user = "zigbee2mqtt";
+      }
+      {
+        directory = "/var/lib/mosquitto";
+        user = "mosquitto";
+      }
       {
         # matter-server AdGuardHome
         directory = "/var/lib/private/";
         mode = "0700";
       }
-      "/var/lib/containers/storage/volumes/home-assistant"
     ];
 
     files = [
@@ -25,10 +38,10 @@ _: {
   };
 
   sops.age.sshKeyPaths = [
-    "/persist/etc/ssh/ssh_host_ed25519_key"
+    "/znode/persist/etc/ssh/ssh_host_ed25519_key"
   ];
 
-  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/znode/persist".neededForBoot = true;
 
   disko.devices = {
     nodev."/" = {
@@ -102,7 +115,6 @@ _: {
 
       a = {
         type = "disk";
-        # device = "/dev/sdc";
         device = "/dev/disk/by-id/ata-WDC_WD10JPCX-24UE4T0_WD-WX31A9611N2C";
 
         content = {
@@ -121,7 +133,6 @@ _: {
 
       b = {
         type = "disk";
-        # device = "/dev/sdb";
         device = "/dev/disk/by-id/ata-WDC_WD10SPZX-21Z10T0_WD-WX42A2139YKS";
 
         content = {
@@ -147,35 +158,40 @@ _: {
         datasets = {
           persist = {
             type = "zfs_fs";
-            mountpoint = "/persist";
+            mountpoint = "/znode/persist";
             options.compression = "lz4";
           };
 
           backups = {
             type = "zfs_fs";
-            mountpoint = "/export/backups";
+            mountpoint = "/znode/share/backups";
             options.compression = "lz4";
           };
 
           disk-images = {
             type = "zfs_fs";
-            mountpoint = "/export/disk-images";
-            options.compression = "lz4";
+            mountpoint = "/znode/share/disk-images";
+            options = {
+              compression = "lz4";
+              recordsize = "4M";
+            };
           };
 
           wiki = {
             type = "zfs_fs";
-            mountpoint = "/export/wiki";
+            mountpoint = "/znode/share/wiki";
+            options.recordsize = "1M";
           };
 
           media = {
             type = "zfs_fs";
-            mountpoint = "/export/media";
+            mountpoint = "/znode/share/media";
+            options.recordsize = "4M";
           };
 
           home = {
             type = "zfs_fs";
-            mountpoint = "/export/home";
+            mountpoint = "/znode/share/home";
             options.compression = "lz4";
           };
         };

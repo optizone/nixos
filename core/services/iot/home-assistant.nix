@@ -1,4 +1,5 @@
-_: {
+{ username, ... }:
+{
   # TODO: make configurable
   hardware.bluetooth.enable = true;
 
@@ -7,7 +8,7 @@ _: {
     containers.homeassistant = {
       volumes = [
         "home-assistant:/config"
-        "/export/backups/home-assistant:/config/backups"
+        "/znode/share/backups/home-assistant:/config/backups"
         "/var/run/dbus:/run/dbus:ro" # Bluetooth support
       ];
       capabilities = {
@@ -21,4 +22,9 @@ _: {
       ];
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d /znode/share/backups/home-assistant 0750 ${username} users"
+  ];
+
 }

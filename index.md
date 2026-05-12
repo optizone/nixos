@@ -151,7 +151,7 @@ nix run github:nix-community/nixos-anywhere -- --build-on remote \
 
 # On remote host:
 # Copy ssh keys to persistent location 
-cp /etc/ssh/ssh_host_ed25519_key* /mnt/persist/etc/ssh
+cp /etc/ssh/ssh_host_ed25519_key* /mnt/znode/persist/etc/ssh
 
 # At this point configuration is done
 reboot
