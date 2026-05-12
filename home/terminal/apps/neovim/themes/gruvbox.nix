@@ -20,6 +20,15 @@ _: {
       NeoTreeGitAdded = {
         fg = "#98971a";
       };
+
+      "@markup.strong" = {
+        fg = "#ff8700";
+      };
+
+      "@markup.italic" = {
+        fg = "#fabd2f";
+      };
+
     };
 
     # -- NeoTreeDirectoryName = { link = "Directory" },
