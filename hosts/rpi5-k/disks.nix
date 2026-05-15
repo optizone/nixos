@@ -10,23 +10,37 @@ _: {
       {
         directory = "/var/lib/grocy";
         user = "grocy";
+        group = "nginx";
       }
       {
         directory = "/var/lib/jellyfin";
         user = "jellyfin";
+        group = "jellyfin";
       }
       {
         directory = "/var/lib/zigbee2mqtt";
         user = "zigbee2mqtt";
+        group = "zigbee2mqtt";
       }
       {
         directory = "/var/lib/mosquitto";
         user = "mosquitto";
+        group = "mosquitto";
       }
       {
         # matter-server AdGuardHome
         directory = "/var/lib/private/";
         mode = "0700";
+      }
+      {
+        directory = "/var/lib/private/matter-server";
+        user = "nobody";
+        group = "nogroup";
+      }
+      {
+        directory = "/var/lib/private/AdGuardHome";
+        user = "nobody";
+        group = "nogroup";
       }
     ];
 
