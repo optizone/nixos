@@ -38,6 +38,7 @@
         color_bg1 = "#3c3836";
         color_bg3 = "#665c54";
         color_blue = "#458588";
+        color_blue_light = "#83a598";
         color_aqua = "#689d6a";
         color_green = "#98971a";
         color_orange = "#d65d0e";
@@ -83,7 +84,7 @@
       };
 
       hostname = {
-        style = "fg:color_purple";
+        style = "fg:color_blue_light";
         # ssh_only = false;
         format = "on [$hostname ]($style)";
       };
