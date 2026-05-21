@@ -15,19 +15,16 @@
     raspberry-pi-4.base
     raspberry-pi-4.bluetooth
 
-    ./disko.nix
+    ../../home/terminal/apps/starship.nix
+
+    ../../core/znode.nix
+
+    ./disks.nix
     ./hardware-configuration.nix
-
-    ../../core/system/sops.nix
-    ../../core/system/common.nix
-    ../../core/system/nh.nix
-
-    ./nginx.nix
 
     ../../core/services/srv-utils/openssh.nix
 
     ../../home/flavours/nixos-module.nix
-    ../../home/terminal/apps/starship.nix
   ];
 
   # =======================================================
@@ -52,14 +49,6 @@
 
   # =======================================================
 
-  environment.systemPackages = with pkgs; [
-    vim
-    htop
-    iotop
-    iperf
-    lsof
-  ];
-
   home-manager.users.${username} = {
     imports = [
       ../../home/headless.nix
@@ -79,11 +68,11 @@
   users.users.root.hashedPasswordFile = config.sops.secrets."${host}/root-pass-hash".path;
   users.users.${username}.hashedPasswordFile = config.sops.secrets."${host}/user-pass-hash".path;
 
-  boot.loader.raspberryPi.bootloader = "uboot";
+  boot.loader.raspberry-pi.bootloader = "uboot";
 
   system.nixos.tags =
     let
-      cfg = config.boot.loader.raspberryPi;
+      cfg = config.boot.loader.raspberry-pi;
     in
     [
       "raspberry-pi-${cfg.variant}"

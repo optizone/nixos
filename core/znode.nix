@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./system/network/znode.nix
@@ -8,5 +8,13 @@
     ./programs/nh.nix
 
     ./virtualization/host.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    vim
+    htop
+    iotop
+    iperf
+    lsof
   ];
 }
