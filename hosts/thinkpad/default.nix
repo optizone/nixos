@@ -76,6 +76,10 @@
     iperf
     ffmpeg
     contact # mestasthic TUI
+    nixos-anywhere
+    just
+    nixos-rebuild-ng
+    htop
 
     man-pages
     man-pages-posix
