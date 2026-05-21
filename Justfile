@@ -45,8 +45,13 @@
     sleep 1
     iperf -c {{host}}
 
+@restore-zigbee2mqtt host:
+    rsync -r \
+        --chown zigbee2mqtt:zigbee2mqtt \
+        ~/zroot/ldata/backups/{{host}}/latest/persist/var/lib/zigbee2mqtt \
+        root@{{host}}:/var/lib/
 
-@secrets-edit:
+@edit-secrets:
      nix run "nixpkgs#sops" secrets.yaml
 
 @secrets-mkpasswd:
