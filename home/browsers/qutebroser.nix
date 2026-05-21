@@ -6,8 +6,8 @@
     searchEngines = {
       g = "https://www.google.com/search?q={}";
       d = "https://duckduckgo.com/?q={}";
-      nixpkgs = "https://search.nixos.org/packages?query={}";
-      nixoptions = "https://search.nixos.org/options?query={}";
+      np = "https://search.nixos.org/packages?query={}";
+      no = "https://search.nixos.org/options?query={}";
     };
 
     settings = {
