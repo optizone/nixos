@@ -132,7 +132,7 @@
       # font = "JetBrainsMono Nerd Font";
       font = "BigBlueTermPlus Nerd Font";
       fontMono = "${font} Mono";
-      fontSIze = 11;
+      fontSize = 13;
 
       gitUsername = "optizone";
       gitEmail = "ilya.kek.lol.orbidol@gmail.com";
@@ -249,6 +249,7 @@
               inputs
               font
               fontMono
+              fontSize
               gitUsername
               gitEmail
               ;

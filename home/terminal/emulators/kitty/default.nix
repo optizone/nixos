@@ -1,4 +1,4 @@
-{ fontMono, ... }:
+{ fontMono, fontSize, ... }:
 {
   imports = [ ./sessions ];
 
@@ -10,7 +10,7 @@
 
     font = {
       name = "${fontMono}";
-      size = 11;
+      size = fontSize;
     };
 
     settings = {
