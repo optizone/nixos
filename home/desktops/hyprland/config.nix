@@ -120,7 +120,7 @@ in
         "$mainMod SHIFT, N, exec, $term --session zroot"
         "$mainMod SHIFT, C, exec, cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"
         "$mainMod SHIFT, M, exec, ${centerFloat 0.5 0.5} $term calcure"
-        "$mainMod SHIFT, B, exec, ${centerFloat 0.5 0.5} $term btop"
+        "$mainMod SHIFT, B, exec, ${centerFloat 0.5 0.5} $term htop"
         "$mainMod SHIFT, P, exec, ${positionedFloat 0.025 0.55 0.4 0.4} $term rmpc"
         "$mainMod SHIFT, W, exec, ${centerFloat 0.5 0.5} waypaper"
         # FIXME: env hack
