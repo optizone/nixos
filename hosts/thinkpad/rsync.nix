@@ -50,7 +50,6 @@ in
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "daily";
-      Persistent = true;
       Unit = "backup-all.service";
     };
   };
