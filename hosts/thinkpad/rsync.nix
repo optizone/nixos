@@ -30,7 +30,7 @@ let
     # FIXME:  please ): + user
     rm -r "${dataPath}/backups/rpi5-k/stale"
     cp -r "${dataPath}/backups/rpi5-k/latest" "${dataPath}/backups/rpi5-k/stale"
-    ${rsync-bak} "root@rpi5-k:/persist" "${dataPath}/backups/rpi5-k/latest" \
+    ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/latest" \
         --archive --delete-after
   '';
 
