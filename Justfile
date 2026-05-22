@@ -2,7 +2,7 @@
 @provision host:
     # Update
     echo "'{{host}}' age key:"
-    ssh "root@{{host}}" "cat /etc/ssh/ssh_host_ed25519_key.pub | nix run nixpkgs#ssh-to-age" | tee .__tmp_ssh_age_key
+    ssh "root@{{host}}" "cat /etc/ssh/ssh_host_ed25519_key.pub" | nix run "nixpkgs#ssh-to-age" | tee .__tmp_ssh_age_key
 
     sed -i "/{{host}} age.*/d" .sops.yaml
     sed -i "/\*{{host}}/d" .sops.yaml
