@@ -102,6 +102,7 @@
 
   networking.hosts = {
     "192.168.88.248" = [ "rpi5-k" ];
+    "192.168.88.219" = [ "rpi4-f" ];
   };
 
   # needed for MKD2 work project
