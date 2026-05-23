@@ -2,6 +2,7 @@
   pkgs,
   font,
   fontMono,
+  fontSize,
   ...
 }:
 let
@@ -236,7 +237,7 @@ in
       margin: 0;
       padding: 1pt;
       font-family: "${font}";
-      font-size: 11pt;
+      font-size: ${builtins.toString fontSize}pt;
     }
 
     #waybar {
