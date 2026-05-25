@@ -59,7 +59,18 @@
       };
     };
 
-    autocomplete.blink-cmp.enable = true;
+    autocomplete.blink-cmp = {
+      enable = true;
+      friendly-snippets.enable = true;
+      setupOpts = {
+        fuzzy.implementation = "prefer_rust_with_warning";
+      };
+      sourcePlugins = {
+        emoji.enable = true;
+        ripgrep.enable = false; # completion from nearby files
+        spell.enable = true;
+      };
+    };
 
     # ------------------------------------------------------------
 
