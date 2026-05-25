@@ -1,6 +1,5 @@
 {
   pkgs,
-  font,
   fontMono,
   fontSize,
   ...
@@ -236,7 +235,7 @@ in
       min-height: 0;
       margin: 0;
       padding: 1pt;
-      font-family: "${font}";
+      font-family: "${fontMono}";
       font-size: ${builtins.toString fontSize}pt;
     }
 
