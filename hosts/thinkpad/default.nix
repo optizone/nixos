@@ -110,4 +110,43 @@
   systemd.tmpfiles.rules = [
     "d /var/run/protei-config-manager 0777 ${username} users"
   ];
+
+  nix = {
+    distributedBuilds = true;
+
+    buildMachines = [
+      {
+        hostName = "rpi5-k";
+        system = "aarch64-linux,armv7l-linux,armv6l-linux";
+        protocol = "ssh-ng";
+        sshUser = "optizone";
+        sshKey = "/home/thinkpad/.ssh/thinkpad";
+        maxJobs = 3;
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
+      }
+
+      {
+        hostName = "rpi4-f";
+        system = "aarch64-linux,armv7l-linux,armv6l-linux";
+        protocol = "ssh-ng";
+        sshUser = "optizone";
+        sshKey = "/home/thinkpad/.ssh/thinkpad";
+        maxJobs = 3;
+        supportedFeatures = [
+          "nixos-test"
+          "benchmark"
+          "big-parallel"
+          "kvm"
+        ];
+        mandatoryFeatures = [ ];
+      }
+    ];
+  };
+
 }
