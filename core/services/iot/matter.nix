@@ -3,4 +3,6 @@ _: {
     enable = true;
     port = 5580;
   };
+
+  networking.firewall.allowedTCPPorts = [ 5580 ];
 }
