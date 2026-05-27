@@ -7,7 +7,7 @@
     hostId = "${hostId}";
 
     firewall = {
-      enable = true;
+      enable = false;
 
       allowedTCPPorts = [
         22
