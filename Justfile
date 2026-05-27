@@ -65,8 +65,7 @@ test host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
-          --target-host "root@{{host}}" \
-          --build-host "root@{{host}}"
+          --target-host "root@{{host}}"
 
 # `nixos-rebuild boot` remote host
 boot host:
@@ -74,8 +73,7 @@ boot host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
-          --target-host "root@{{host}}" \
-          --build-host "root@{{host}}"
+          --target-host "root@{{host}}"
 
 # `nixos-rebuild switch` remote host
 switch host:
@@ -83,8 +81,7 @@ switch host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
-          --target-host "root@{{host}}" \
-          --build-host "root@{{host}}"
+          --target-host "root@{{host}}"
 
 # VM related
 
