@@ -14,6 +14,7 @@
     ./plugins/lualine.nix
     ./plugins/neo-tree.nix
     # ./plugins/nvim-tree.nix
+    ./plugins/marks.nix
 
     ./custom-plugins/layout-mappers.nix
 
