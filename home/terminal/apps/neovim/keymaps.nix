@@ -225,13 +225,36 @@ _: {
       lua = true;
     }
 
-    # -- Other
+    # -- Buffers
     {
       key = "<leader>bd";
       mode = [ "n" ];
       action = "function() Snacks.bufdelete() end";
       desc = "Delete buffer";
       lua = true;
+    }
+    {
+      key = "<C-j>";
+      mode = [ "n" ];
+      action = "<Cmd>bp<CR>";
+      desc = "Navigate to the prefious buffer";
+      silent = true;
+    }
+    {
+      key = "<C-k>";
+      mode = [ "n" ];
+      action = "<Cmd>bn<CR>";
+      desc = "Navigate to the next buffer";
+      silent = true;
+    }
+
+    # -- ImgClip
+    {
+      key = "<leader>p";
+      mode = [ "n" ];
+      action = "<Cmd>PasteImage<CR>";
+      desc = "Paste image from the system clipboard";
+      silent = true;
     }
   ];
 }
