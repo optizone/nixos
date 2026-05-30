@@ -210,7 +210,7 @@
             host = "rpi4-f";
             hostId = "d101d000";
             stateVersion = "25.11";
-            shell = pkgs-x86.bash;
+            shell = pkgs-arm.bash;
           };
 
           modules = [
