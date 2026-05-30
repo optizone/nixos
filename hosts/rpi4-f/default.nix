@@ -48,6 +48,16 @@
 
   # =======================================================
 
+  services.create_ap = {
+    enable = true;
+    settings = {
+      INTERNET_IFACE = "eth0";
+      WIFI_IFACE = "wlan0";
+      SSID = "rpi4-f-wifi";
+      PASSPHRASE = "12345678";
+    };
+  };
+
   home-manager.users.${username} = {
     imports = [
       ../../home/headless.nix
