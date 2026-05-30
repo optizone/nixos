@@ -81,6 +81,7 @@
     just
     nixos-rebuild-ng
     htop
+    ollama
 
     man-pages
     man-pages-posix
