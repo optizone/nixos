@@ -222,6 +222,30 @@
           ];
         };
 
+        # FIXME: does not build
+        opi2-c = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = {
+            inherit
+              inputs
+              username
+              domain
+              ;
+            host = "opi2-c";
+            hostId = "d101d001";
+            stateVersion = "26.05";
+            shell = pkgs-arm.bash;
+          };
+
+          modules = [
+            ./hosts/opi2-c
+            sops-nix.nixosModules.sops
+            disko.nixosModules.disko
+            impermanence.nixosModules.impermanence
+            home-manager.nixosModules.home-manager
+          ];
+        };
+
         # ==== x86-64 ====
 
         # Personal

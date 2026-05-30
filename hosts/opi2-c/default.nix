@@ -51,15 +51,14 @@ in
   # =======================================================
 
   imports = [
+    ../../core/znode.nix
+
     ./disks.nix
     # ./hardware-configuration.nix
 
-    ../../core/system/sops.nix
-    ../../core/system/common.nix
-    ../../core/system/nh.nix
+    ../../core/services/srv-utils/openssh.nix
 
     ../../home/flavours/nixos-module.nix
-    ../../home/terminal/apps/starship.nix
   ];
 
   # =======================================================
@@ -67,13 +66,15 @@ in
   nix.settings = {
     substituters = [
       "https://nix-community.cachix.org"
+      "http://192.168.88.252:5000"
+      "http://192.168.88.250:5000"
     ];
     trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
 
-  nixpkgs.pkgs = pkgs;
+  nixpkgs.config.allowUnfree = false;
   system.stateVersion = "${stateVersion}";
 
   # =======================================================
@@ -88,6 +89,14 @@ in
     vim
     htop
   ];
+
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/headless.nix
+      ../../home/terminal/apps/starship.nix
+      ../../home/terminal/shells/bash.nix
+    ];
+  };
 
   # =======================================================
 

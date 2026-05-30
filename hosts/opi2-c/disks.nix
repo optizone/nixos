@@ -1,13 +1,10 @@
 _: {
-  environment.persistence."/persist" = {
+  environment.persistence."/znode/persist" = {
     enable = true;
     hideMounts = true;
 
     directories = [
       "/var/lib/nixos"
-      "/var/lib/jellyfin"
-      "/var/lib/grocy"
-      "/var/lib/containers/storage/home-assistant"
     ];
 
     files = [
@@ -18,16 +15,16 @@ _: {
   };
 
   sops.age.sshKeyPaths = [
-    "/persist/etc/ssh/ssh_host_ed25519_key"
+    "/znode/persist/etc/ssh/ssh_host_ed25519_key"
   ];
 
-  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/znode/persist".neededForBoot = true;
 
   disko.devices = {
     nodev."/" = {
       fsType = "tmpfs";
       mountOptions = [
-        "size=4G"
+        "size=2G"
         "defaults"
         "mode=755"
       ];
@@ -89,83 +86,18 @@ _: {
                 mountOptions = [ "noatime" ];
               };
             };
-          };
-        };
-      };
 
-      a = {
-        type = "disk";
-        # device = "/dev/sdc";
-        device = "/dev/disk/by-id/ata-WDC_WD10JPCX-24UE4T0_WD-WX31A9611N2C";
+            persist = {
+              label = "PERSIST";
+              size = "2G";
 
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
               content = {
-                type = "zfs";
-                pool = "rpool";
+                type = "filesystem";
+                mountpoint = "/znode/persist";
+                format = "ext4";
+                mountOptions = [ "noatime" ];
               };
             };
-          };
-        };
-      };
-
-      b = {
-        type = "disk";
-        # device = "/dev/sdb";
-        device = "/dev/disk/by-id/ata-WDC_WD10SPZX-21Z10T0_WD-WX42A2139YKS";
-
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "rpool";
-              };
-            };
-          };
-        };
-      };
-    };
-
-    zpool = {
-      rpool = {
-        type = "zpool";
-        mode = "mirror";
-
-        datasets = {
-          persist = {
-            type = "zfs_fs";
-            mountpoint = "/persist";
-          };
-
-          backups = {
-            type = "zfs_fs";
-            mountpoint = "/export/backups";
-          };
-
-          disk-images = {
-            type = "zfs_fs";
-            mountpoint = "/export/disk-images";
-          };
-
-          kiwix-images = {
-            type = "zfs_fs";
-            mountpoint = "/export/kiwix-images";
-          };
-
-          media = {
-            type = "zfs_fs";
-            mountpoint = "/export/media";
-          };
-
-          home = {
-            type = "zfs_fs";
-            mountpoint = "/export/home";
           };
         };
       };
