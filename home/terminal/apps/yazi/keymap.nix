@@ -1419,7 +1419,14 @@
         run = "shell -- dragon -x -i -T \"$1\"";
         for = "linux";
       }
-
+      {
+        on = [
+          "c"
+          "m"
+        ];
+        run = "plugin chmod";
+        desc = "Chmod on selected files";
+      }
       # cd back to the root of the current Git repository
       {
         on = [

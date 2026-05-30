@@ -20,6 +20,7 @@
       mount = "${inputs.yazi-plugins}/mount.yazi";
       smart-enter = "${inputs.yazi-plugins}/smart-enter.yazi";
       full-border = "${inputs.yazi-plugins}/full-border.yazi";
+      chmod = "${inputs.yazi-plugins}/chmod.yazi";
     };
 
     flavors = {
