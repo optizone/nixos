@@ -27,10 +27,10 @@ let
     ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" \
         "${dataPath}/backups/home-assistant"
 
-    # FIXME:  please ): + user
-    rm -r "${dataPath}/backups/rpi5-k/stale"
-    cp -r "${dataPath}/backups/rpi5-k/latest" "${dataPath}/backups/rpi5-k/stale"
-    ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/latest" \
+    # dayly (week) and mounthly (year) retention
+    ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%A)" \
+        --archive --delete-after
+    ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%B)" \
         --archive --delete-after
   '';
 
