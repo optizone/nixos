@@ -2,7 +2,7 @@ new_tab
 layout grid
 enabled_layouts grid
 
-launch --cwd=~/zroot/notes fish -C "nvim -c 'Neotree reveal' tasks.md"
+launch --cwd=~/zroot/notes fish -C "nvim -c 'Neotree reveal' tasks.md psyche.md notdaily.md"
 
 new_tab
 layout grid
