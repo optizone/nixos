@@ -1416,7 +1416,7 @@
       # Drag and drop via dragon
       {
         on = "<C-n>";
-        run = "shell -- dragon -x -i -T \"$1\"";
+        run = "shell -- dragon-drop -x -i -T \"$1\"";
         for = "linux";
       }
       {
