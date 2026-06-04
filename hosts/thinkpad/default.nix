@@ -51,38 +51,50 @@
 
   # =======================================================
 
-  services.v2raya.enable = true;
-
-  programs.winbox = {
-    enable = true;
-    openFirewall = true;
-  };
-
-  programs.wireshark = {
-    enable = true;
-    package = pkgs.wireshark;
-  };
-
   home-manager.users.${username} = {
     imports = [
       ../../home/default.nix
       ../../home/gui-apps/utils/pyobd/pyobd.nix
     ];
 
-    home.packages = [ pkgs.zeal ];
+    home.packages = with pkgs; [
+      zeal
+      iperf
+      ffmpeg
+      contact # mestasthic TUI
+      nixos-anywhere
+      just
+      nixos-rebuild-ng
+      htop
+      ollama
+    ];
+  };
+
+  services.v2raya.enable = true;
+
+  programs = {
+    # throne = {
+    #   enable = true;
+    #   tunMode.enable = true;
+    # };
+
+    winbox = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
+
+    # opencode = {
+    #   enable = true;
+    # };
   };
 
   environment.systemPackages = with pkgs; [
     socat
-    iperf
-    ffmpeg
-    contact # mestasthic TUI
-    nixos-anywhere
-    just
-    nixos-rebuild-ng
-    htop
-    ollama
-
     man-pages
     man-pages-posix
   ];
