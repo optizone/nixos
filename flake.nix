@@ -271,6 +271,7 @@
             inherit
               self
               inputs
+              domain
               font
               fontMono
               fontSize
