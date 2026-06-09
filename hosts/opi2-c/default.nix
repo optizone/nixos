@@ -67,7 +67,6 @@ in
     substituters = [
       "https://nix-community.cachix.org"
       "http://192.168.88.252:5000"
-      "http://192.168.88.250:5000"
     ];
     trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
