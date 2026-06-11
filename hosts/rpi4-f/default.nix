@@ -20,6 +20,8 @@
     ./hardware-configuration.nix
 
     ../../core/services/srv-utils/openssh.nix
+    ../../core/services/srv-utils/avahi.nix
+    ../../core/services/srv-utils/smb.nix
 
     ../../home/flavours/nixos-module.nix
   ];
