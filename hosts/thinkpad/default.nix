@@ -22,6 +22,7 @@
 
     ./rsync.nix
     ./smb-rpi5-k.nix
+    ./smb-rpi4-f.nix
     ../../shuttles/mount.nix
   ];
 
