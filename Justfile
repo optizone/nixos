@@ -2,7 +2,9 @@
 @provision host:
     # Update
     echo "'{{host}}' age key:"
-    ssh "root@{{host}}" "cat /etc/ssh/ssh_host_ed25519_key.pub" | nix run "nixpkgs#ssh-to-age" | tee .__tmp_ssh_age_key
+    ssh "root@{{host}}" "cat /etc/ssh/ssh_host_ed25519_key.pub" \
+        | nix run --offline "nixpkgs#ssh-to-age" \
+        | tee .__tmp_ssh_age_key
 
     sed -i "/{{host}} age.*/d" .sops.yaml
     sed -i "/\*{{host}}/d" .sops.yaml
@@ -15,14 +17,15 @@
     # Update secrets.yaml with new host key
     echo ""
     echo "Updating keys:"
-    nix run "nixpkgs#sops" updatekeys secrets.yaml
+    nix run --offline "nixpkgs#sops" updatekeys secrets.yaml
 
     echo ""
     echo "Provisioning:"
-    nix run github:nix-community/nixos-anywhere -- \
+    nix run --offline  "github:nix-community/nixos-anywhere" -- \
         --flake "./#{{host}}" \
         --target-host root@{{host}} \
         --no-substitute-on-destination \
+        --option substitute false \
         --generate-hardware-config nixos-generate-config \
             ./hosts/{{host}}/hardware-configuration.nix \
         --copy-host-keys \
@@ -54,7 +57,7 @@
 @edit-secrets:
      nix run "nixpkgs#sops" secrets.yaml
 
-@secrets-mkpasswd:
+@make-password:
     mkpasswd -m sha-512
 
 # nixos-rebuild aliases
@@ -65,6 +68,7 @@ test host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
+          --offline \
           --target-host "root@{{host}}"
 
 # `nixos-rebuild boot` remote host
@@ -73,6 +77,7 @@ boot host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
+          --offline \
           --target-host "root@{{host}}"
 
 # `nixos-rebuild switch` remote host
@@ -81,9 +86,6 @@ switch host:
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
+          --offline \
           --target-host "root@{{host}}"
 
-# VM related
-
-vm-build host:
-   nixos-rebuild-ng build-vm 
