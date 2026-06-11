@@ -16,6 +16,7 @@
     ../../core/services/web-utils/lubelogger.nix
     ../../core/services/media/mpd.nix
     ../../core/services/srv-utils/nix-serve.nix
+    ../../core/services/srv-utils/avahi.nix
 
     ../../home/flavours/nixos-module.nix
 
