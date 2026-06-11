@@ -1,7 +1,15 @@
 { username, pkgs, ... }:
 let
   rsync-bak = pkgs.writeShellScript "rsync-bak" ''
-    ${pkgs.rsync}/bin/rsync --recursive --update --compress --partial --times \
+    ${pkgs.rsync}/bin/rsync \
+        --recursive \
+        --update \
+        --compress \
+        --partial \
+        --times \
+        --links \
+        --copy-unsafe-links \
+        --hard-links \
         -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/${username}' \
         $@
   '';
@@ -34,16 +42,20 @@ let
         --archive --delete-after
   '';
 
-  backup-to-k1-script = pkgs.writeShellScript "backup-to-iva" ''
+  zsync-k1-script = pkgs.writeShellScript "zsync-k1" ''
     # local -> shuttle
-    ${rsync-bak} "${zrootPath}/" "${shuttles}/k1/zroot" \
-        --exclude "${zrootPath}/ldata/media" \
-        --exclude "${zrootPath}/ldata/builds"
+    ${rsync-bak} "${zrootPath}/notes/" "${shuttles}/k1/zroot/notes" --progress
+    ${rsync-bak} "${zrootPath}/ldata/" "${shuttles}/k1/zroot/ldata" \
+        --exclude "media/" \
+        --exclude "builds/" \
+        --progress
+    ${rsync-bak} "${zrootPath}/nixos/" "${shuttles}/k1/zroot/nixos" --progress
+    ${rsync-bak} "${zrootPath}/misc/" "${shuttles}/k1/zroot/misc" --progress
 
-    ${rsync-bak} "/nix/store/" "${shuttles}/iva/nix/store"
+    ${rsync-bak} "/nix/store/" "${shuttles}/k1/nix/store" --progress
   '';
 
-  backup-to-k1 = pkgs.writeScriptBin "backup-to-k1" backup-to-k1-script;
+  zsync-k1 = pkgs.writeScriptBin "zsync-k1" zsync-k1-script;
 in
 {
   systemd.timers."backup-timer" = {
@@ -63,5 +75,5 @@ in
     };
   };
 
-  environment.systemPackages = [ backup-to-k1 ];
+  environment.systemPackages = [ zsync-k1 ];
 }
