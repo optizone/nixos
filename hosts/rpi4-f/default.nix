@@ -52,7 +52,7 @@
   services.create_ap = {
     enable = true;
     settings = {
-      INTERNET_IFACE = "eth0";
+      INTERNET_IFACE = "end0";
       WIFI_IFACE = "wlan0";
       SSID = "rpi4-f-wifi";
       PASSPHRASE = "someveryinsecurepassword";
