@@ -17,4 +17,10 @@
     iperf
     lsof
   ];
+
+  nix.settings = {
+    # FIXME: use dedicated dir
+    build-dir = "/znode/persist/build";
+    keep-failed = true;
+  };
 }
