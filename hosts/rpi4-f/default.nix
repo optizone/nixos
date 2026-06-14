@@ -65,6 +65,11 @@
       ../../home/headless.nix
       ../../home/terminal/apps/starship.nix
       ../../home/terminal/shells/bash.nix
+      ../../home/terminal/shells/fish.nix
+      ../../home/terminal/apps/eza
+      ../../home/terminal/apps/yazi
+      ../../home/terminal/apps/bat.nix
+      ../../home/terminal/apps/zoxide.nix
     ];
   };
 
