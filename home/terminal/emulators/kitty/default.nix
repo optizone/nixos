@@ -8,6 +8,11 @@
     # themeFile = "gruvbox-dark";
     themeFile = "gruvbox-dark-hard";
 
+    shellIntegration = {
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+    };
+
     font = {
       name = "${fontMono}";
       size = fontSize;
