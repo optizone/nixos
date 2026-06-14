@@ -8,6 +8,7 @@
       d = "https://duckduckgo.com/?q={}";
       np = "https://search.nixos.org/packages?query={}";
       no = "https://search.nixos.org/options?query={}";
+      nho = "https://home-manager-options.extranix.com/?query={}";
     };
 
     settings = {
