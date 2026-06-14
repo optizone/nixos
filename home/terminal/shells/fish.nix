@@ -49,6 +49,10 @@
       ",,,," = "....";
       ",,,,," = ".....";
 
+      "ls" = "eza";
+      "la" = "eza -a";
+      "lla" = "eza -la";
+
       "ct" = "clean-trash-bin";
       "ns" = "NIXPKGS_ALLOW_UNFREE=1 FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix-shell --command fish -p";
       "nd" = "NIXPKGS_ALLOW_UNFREE=1 FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix develop --command fish";
