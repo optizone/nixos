@@ -24,6 +24,7 @@
     ../../core/services/srv-utils/smb.nix
 
     ../../home/flavours/nixos-module.nix
+    ../../shuttles
   ];
 
   # =======================================================
