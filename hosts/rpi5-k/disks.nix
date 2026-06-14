@@ -85,9 +85,14 @@ _: {
 
           partitions = {
             firmware = {
+              priority = 1;
+
               size = "1024M";
               label = "FIRMWARE";
               type = "0700";
+              attributes = [
+                0 # Required Partition
+              ];
 
               content = {
                 type = "filesystem";
@@ -105,7 +110,10 @@ _: {
             boot = {
               size = "512M";
               label = "BOOT";
-              type = "0700";
+              type = "EF00";
+              attributes = [
+                2 # Legacy BIOS Bootable, for U-Boot to find extlinux config
+              ];
 
               content = {
                 type = "filesystem";
