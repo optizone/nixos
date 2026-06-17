@@ -70,6 +70,7 @@
       nixos-rebuild-ng
       htop
       ollama
+      devenv
     ];
   };
 
