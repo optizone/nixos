@@ -70,8 +70,20 @@
       nixos-rebuild-ng
       htop
       ollama
-      devenv
     ];
+
+    programs = {
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+        silent = true;
+      };
+
+      opencode = {
+        enable = true;
+        settings.theme = "gruvbox";
+      };
+    };
   };
 
   services.v2raya.enable = true;
@@ -91,10 +103,6 @@
       enable = true;
       package = pkgs.wireshark;
     };
-
-    # opencode = {
-    #   enable = true;
-    # };
   };
 
   environment.systemPackages = with pkgs; [
