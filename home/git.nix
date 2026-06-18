@@ -14,6 +14,12 @@
         email = "${gitEmail}";
       };
 
+      includeIf = {
+        "gitdir:~/code/protei/" = {
+          path = "~/.config/git/.protei_include";
+        };
+      };
+
       init.defaultBranch = "main";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
@@ -44,5 +50,11 @@
 
   xdg.configFile."git/.gitignore".text = ''
     .vscode
+  '';
+
+  xdg.configFile."git/.protei_include".text = ''
+    [user]
+    name = "Бойцов Илья Вячеславович"
+    email = "boicov@protei-lab.ru"
   '';
 }
