@@ -64,12 +64,15 @@
       zeal
       iperf
       ffmpeg
-      contact # mestasthic TUI
+      contact
       nixos-anywhere
       just
       nixos-rebuild-ng
       htop
       ollama
+      disko
+      ssh-to-age
+      sops
     ];
 
     programs = {
