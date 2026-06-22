@@ -8,7 +8,13 @@ _: {
         type = "btrfs";
         extraArgs = [ "-f" ];
         subvolumes = {
-          "/znode/share" = {
+          "/zroot" = {
+            mountpoint = "/zroot";
+            mountOptions = [ "compress=lz4" ];
+          };
+
+          "/nix" = {
+            mountpoint = "/nix";
             mountOptions = [ "compress=lz4" ];
           };
         };

@@ -9,14 +9,12 @@ _: {
         extraArgs = [ "-f" ];
         subvolumes = {
           "/zroot" = {
+            mountpoint = "/zroot";
             mountOptions = [ "compress=lz4" ];
           };
 
           "/nix" = {
-            mountOptions = [ "compress=lz4" ];
-          };
-
-          "/ldata" = {
+            mountpoint = "/nix";
             mountOptions = [ "compress=lz4" ];
           };
         };
