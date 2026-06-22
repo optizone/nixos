@@ -70,6 +70,7 @@
       ../../home/headless.nix
       ../../home/terminal/apps/starship.nix
       ../../home/terminal/shells/bash.nix
+      ../../home/terminal/shells/fish.nix
     ];
   };
 
