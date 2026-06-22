@@ -10,6 +10,7 @@ let
         --links \
         --copy-unsafe-links \
         --hard-links \
+        --info=progress2 \
         -e '${pkgs.openssh}/bin/ssh -i /home/${username}/.ssh/${username}' \
         $@
   '';
@@ -19,7 +20,7 @@ let
   nasesPath = "${zrootPath}/nas";
   shuttles = "${zrootPath}/shuttles";
 
-  backup-all = pkgs.writeShellScript "backup-all" ''
+  zback-script = pkgs.writeShellScript "zback" ''
     # local -> nas
     ${rsync-bak} "${dataPath}/wiki/" "${nasesPath}/rpi5-k/wiki"
     ${rsync-bak} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
@@ -37,37 +38,43 @@ let
 
     # dayly (week) and mounthly (year) retention
     ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%A)" \
-        --archive --delete-after
+        --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
     ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%B)" \
-        --archive --delete-after
+        --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
+
+    # TODO: shuttle sync?
   '';
 
-  zsync-k1-script = pkgs.writeShellScript "zsync-k1" ''
+  zsync-script = pkgs.writeShellScript "zsync" ''
+    [ -z "$1" ] && echo "Missing shuttle argument" && exit 1
+    SHUTTLE=$1
+
     # local -> shuttle
-    ${rsync-bak} "${zrootPath}/notes/" "${shuttles}/k1/zroot/notes" --progress
-    ${rsync-bak} "${zrootPath}/ldata/" "${shuttles}/k1/zroot/ldata" \
+    ${rsync-bak} "${zrootPath}/notes/" "${shuttles}/$SHUTTLE/zroot/notes"
+    ${rsync-bak} "${zrootPath}/ldata/" "${shuttles}/$SHUTTLE/zroot/ldata" \
         --exclude "media/" \
-        --exclude "builds/" \
-        --progress
-    ${rsync-bak} "${zrootPath}/nixos/" "${shuttles}/k1/zroot/nixos" --progress
-    ${rsync-bak} "${zrootPath}/misc/" "${shuttles}/k1/zroot/misc" --progress
+        --exclude "builds/"
+    ${rsync-bak} "${zrootPath}/nixos/" "${shuttles}/$SHUTTLE/zroot/nixos"
+    ${rsync-bak} "${zrootPath}/misc/" "${shuttles}/$SHUTTLE/zroot/misc"
 
-    ${rsync-bak} "/nix/store/" "${shuttles}/k1/nix/store" --progress
+    ${rsync-bak} "/nix/store/" "${shuttles}/$SHUTTLE/nix/store"
   '';
 
-  zsync-k1 = pkgs.writeScriptBin "zsync-k1" zsync-k1-script;
+  zsync = pkgs.writeScriptBin "zsync" zsync-script;
+  zback = pkgs.writeScriptBin "zback" zback-script;
 in
 {
+  # TODO: find a way to toggle
   systemd.timers."backup-timer" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "daily";
-      Unit = "backup-all.service";
+      Unit = "zback.service";
     };
   };
 
-  systemd.services."backup-all" = {
-    script = "${backup-all}";
+  systemd.services."zback" = {
+    script = "${zback-script}";
 
     serviceConfig = {
       Type = "oneshot";
@@ -75,5 +82,8 @@ in
     };
   };
 
-  environment.systemPackages = [ zsync-k1 ];
+  environment.systemPackages = [
+    zsync
+    zback
+  ];
 }
