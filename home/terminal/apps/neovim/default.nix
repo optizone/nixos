@@ -1,22 +1,18 @@
-{ pkgs, inputs, ... }:
-let
-  customNeovim = inputs.nvf.lib.neovimConfiguration {
-    inherit pkgs;
-    modules = [ ./config.nix ];
-  };
-in
+{ inputs, ... }:
 {
-  home.packages = [
-    customNeovim.neovim
-  ];
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
   imports = [
+    inputs.nvf.homeManagerModules.default
     ../yazi
     ../fzf.nix
     ../lazygit.nix
   ];
+
+  programs.nvf = {
+    enable = true;
+    settings = import ./config.nix;
+  };
 }
