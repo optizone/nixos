@@ -150,7 +150,8 @@
 
     minimap = {
       codewindow = {
-        enable = true;
+        # HACK: fixes nvim crash, see https://github.com/NotAShelf/nvf/issues/1426
+        enable = false;
         mappings = {
           open = "<leader>mo";
           toggle = "<leader>mm";
@@ -236,7 +237,10 @@
     ui = {
       borders.enable = true;
       noice.enable = true;
-      colorizer.enable = true;
+      colorizer = {
+        enable = true;
+        setupOpts.names = false;
+      };
       illuminate.enable = true;
       breadcrumbs = {
         enable = true;

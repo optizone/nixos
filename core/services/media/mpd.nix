@@ -1,5 +1,4 @@
-{ username, ... }:
-{
+{username, ...}: {
   services.mpd = {
     enable = true;
     startWhenNeeded = true;
@@ -11,14 +10,6 @@
       listenAddress = "127.0.0.1";
       port = 6600;
     };
-
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "PipeWire Sound Server"
-      }
-    '';
-
   };
 
   # TODO: uid

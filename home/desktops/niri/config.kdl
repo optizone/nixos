@@ -49,7 +49,7 @@ spawn-at-startup "wl-clip-persist --clipboard both"
 spawn-at-startup "wl-paste --watch cliphist store"
 spawn-at-startup "waybar"
 spawn-at-startup "swaync"
-spawn-at-startup "swww-daemon"
+spawn-at-startup "awww-daemon"
 
 cursor {
     xcursor-theme "Simp1e"

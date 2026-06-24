@@ -85,7 +85,7 @@
     open.rules = [
       # Folder
       {
-        name = "*/";
+        url = "*/";
         use = [
           "edit"
           "open"
@@ -149,7 +149,7 @@
       }
       # Fallback
       {
-        name = "*";
+        url = "*";
         use = [
           "open"
           "reveal"
@@ -170,17 +170,9 @@
     };
 
     plugin = {
-      fetchers = [
-        {
-          id = "mime";
-          name = "*";
-          run = "mime";
-          prio = "high";
-        }
-      ];
       spotters = [
         {
-          name = "*/";
+          url = "*/";
           run = "folder";
         }
         # Code
@@ -208,7 +200,7 @@
         }
         # Fallback
         {
-          name = "*";
+          url = "*";
           run = "file";
         }
       ];
@@ -245,9 +237,9 @@
       ];
       previewers = [
         {
-          name = "*/";
+          url = "*/";
           run = "folder";
-          sync = true;
+          # sync = true;
         }
         # Code
         {
@@ -292,7 +284,7 @@
           run = "archive";
         }
         {
-          name = "*.{AppImage,appimage}";
+          url = "*.{AppImage,appimage}";
           run = "archive";
         }
         # Virtual Disk / Disk Image
@@ -305,7 +297,7 @@
           run = "archive";
         }
         {
-          name = "*.{img,fat,ext,ext2,ext3,ext4,squashfs,ntfs,hfs,hfsx}";
+          url = "*.{img,fat,ext,ext2,ext3,ext4,squashfs,ntfs,hfs,hfsx}";
           run = "archive";
         }
         # Font
@@ -324,7 +316,7 @@
         }
         # Fallback
         {
-          name = "*";
+          url = "*";
           run = "file";
         }
       ];
@@ -481,14 +473,14 @@
 
     plugin.prepend_fetchers = [
       {
-        id = "git";
-        name = "*";
+        url = "*";
         run = "git";
+        group = "git";
       }
       {
-        id = "git";
-        name = "*/";
+        url = "*/";
         run = "git";
+        group = "git";
       }
     ];
   };

@@ -64,7 +64,7 @@
 
 # `nixos-rebuild test` remote host
 test host:
-    nixos-rebuild-ng test \
+    nixos-rebuild test \
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
@@ -73,7 +73,7 @@ test host:
 
 # `nixos-rebuild boot` remote host
 boot host:
-    nixos-rebuild-ng boot \
+    nixos-rebuild boot \
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
@@ -82,7 +82,7 @@ boot host:
 
 # `nixos-rebuild switch` remote host
 switch host:
-    nixos-rebuild-ng switch \
+    nixos-rebuild switch \
           --use-remote-sudo \
           --ask-sudo-password \
           --flake "./#{{host}}" \
