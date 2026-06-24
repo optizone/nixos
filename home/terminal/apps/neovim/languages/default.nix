@@ -10,25 +10,18 @@
     enableTreesitter = true;
     enableExtraDiagnostics = true;
 
-    nix = {
-      enable = true;
-      format = {
-        enable = true;
-        type = "nixfmt";
-      };
-      lsp = {
-        enable = true;
-        # server = "nixd";
-      };
-      treesitter.enable = true;
-    };
-
+    nix.enable = true;
     bash.enable = true;
-    clang = {
-      enable = true;
-      lsp.enable = true;
-      treesitter.enable = true;
-    };
+    clang.enable = true;
+    cmake.enable = true;
+    docker.enable = true;
+    fish.enable = true;
+    json.enable = true;
+    just.enable = true;
+    make.enable = true;
+    nu.enable = true;
+    toml.enable = true;
+    yaml.enable = true;
     css.enable = true;
     html.enable = true;
     sql.enable = true;
