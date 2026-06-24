@@ -1,5 +1,4 @@
-{ fontMono, ... }:
-{
+{fontMono, ...}: {
   programs.qutebrowser = {
     enable = true;
 
@@ -37,6 +36,9 @@
       # TODO: greasemonkey; editor.command; castnow usercript; pass userscript
 
       tabs.max_width = 255;
+
+      # HACK: fixes flickering after update to nixos-26.05
+      qt.args = ["disable-features=AcceleratedVideoDecodeLinuxGL"];
 
       zoom.default = "125%";
 
