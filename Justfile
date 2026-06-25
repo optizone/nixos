@@ -1,16 +1,16 @@
 # Provision remote host
 @provision host:
     # Update
-    echo "'{{host}}' age key:"
-    ssh "root@{{host}}" "cat /etc/ssh/ssh_host_ed25519_key.pub" \
+    echo "'{{ host }}' age key:"
+    ssh "root@{{ host }}" "cat /etc/ssh/ssh_host_ed25519_key.pub" \
         | nix run --offline "nixpkgs#ssh-to-age" \
         | tee .__tmp_ssh_age_key
 
-    sed -i "/{{host}} age.*/d" .sops.yaml
-    sed -i "/\*{{host}}/d" .sops.yaml
+    sed -i "/{{ host }} age.*/d" .sops.yaml
+    sed -i "/\*{{ host }}/d" .sops.yaml
 
-    sed -i "2i\  - &{{host}} $(cat .__tmp_ssh_age_key)" .sops.yaml
-    echo "      - *{{host}}" >> .sops.yaml
+    sed -i "2i\  - &{{ host }} $(cat .__tmp_ssh_age_key)" .sops.yaml
+    echo "      - *{{ host }}" >> .sops.yaml
     rm .__tmp_ssh_age_key
 
 
@@ -22,40 +22,40 @@
     echo ""
     echo "Provisioning:"
     nix run --offline  "github:nix-community/nixos-anywhere" -- \
-        --flake "./#{{host}}" \
-        --target-host root@{{host}} \
+        --flake "./#{{ host }}" \
+        --target-host root@{{ host }} \
         --no-substitute-on-destination \
         --option substitute false \
         --generate-hardware-config nixos-generate-config \
-            ./hosts/{{host}}/hardware-configuration.nix \
+            ./hosts/{{ host }}/hardware-configuration.nix \
         --copy-host-keys \
         --phases kexec,disko,install
 
     # Copy ssh keys to persistent location 
     echo ""
     echo "Copying SSH keys to persistent location..."
-    ssh "root@{{host}}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/znode/persist/etc/ssh"
+    ssh "root@{{ host }}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/znode/persist/etc/ssh"
 
     # At this point configuration is done
     echo ""
     echo "Rebooting..."
-    ssh "root@{{host}}" "reboot"
+    ssh "root@{{ host }}" "reboot"
 
 # test connection speed to remote host
 @cspeed host:
-    ssh "{{host}}@{{host}}" "iperf -s1" &
+    ssh "{{ host }}@{{ host }}" "iperf -s1" &
     # TODO: wait for port 5201 to open
     sleep 1
-    iperf -c {{host}}
+    iperf -c {{ host }}
 
 @restore-zigbee2mqtt host:
     rsync -r \
         --chown zigbee2mqtt:zigbee2mqtt \
-        ~/zroot/ldata/backups/{{host}}/latest/persist/var/lib/zigbee2mqtt \
-        root@{{host}}:/var/lib/
+        ~/zroot/ldata/backups/{{ host }}/latest/persist/var/lib/zigbee2mqtt \
+        root@{{ host }}:/var/lib/
 
 @edit-secrets:
-     nix run "nixpkgs#sops" secrets.yaml
+    nix run "nixpkgs#sops" secrets.yaml
 
 @make-password:
     mkpasswd -m sha-512
@@ -67,25 +67,24 @@ test host:
     nixos-rebuild test \
           --use-remote-sudo \
           --ask-sudo-password \
-          --flake "./#{{host}}" \
+          --flake "./#{{ host }}" \
           --offline \
-          --target-host "root@{{host}}"
+          --target-host "root@{{ host }}"
 
 # `nixos-rebuild boot` remote host
 boot host:
     nixos-rebuild boot \
           --use-remote-sudo \
           --ask-sudo-password \
-          --flake "./#{{host}}" \
+          --flake "./#{{ host }}" \
           --offline \
-          --target-host "root@{{host}}"
+          --target-host "root@{{ host }}"
 
 # `nixos-rebuild switch` remote host
 switch host:
     nixos-rebuild switch \
           --use-remote-sudo \
           --ask-sudo-password \
-          --flake "./#{{host}}" \
+          --flake "./#{{ host }}" \
           --offline \
-          --target-host "root@{{host}}"
-
+          --target-host "root@{{ host }}"
