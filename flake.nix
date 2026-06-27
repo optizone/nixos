@@ -181,7 +181,7 @@
           host = "rpi5-k";
           hostId = "d100d000";
           stateVersion = "25.11";
-          shell = pkgs-arm.bash;
+          shell = pkgs-arm.fish;
         };
 
         modules = [
