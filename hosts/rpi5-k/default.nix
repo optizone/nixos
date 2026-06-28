@@ -5,8 +5,7 @@
   username,
   host,
   ...
-}:
-{
+}: {
   # =======================================================
 
   imports = with nixos-raspberrypi.nixosModules; [
@@ -53,7 +52,7 @@
 
   time.timeZone = "Europe/Moscow";
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];
+  i18n.extraLocales = ["ru_RU.UTF-8/UTF-8"];
 
   # =======================================================
 
@@ -71,6 +70,15 @@
       ../../home/terminal/apps/starship.nix
       ../../home/terminal/shells/bash.nix
       ../../home/terminal/shells/fish.nix
+
+      ../../home/terminal/apps/eza
+      ../../home/terminal/apps/fd.nix
+      ../../home/terminal/apps/dust.nix
+      ../../home/terminal/apps/yazi
+      ../../home/terminal/apps/bat.nix
+      ../../home/terminal/apps/fzf.nix
+      ../../home/terminal/apps/starship.nix
+      ../../home/terminal/apps/zoxide.nix
     ];
   };
 
@@ -90,13 +98,11 @@
     dtparam=pciex1_gen=3
   '';
 
-  system.nixos.tags =
-    let
-      cfg = config.boot.loader.raspberry-pi;
-    in
-    [
-      "raspberry-pi-${cfg.variant}"
-      cfg.bootloader
-      config.boot.kernelPackages.kernel.version
-    ];
+  system.nixos.tags = let
+    cfg = config.boot.loader.raspberry-pi;
+  in [
+    "raspberry-pi-${cfg.variant}"
+    cfg.bootloader
+    config.boot.kernelPackages.kernel.version
+  ];
 }
