@@ -4,11 +4,18 @@
     startWhenNeeded = true;
     user = "${username}";
 
-    musicDirectory = "/home/${username}/zroot/ldata/media/music/";
-
-    network = {
-      listenAddress = "127.0.0.1";
+    settings = {
+      bind_to_address = "127.0.0.1";
       port = 6600;
+
+      music_directory = "/home/${username}/zroot/ldata/media/music/";
+
+      audio_output = [
+        {
+          type = "pipewire";
+          name = "My PipeWire Output";
+        }
+      ];
     };
   };
 
