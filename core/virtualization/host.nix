@@ -1,6 +1,9 @@
-{ pkgs, username, ... }:
 {
-  users.users.${username}.extraGroups = [ "libvirtd" ];
+  pkgs,
+  username,
+  ...
+}: {
+  users.users.${username}.extraGroups = ["libvirtd"];
 
   environment.systemPackages = with pkgs; [
     virt-manager
@@ -39,8 +42,8 @@
   # NOTE: only works with home-manager managed homes
   home-manager.users.${username}.dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
   };
 }

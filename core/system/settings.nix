@@ -1,5 +1,4 @@
-{ stateVersion, ... }:
-{
+{stateVersion, ...}: {
   nix = {
     settings = {
       auto-optimise-store = false;
@@ -11,7 +10,7 @@
 
     optimise = {
       automatic = true;
-      dates = [ "03:45" ];
+      dates = ["03:45"];
     };
 
     channel.enable = false;

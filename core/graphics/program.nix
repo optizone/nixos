@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # TODO: reorganize
   programs.gnupg.agent = {
     enable = true;
@@ -7,5 +6,5 @@
     # pinentryFlavor = "";
   };
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ ];
+  programs.nix-ld.libraries = with pkgs; [];
 }

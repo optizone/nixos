@@ -23,7 +23,7 @@ _: {
     }
     {
       key = "<leader>cr";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "vim.lsp.buf.rename";
       lua = true;
       desc = "Rename";
@@ -38,7 +38,7 @@ _: {
     # }
     {
       key = "<esc>";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "<Cmd>noh<CR>";
       silent = true;
       desc = "Disable search higlights";
@@ -46,7 +46,7 @@ _: {
     # TODO: toggle
     {
       key = "<c-t>";
-      mode = [ "t" ];
+      mode = ["t"];
       action = "<c-\\><c-n>:CFloatTerm<CR>";
       noremap = true;
       silent = true;
@@ -65,21 +65,21 @@ _: {
     }
     {
       key = "<leader>E";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "<Cmd>Neotree toggle<CR>";
       silent = true;
       desc = "Toggle neotree";
     }
     {
       key = "<leader>e";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "<Cmd>Neotree focus<CR>";
       silent = true;
       desc = "Toggle neotree";
     }
     {
       key = "<leader>qq";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "<Cmd>qa<CR>";
       silent = true;
       desc = "Quit All";
@@ -88,49 +88,49 @@ _: {
     # -- Goto diagnostics
     {
       key = "]e";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() vim.diagnostic.goto_next({severity = \"ERROR\"}) end";
       desc = "Goto next error";
       lua = true;
     }
     {
       key = "[e";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() vim.diagnostic.goto_prev({severity = \"ERROR\"}) end";
       desc = "Goto previous error";
       lua = true;
     }
     {
       key = "]w";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() vim.diagnostic.goto_next({severity = \"WARN\"}) end";
       desc = "Goto next warning";
       lua = true;
     }
     {
       key = "[w";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() vim.diagnostic.goto_prev({severity = \"WARN\"}) end";
       desc = "Goto previous warning";
       lua = true;
     }
     {
       key = "]d";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() vim.diagnostic.goto_next({severity = nil}) end";
       desc = "Goto next diagnostic";
       lua = true;
     }
     {
       key = "[d";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() vim.diagnostic.goto_prev({severity = nil}) end";
       desc = "Goto previous diagnostics";
       lua = true;
     }
     {
       key = "<leader>cd";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "vim.diagnostic.open_float";
       desc = "Line diagnostics";
       lua = true;
@@ -139,35 +139,35 @@ _: {
     # -- Top Pickers
     {
       key = "<leader>ff";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.smart() end";
       desc = "Smart Find Files";
       lua = true;
     }
     {
       key = "<space><space>";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.grep() end";
       desc = "Grep";
       lua = true;
     }
     {
       key = "<leader>:";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.command_history() end";
       desc = "Command History";
       lua = true;
     }
     {
       key = "<leader>,";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.buffers() end";
       desc = "Buffers";
       lua = true;
     }
     {
       key = "<leader>n";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.notifications() end";
       desc = "Notification History";
       lua = true;
@@ -176,21 +176,21 @@ _: {
     # -- LSP
     {
       key = "gd";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.lsp_definitions() end";
       desc = "Goto Definition";
       lua = true;
     }
     {
       key = "gD";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.lsp_declarations() end";
       desc = "Goto Declaration";
       lua = true;
     }
     {
       key = "gr";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.lsp_references() end";
       desc = "References";
       nowait = true;
@@ -198,28 +198,28 @@ _: {
     }
     {
       key = "gi";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.lsp_implementations() end";
       desc = "Goto Implementation";
       lua = true;
     }
     {
       key = "gy";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.lsp_type_definitions() end";
       desc = "Goto T[y]pe Definition";
       lua = true;
     }
     {
       key = "<leader>ss";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.lsp_symbols() end";
       desc = "LSP Symbols";
       lua = true;
     }
     {
       key = "<leader>sS";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.picker.lsp_workspace_symbols() end";
       desc = "LSP Workspace Symbols";
       lua = true;
@@ -228,21 +228,21 @@ _: {
     # -- Buffers
     {
       key = "<leader>bd";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "function() Snacks.bufdelete() end";
       desc = "Delete buffer";
       lua = true;
     }
     {
       key = "<C-j>";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "<Cmd>bp<CR>";
       desc = "Navigate to the prefious buffer";
       silent = true;
     }
     {
       key = "<C-k>";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "<Cmd>bn<CR>";
       desc = "Navigate to the next buffer";
       silent = true;
@@ -251,7 +251,7 @@ _: {
     # -- ImgClip
     {
       key = "<leader>p";
-      mode = [ "n" ];
+      mode = ["n"];
       action = "<Cmd>PasteImage<CR>";
       desc = "Paste image from the system clipboard";
       silent = true;

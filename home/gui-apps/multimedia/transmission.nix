@@ -1,4 +1,3 @@
-{ pkgs, ... }:
-{
-  home.packages = [ pkgs.transmission_4-gtk ];
+{pkgs, ...}: {
+  home.packages = [pkgs.transmission_4-gtk];
 }

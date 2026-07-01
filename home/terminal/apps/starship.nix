@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   programs.starship = {
     enable = true;
 
@@ -205,7 +204,6 @@
         style = "bg:color_bg3";
         format = "[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)";
       };
-
     };
   };
 }

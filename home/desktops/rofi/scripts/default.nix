@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   scriptDir = ./.;
   scriptEntries = builtins.readDir scriptDir;
 
@@ -11,14 +10,13 @@ let
 
   mkScript = name: {
     name = "rofi-${name}";
-    value = pkgs.writeScriptBin (builtins.replaceStrings [ ".sh" ] [ "" ] "rofi-${name}") (
+    value = pkgs.writeScriptBin (builtins.replaceStrings [".sh"] [""] "rofi-${name}") (
       builtins.readFile (scriptDir + "/${name}")
     );
   };
 
   scriptsSet = builtins.listToAttrs (map mkScript shellScripts);
   scripts = builtins.attrValues scriptsSet;
-in
-{
+in {
   home.packages = scripts;
 }

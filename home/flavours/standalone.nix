@@ -1,8 +1,4 @@
-{
-  username,
-  ...
-}:
-{
+{username, ...}: {
   home = {
     username = "${username}";
     homeDirectory = "/home/${username}";
@@ -11,5 +7,5 @@
 
   targets.genericLinux.enable = true;
 
-  imports = [ ../default.nix ];
+  imports = [../default.nix];
 }

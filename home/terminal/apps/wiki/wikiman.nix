@@ -1,5 +1,8 @@
-{ pkgs, username, ... }:
-let
+{
+  pkgs,
+  username,
+  ...
+}: let
   wikiman-update-archwiki = pkgs.writeShellScript "wikiman-update-archwiki" ''
     ${pkgs.curl}/bin/curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile'
 
@@ -11,12 +14,11 @@ let
   '';
 
   wikiman-update-sources = pkgs.writeScriptBin "wikiman-update-archwiki" wikiman-update-archwiki;
-in
-{
+in {
   home.packages = with pkgs; [
     (wikiman.overrideAttrs (
       _: previousAttrs: {
-        patches = previousAttrs.patches ++ [ ./doc-path-patch.patch ];
+        patches = previousAttrs.patches ++ [./doc-path-patch.patch];
       }
     ))
 

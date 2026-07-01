@@ -1,5 +1,4 @@
-{ domain, ... }:
-{
+{domain, ...}: {
   services.grocy = {
     enable = true;
     hostName = "grocy.${domain}";

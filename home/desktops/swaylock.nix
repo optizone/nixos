@@ -1,5 +1,8 @@
-{ pkgs, font, ... }:
 {
+  pkgs,
+  font,
+  ...
+}: {
   programs.swaylock = {
     enable = true;
 

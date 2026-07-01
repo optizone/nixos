@@ -5,7 +5,7 @@ _: {
     port = 5000;
   };
 
-  networking.firewall.allowedTCPPorts = [ 5000 ];
+  networking.firewall.allowedTCPPorts = [5000];
 
   # services.nginx = {
   #   enable = true;

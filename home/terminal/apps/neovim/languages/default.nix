@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./markdown.nix
     ./typst.nix

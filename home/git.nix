@@ -3,8 +3,7 @@
   gitUsername,
   gitEmail,
   ...
-}:
-{
+}: {
   programs.git = {
     enable = true;
 
@@ -33,7 +32,6 @@
       };
       core.excludesFile = "/home/${username}/.config/git/.gitignore";
     };
-
   };
 
   programs.delta = {

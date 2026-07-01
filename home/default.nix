@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./browsers/firefox.nix
     ./browsers/librewolf.nix

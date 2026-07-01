@@ -1,5 +1,4 @@
-{ username, ... }:
-{
+{username, ...}: {
   services.lidarr = {
     enable = true;
     openFirewall = true;

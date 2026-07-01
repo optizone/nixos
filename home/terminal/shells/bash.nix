@@ -24,13 +24,10 @@ _: {
       "ct" = "clean-trash-bin";
       "ns" = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
       "nd" = "NIXPKGS_ALLOW_UNFREE=1 nix develop";
-      "ndl" =
-        "git reset -- flake.nix flake.lock && git add --intent-to-add flake.nix flake.lock && nd && git update-index --assume-unchanged flake.nix flake.lock";
-      "ndhide" =
-        "git add --intent-to-add flake.nix flake.lock &&
+      "ndl" = "git reset -- flake.nix flake.lock && git add --intent-to-add flake.nix flake.lock && nd && git update-index --assume-unchanged flake.nix flake.lock";
+      "ndhide" = "git add --intent-to-add flake.nix flake.lock &&
         git update-index --assume-unchanged flake.nix flake.lock";
       "nv" = "nvim .";
     };
-
   };
 }

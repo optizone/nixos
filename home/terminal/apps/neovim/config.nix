@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # NOTE: see options for nvf at https://notashelf.github.io/nvf/options.html
 
   # home.sessionVariables = {

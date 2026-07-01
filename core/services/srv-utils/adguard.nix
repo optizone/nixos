@@ -1,5 +1,4 @@
-{ domain, ... }:
-{
+{domain, ...}: {
   services.adguardhome = {
     enable = true;
     openFirewall = true;
@@ -10,7 +9,7 @@
           "https://dns10.quad9.net/dns-query"
         ];
 
-        bootstrap_dns = [ "tls://1.1.1.1" ];
+        bootstrap_dns = ["tls://1.1.1.1"];
       };
 
       filtering = {

@@ -1,5 +1,8 @@
-{ host, hostId, ... }:
 {
+  host,
+  hostId,
+  ...
+}: {
   networking.nftables.enable = true;
 
   networking = {

@@ -1,4 +1,3 @@
-{ pkgs, ... }:
-{
-  home.packages = [ pkgs.tealdeer ];
+{pkgs, ...}: {
+  home.packages = [pkgs.tealdeer];
 }

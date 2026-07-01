@@ -10,8 +10,8 @@ _: {
     };
 
     pam.services = {
-      swaylock = { };
-      hyprlock = { };
+      swaylock = {};
+      hyprlock = {};
     };
   };
 }

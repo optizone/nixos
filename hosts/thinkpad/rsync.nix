@@ -1,5 +1,8 @@
-{ username, pkgs, ... }:
-let
+{
+  username,
+  pkgs,
+  ...
+}: let
   rsync-bak = pkgs.writeShellScript "rsync-bak" ''
     ${pkgs.rsync}/bin/rsync \
         --recursive \
@@ -29,7 +32,7 @@ let
 
     ${rsync-bak} "${zrootPath}/" \
         "${nasesPath}/rpi5-k/backups/zroot" \
-        --exclude-from "${zrootPath}/.gitignore" 
+        --exclude-from "${zrootPath}/.gitignore"
 
     # nas -> local
     ${rsync-bak} "${nasesPath}/rpi5-k/wiki/" "${dataPath}/wiki"
@@ -62,11 +65,10 @@ let
 
   zsync = pkgs.writeScriptBin "zsync" zsync-script;
   zback = pkgs.writeScriptBin "zback" zback-script;
-in
-{
+in {
   # TODO: find a way to toggle
   systemd.timers."backup-timer" = {
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
     timerConfig = {
       OnCalendar = "daily";
       Unit = "zback.service";

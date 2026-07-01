@@ -1,6 +1,5 @@
-{ ... }:
-{
-  imports = [ ./fd.nix ];
+{...}: {
+  imports = [./fd.nix];
 
   programs.fzf = {
     enable = true;

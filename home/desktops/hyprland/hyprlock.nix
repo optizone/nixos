@@ -3,8 +3,7 @@
   pkgs,
   font,
   ...
-}:
-{
+}: {
   programs.hyprlock = {
     enable = true;
 

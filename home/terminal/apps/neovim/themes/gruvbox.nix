@@ -28,7 +28,6 @@ _: {
       "@markup.italic" = {
         fg = "#458588";
       };
-
     };
 
     # -- NeoTreeDirectoryName = { link = "Directory" },

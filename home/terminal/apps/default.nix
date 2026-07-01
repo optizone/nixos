@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     jq
     ripgrep
@@ -34,5 +33,4 @@
     ./wiki/tldr.nix
     ./zoxide.nix
   ];
-
 }

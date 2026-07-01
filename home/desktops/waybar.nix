@@ -3,8 +3,7 @@
   fontMono,
   fontSize,
   ...
-}:
-let
+}: let
   colors = rec {
     c_black = "#1d2021";
     c_red = "#cc241d";
@@ -43,8 +42,7 @@ let
     c_date = c_black;
     c_time = c_white;
   };
-in
-{
+in {
   programs.waybar.enable = true;
 
   home.packages = [
@@ -66,7 +64,7 @@ in
       "hyprland/language"
     ];
 
-    modules-center = [ "clock" ];
+    modules-center = ["clock"];
 
     modules-right = [
       "memory"
@@ -199,7 +197,7 @@ in
     clock = {
       calendar = {
         format = {
-          today = ''<span color = '${colors.c_green}'><b>{}</b></span>'';
+          today = "<span color = '${colors.c_green}'><b>{}</b></span>";
           # TODO:
           weeks = "{:%W}";
         };

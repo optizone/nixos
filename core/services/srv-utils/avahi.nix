@@ -1,5 +1,8 @@
-{ domain, host, ... }:
 {
+  domain,
+  host,
+  ...
+}: {
   services.avahi = {
     publish = {
       enable = true;

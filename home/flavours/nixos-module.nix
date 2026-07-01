@@ -5,17 +5,17 @@
   shell,
   stateVersion,
   ...
-}:
-{
+}: {
   home-manager = {
     useUserPackages = true;
     backupFileExtension = "bak";
     useGlobalPkgs = true;
 
-    extraSpecialArgs = {
-      inherit inputs;
-    }
-    // specialArgs;
+    extraSpecialArgs =
+      {
+        inherit inputs;
+      }
+      // specialArgs;
 
     users.${username} = {
       home = {
@@ -39,6 +39,6 @@
     inherit shell;
   };
 
-  nix.settings.allowed-users = [ "${username}" ];
-  nix.settings.trusted-users = [ "${username}" ];
+  nix.settings.allowed-users = ["${username}"];
+  nix.settings.trusted-users = ["${username}"];
 }

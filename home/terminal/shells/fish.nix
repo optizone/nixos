@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     pv
     zip
@@ -56,10 +55,8 @@
       "ct" = "clean-trash-bin";
       "ns" = "NIXPKGS_ALLOW_UNFREE=1 FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix-shell --command fish -p";
       "nd" = "NIXPKGS_ALLOW_UNFREE=1 FISH_INIT_SUPPRESS_FASTFETCH=TRUE nix develop --command fish";
-      "ndl" =
-        "git reset -- flake.nix flake.lock && git add --intent-to-add flake.nix flake.lock && nd && git update-index --assume-unchanged flake.nix flake.lock";
-      "ndhide" =
-        "git add --intent-to-add flake.nix flake.lock &&
+      "ndl" = "git reset -- flake.nix flake.lock && git add --intent-to-add flake.nix flake.lock && nd && git update-index --assume-unchanged flake.nix flake.lock";
+      "ndhide" = "git add --intent-to-add flake.nix flake.lock &&
         git update-index --assume-unchanged flake.nix flake.lock";
       "nv" = "nvim .";
       "kssh" = "kitten ssh";
@@ -153,18 +150,18 @@
 
             # TODO:
             set -U fish_color_normal normal
-            set -U fish_pager_color_secondary_completion 
-            set -U fish_pager_color_secondary_description 
+            set -U fish_pager_color_secondary_completion
+            set -U fish_pager_color_secondary_description
             set -U fish_color_keyword 99cc99
-            set -U fish_pager_color_secondary_background 
+            set -U fish_pager_color_secondary_background
             set -U fish_color_quote ffcc66
-            set -U fish_pager_color_secondary_prefix 
+            set -U fish_pager_color_secondary_prefix
             set -U fish_color_redirection d3d0c8
-            set -U fish_pager_color_selected_description 
+            set -U fish_pager_color_selected_description
             set -U fish_color_end cc99cc
-            set -U fish_pager_color_background 
+            set -U fish_pager_color_background
             set -U fish_color_error f2777a
-            set -U fish_pager_color_selected_completion 
+            set -U fish_pager_color_selected_completion
             set -U fish_color_comment ffcc66
             set -U fish_color_selection white --bold --background=brblack
             set -U fish_color_search_match white --bold --background=brblack
@@ -187,13 +184,13 @@
             set -U fish_pager_color_completion normal
             set -U fish_pager_color_description B3A06D
             set -U fish_pager_color_selected_background --background=brblack
-            set -U fish_pager_color_selected_prefix 
-            set -U fish_pager_color_secondary_completion 
-            set -U fish_pager_color_secondary_description 
-            set -U fish_pager_color_secondary_background 
-            set -U fish_pager_color_secondary_prefix 
-            set -U fish_pager_color_selected_description 
-            set -U fish_pager_color_background 
+            set -U fish_pager_color_selected_prefix
+            set -U fish_pager_color_secondary_completion
+            set -U fish_pager_color_secondary_description
+            set -U fish_pager_color_secondary_background
+            set -U fish_pager_color_secondary_prefix
+            set -U fish_pager_color_selected_description
+            set -U fish_pager_color_background
             set -U fish_pager_color_selected_completion
         end
       '';

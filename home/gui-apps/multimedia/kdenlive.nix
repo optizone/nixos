@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-{
-
-  home.packages = [ pkgs.kdePackages.kdenlive ];
+{pkgs, ...}: {
+  home.packages = [pkgs.kdePackages.kdenlive];
 }

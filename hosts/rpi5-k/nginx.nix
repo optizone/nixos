@@ -1,5 +1,4 @@
-{ domain, ... }:
-{
+{domain, ...}: {
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;

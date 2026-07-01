@@ -58,8 +58,8 @@ _: {
   services.smartd = {
     enable = true;
     devices = [
-      { device = "/dev/disk/by-id/ata-WDC_WD10JPCX-24UE4T0_WD-WX31A9611N2C"; }
-      { device = "/dev/disk/by-id/ata-WDC_WD10SPZX-21Z10T0_WD-WX42A2139YKS"; }
+      {device = "/dev/disk/by-id/ata-WDC_WD10JPCX-24UE4T0_WD-WX31A9611N2C";}
+      {device = "/dev/disk/by-id/ata-WDC_WD10SPZX-21Z10T0_WD-WX42A2139YKS";}
     ];
   };
 
@@ -136,7 +136,7 @@ _: {
                 type = "filesystem";
                 mountpoint = "/nix";
                 format = "ext4";
-                mountOptions = [ "noatime" ];
+                mountOptions = ["noatime"];
               };
             };
           };

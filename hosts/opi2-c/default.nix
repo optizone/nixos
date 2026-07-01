@@ -8,8 +8,7 @@
   username,
   stateVersion,
   ...
-}:
-let
+}: let
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = false;
@@ -17,8 +16,8 @@ let
       (final: prev: {
         ubootOrangePiZero2W = prev.buildUBoot {
           defconfig = "orangepi_zero2w_defconfig";
-          extraMeta.platforms = [ "aarch64-linux" ];
-          filesToInstall = [ "u-boot-sunxi-with-spl.bin" ];
+          extraMeta.platforms = ["aarch64-linux"];
+          filesToInstall = ["u-boot-sunxi-with-spl.bin"];
           version = "2024.04";
           src = prev.fetchurl {
             url = "https://ftp.denx.de/pub/u-boot/u-boot-2024.04.tar.bz2";
@@ -46,8 +45,7 @@ let
       })
     ];
   };
-in
-{
+in {
   # =======================================================
 
   imports = [
@@ -80,7 +78,7 @@ in
 
   time.timeZone = "Europe/Moscow";
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];
+  i18n.extraLocales = ["ru_RU.UTF-8/UTF-8"];
 
   # =======================================================
 
@@ -121,7 +119,7 @@ in
       generic-extlinux-compatible.enable = true;
     };
 
-    kernelParams = [ "console=ttyS0,115200" ];
+    kernelParams = ["console=ttyS0,115200"];
   };
 
   hardware.deviceTree.name = "allwinner/sun50i-h618-orangepi-zero2w.dtb";

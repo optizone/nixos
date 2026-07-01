@@ -10,8 +10,8 @@ _: {
     };
 
     formatter.conform-nvim.setupOpts.formatters_by_ft = {
-      typst = [ "typstyle" ];
-      typ = [ "typstyle" ];
+      typst = ["typstyle"];
+      typ = ["typstyle"];
     };
   };
 }

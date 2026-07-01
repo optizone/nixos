@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./graphics
 
@@ -40,5 +39,4 @@
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;
   };
-
 }

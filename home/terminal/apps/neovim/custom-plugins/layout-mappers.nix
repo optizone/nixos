@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   config.vim = {
     augroups = [
       {
@@ -25,7 +24,7 @@
             kl = 0
           elseif (kl == "ru") then
             kl = 1
-          else 
+          else
             vim.notify(string.format("Unknown keyboard layout '%s'. Defaulting to us.", kl))
             kl = 0
           end
@@ -54,7 +53,7 @@
 
     autocmds = [
       {
-        event = [ "InsertEnter" ];
+        event = ["InsertEnter"];
         group = "layout-switch";
         callback = lib.generators.mkLuaInline ''
           function()
@@ -64,7 +63,7 @@
       }
 
       {
-        event = [ "InsertLeave" ];
+        event = ["InsertLeave"];
         group = "layout-switch";
         callback = lib.generators.mkLuaInline ''
           function()

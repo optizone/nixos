@@ -83,7 +83,7 @@ _: {
                 type = "filesystem";
                 mountpoint = "/nix";
                 format = "ext4";
-                mountOptions = [ "noatime" ];
+                mountOptions = ["noatime"];
               };
             };
 
@@ -95,7 +95,7 @@ _: {
                 type = "filesystem";
                 mountpoint = "/znode/persist";
                 format = "ext4";
-                mountOptions = [ "noatime" ];
+                mountOptions = ["noatime"];
               };
             };
           };

@@ -1,17 +1,15 @@
-{ username, ... }:
-let
+{username, ...}: let
   automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=60s";
   uid = "${username}";
   gid = "users";
   credentialsPath = "/run/secrets/${username}/smb-client-auth";
 
-  options = [ "${automount_opts},credentials=${credentialsPath},rw,uid=${uid},gid=${gid}" ];
+  options = ["${automount_opts},credentials=${credentialsPath},rw,uid=${uid},gid=${gid}"];
   fsType = "cifs";
 
   nasPath = "/home/${username}/zroot/nas/rpi4-f";
-in
-{
-  sops.secrets."${username}/smb-client-auth" = { };
+in {
+  sops.secrets."${username}/smb-client-auth" = {};
 
   services.samba.enable = true;
 

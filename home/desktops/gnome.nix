@@ -1,5 +1,8 @@
-{ pkgs, fontMono, ... }:
 {
+  pkgs,
+  fontMono,
+  ...
+}: {
   home.packages = with pkgs; [
     evince # pdf
     file-roller # archive

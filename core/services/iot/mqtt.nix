@@ -3,7 +3,7 @@ _: {
     enable = true;
     listeners = [
       {
-        acl = [ "pattern readwrite #" ];
+        acl = ["pattern readwrite #"];
         omitPasswordAuth = true;
         settings.allow_anonymous = true;
       }

@@ -2,8 +2,7 @@
   username,
   pkgs,
   ...
-}:
-{
+}: {
   # =======================================================
 
   imports = [
@@ -51,7 +50,7 @@
 
   time.timeZone = "Europe/Moscow";
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];
+  i18n.extraLocales = ["ru_RU.UTF-8/UTF-8"];
 
   # =======================================================
 
@@ -128,11 +127,11 @@
     ];
   };
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   networking.hosts = {
-    "192.168.88.248" = [ "rpi5-k" ];
-    "192.168.88.219" = [ "rpi4-f" ];
+    "192.168.88.248" = ["rpi5-k"];
+    "192.168.88.219" = ["rpi4-f"];
   };
 
   # needed for MKD2 work project
@@ -157,7 +156,7 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [ ];
+        mandatoryFeatures = [];
       }
 
       {
@@ -173,9 +172,8 @@
           "big-parallel"
           "kvm"
         ];
-        mandatoryFeatures = [ ];
+        mandatoryFeatures = [];
       }
     ];
   };
-
 }

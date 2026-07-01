@@ -6,8 +6,7 @@
   hostId,
   stateVersion,
   ...
-}:
-{
+}: {
   # =======================================================
 
   imports = with nixos-raspberrypi.nixosModules; [
@@ -46,7 +45,7 @@
 
   time.timeZone = "Europe/Moscow";
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];
+  i18n.extraLocales = ["ru_RU.UTF-8/UTF-8"];
 
   # =======================================================
 
@@ -86,13 +85,11 @@
 
   boot.loader.raspberry-pi.bootloader = "uboot";
 
-  system.nixos.tags =
-    let
-      cfg = config.boot.loader.raspberry-pi;
-    in
-    [
-      "raspberry-pi-${cfg.variant}"
-      cfg.bootloader
-      config.boot.kernelPackages.kernel.version
-    ];
+  system.nixos.tags = let
+    cfg = config.boot.loader.raspberry-pi;
+  in [
+    "raspberry-pi-${cfg.variant}"
+    cfg.bootloader
+    config.boot.kernelPackages.kernel.version
+  ];
 }

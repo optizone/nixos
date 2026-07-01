@@ -4,14 +4,12 @@
   pkgs,
   host,
   ...
-}:
-let
+}: let
   setSmbPass = pkgs.writeShellScript "samba-set-passwords" ''
     smb_password="$(cat /run/secrets/${host}/smb-pass)"
     echo -e "$smb_password\n$smb_password\n" | ${lib.getExe' pkgs.samba "smbpasswd"} -a -s smbuser
   '';
-in
-{
+in {
   users.users.smbuser = {
     isSystemUser = true;
     group = "users";
@@ -109,6 +107,6 @@ in
   ];
 
   sops.secrets."${host}/smb-pass" = {
-    restartUnits = [ "samba-smbd.service" ];
+    restartUnits = ["samba-smbd.service"];
   };
 }

@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-
-with pkgs;
-
-let
+{pkgs, ...}:
+with pkgs; let
   pythonPackages = python3Packages;
   pythonDeps = with pythonPackages; [
     pygobject3
@@ -31,10 +28,11 @@ let
       makeWrapper
     ];
 
-    buildInputs = [
-      pythonPackages.python
-    ]
-    ++ pythonDeps;
+    buildInputs =
+      [
+        pythonPackages.python
+      ]
+      ++ pythonDeps;
 
     installPhase = ''
       install -d $out/libexec/pyobd
@@ -50,11 +48,10 @@ let
       description = "A Python OBD-II tool for diagnostics and data logging";
       homepage = "https://github.com/barracuda-fsh/pyobd";
       license = licenses.gpl2;
-      maintainers = [ ];
+      maintainers = [];
       platforms = platforms.linux;
     };
   };
-in
-{
-  home.packages = [ pyobd ];
+in {
+  home.packages = [pyobd];
 }

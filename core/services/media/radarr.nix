@@ -1,5 +1,4 @@
-{ username, ... }:
-{
+{username, ...}: {
   services.radarr = {
     enable = true;
     openFirewall = true;

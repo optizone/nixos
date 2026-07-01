@@ -1,5 +1,4 @@
-{ username, ... }:
-{
+{username, ...}: {
   # TODO: make configurable
   hardware.bluetooth.enable = true;
 
@@ -27,5 +26,5 @@
     "d /znode/share/backups/home-assistant 0750 ${username} users"
   ];
 
-  networking.firewall.allowedTCPPorts = [ 8123 ];
+  networking.firewall.allowedTCPPorts = [8123];
 }

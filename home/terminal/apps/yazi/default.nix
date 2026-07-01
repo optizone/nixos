@@ -1,6 +1,9 @@
-{ inputs, pkgs, ... }:
 {
-  home.packages = [ pkgs.dragon-drop ];
+  inputs,
+  pkgs,
+  ...
+}: {
+  home.packages = [pkgs.dragon-drop];
 
   imports = [
     ./keymap.nix

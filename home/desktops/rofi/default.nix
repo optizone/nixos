@@ -1,5 +1,4 @@
-{ font, ... }:
-{
+{font, ...}: {
   imports = [
     ./scripts
   ];

@@ -1,8 +1,7 @@
-{ username, ... }:
-{
+{username, ...}: {
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
+    ports = [22];
 
     hostKeys = [
       {

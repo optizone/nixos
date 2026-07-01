@@ -3,8 +3,7 @@
   font,
   lib,
   ...
-}:
-{
+}: {
   # ================ COMMON ====================
 
   fonts.fontconfig.enable = true;
@@ -50,10 +49,9 @@
     # qt6ctSettings = { Appearance = { style = "kvantum"; }; };
   };
 
-  xdg.configFile."Kvantum/Gruvbox-Dark-Brown".source =
-    "${pkgs.gruvbox-kvantum}/share/Kvantum/Gruvbox-Dark-Brown";
+  xdg.configFile."Kvantum/Gruvbox-Dark-Brown".source = "${pkgs.gruvbox-kvantum}/share/Kvantum/Gruvbox-Dark-Brown";
 
-  xdg.configFile."Kvantum/kvantum.kvconfig".text = lib.generators.toINI { } {
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = lib.generators.toINI {} {
     General = {
       theme = "Gruvbox-Dark-Brown";
     };
@@ -74,8 +72,8 @@
     theme = {
       name = "Colloid-Green-Dark-Gruvbox";
       package = pkgs.colloid-gtk-theme.override {
-        colorVariants = [ "dark" ];
-        themeVariants = [ "green" ];
+        colorVariants = ["dark"];
+        themeVariants = ["green"];
         tweaks = [
           "gruvbox"
           "rimless"
@@ -86,7 +84,7 @@
 
     iconTheme = {
       name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme.override { color = "green"; };
+      package = pkgs.papirus-icon-theme.override {color = "green";};
     };
 
     cursorTheme = {
@@ -101,5 +99,4 @@
   };
 
   # ============================================
-
 }

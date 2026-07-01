@@ -4,5 +4,5 @@ _: {
     port = 5580;
   };
 
-  networking.firewall.allowedTCPPorts = [ 5580 ];
+  networking.firewall.allowedTCPPorts = [5580];
 }
