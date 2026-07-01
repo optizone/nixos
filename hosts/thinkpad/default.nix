@@ -17,6 +17,7 @@
     ../../core/services/media/mpd.nix
     ../../core/services/srv-utils/nix-serve.nix
     ../../core/services/srv-utils/avahi.nix
+    ../../core/services/web-utils/actual.nix
 
     ../../home/flavours/nixos-module.nix
 
