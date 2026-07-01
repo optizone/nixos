@@ -4,7 +4,7 @@
 (
     address: "127.0.0.1:6600",
     password: None,
-    theme: None,
+    theme: "theme",
     cache_dir: None,
     on_song_change: None,
     volume_step: 5,
@@ -21,6 +21,7 @@
     ignore_leading_the: false,
     browser_song_sort: [Disc, Track, Artist, Title],
     directories_sort: SortFormat(group_by_type: true, reverse: false),
+
     album_art: (
         method: Auto,
         max_size_px: (width: 1200, height: 1200),
@@ -28,6 +29,7 @@
         vertical_align: Center,
         horizontal_align: Center,
     ),
+
     keybinds: (
         global: {
             ":":       CommandMode,
@@ -61,6 +63,7 @@
             "P":       ShowDecoders,
             "R":       AddRandom,
         },
+
         navigation: {
             "k":         Up,
             "j":         Down,
@@ -97,6 +100,7 @@
             "<C-z>":     ContextMenu(),
             "<C-s>":     Save(kind: Modal(all: false, duplicates_strategy: Ask)),
         },
+
         queue: {
             "D":       DeleteAll,
             "<CR>":    Play,
@@ -106,6 +110,7 @@
             "X":       Shuffle,
         },
     ),
+
     search: (
         case_sensitive: false,
         ignore_diacritics: false,
@@ -121,11 +126,13 @@
             (value: "genre",       label: "Genre"),
         ],
     ),
+
     artists: (
         album_display_mode: SplitByDate,
         album_sort_by: Date,
         album_date_tags: [Date],
     ),
+
     tabs: [
         (
             name: "Queue",
@@ -133,24 +140,27 @@
                 direction: Horizontal,
                 panes: [
                     (
-                        size: "40%",
+                        size: "35%",
+                        borders: "TOP | BOTTOM | RIGHT",
+                        border_style: (fg: "#1d2021", bg: "#1d2021"),
+                        pane: Pane(AlbumArt),
+                    ),
+                    (
+                        size: "65%",
                         pane: Split(
                             direction: Vertical,
                             panes: [
                                 (
-                                    size: "3",
-                                    pane: Pane(Lyrics)
+                                    pane: Pane(QueueHeader()),
+                                    size: "2",
+                                    borders: "BOTTOM"
                                 ),
                                 (
+                                    pane: Pane(Queue),
                                     size: "100%",
-                                    pane: Pane(AlbumArt)
-                                ),
+                                )
                             ],
-                        ),
-                    ), 
-                    (
-                        size: "60%",
-                        pane: Pane(Queue)
+                        )
                     ),
                 ],
             ),
@@ -162,10 +172,6 @@
         (
             name: "Artists",
             pane: Pane(Artists),
-        ),
-        (
-            name: "Album Artists",
-            pane: Pane(AlbumArtists),
         ),
         (
             name: "Albums",
@@ -181,4 +187,3 @@
         ),
     ],
 )
-
