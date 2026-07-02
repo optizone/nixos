@@ -114,7 +114,7 @@
     man-pages-posix
   ];
 
-  documentation.man.generateCaches = true;
+  documentation.man.cache.enable = true;
   documentation.dev.enable = true;
 
   # =======================================================
