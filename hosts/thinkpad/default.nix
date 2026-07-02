@@ -58,13 +58,13 @@
     imports = [
       ../../home/default.nix
       ../../home/gui-apps/utils/pyobd/pyobd.nix
+      ../../home/terminal/apps/contact.nix
     ];
 
     home.packages = with pkgs; [
       zeal
       iperf
       ffmpeg
-      contact
       nixos-anywhere
       just
       nixos-rebuild-ng
