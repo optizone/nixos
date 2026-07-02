@@ -115,7 +115,7 @@ in {
         "SUPER SHIFT, C, exec, cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"
         "SUPER SHIFT, M, exec, ${centerFloat 0.5 0.5} kitty calcure"
         "SUPER SHIFT, B, exec, ${centerFloat 0.5 0.5} kitty htop"
-        "SUPER SHIFT, P, exec, ${positionedFloat 0.025 0.55 0.4 0.4} kitty rmpc"
+        "SUPER SHIFT, P, exec, ${positionedFloat 0.025 0.55 0.475 0.4} kitty rmpc"
         "SUPER SHIFT, W, exec, ${centerFloat 0.5 0.5} waypaper"
         # FIXME: env hack
         "SUPER SHIFT, Return, exec, ${centerFloat 0.5 0.5} QT_QPA_PLATFORMTHEME=qt5ct EDITOR=$$EDITOR SHELL=$$SHELL kitty yazi"
