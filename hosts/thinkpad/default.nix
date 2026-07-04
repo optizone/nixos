@@ -147,7 +147,7 @@
         hostName = "rpi5-k";
         system = "aarch64-linux,armv7l-linux,armv6l-linux";
         protocol = "ssh-ng";
-        sshUser = "optizone";
+        sshUser = "nixremotebuilder";
         sshKey = "/home/thinkpad/.ssh/thinkpad";
         maxJobs = 3;
         supportedFeatures = [
@@ -163,7 +163,7 @@
         hostName = "rpi4-f";
         system = "aarch64-linux,armv7l-linux,armv6l-linux";
         protocol = "ssh-ng";
-        sshUser = "optizone";
+        sshUser = "nixremotebuilder";
         sshKey = "/home/thinkpad/.ssh/thinkpad";
         maxJobs = 3;
         supportedFeatures = [
