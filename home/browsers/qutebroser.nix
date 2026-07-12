@@ -1,4 +1,10 @@
-{fontMono, ...}: {
+{
+  fontMono,
+  pkgs,
+  ...
+}: {
+  home.packages = [pkgs.pass];
+
   programs.qutebrowser = {
     enable = true;
 
@@ -53,6 +59,10 @@
 
     keyBindings = {
       "normal" = {
+        "zl" = "spawn --userscript qute-pass";
+        "zul" = "spawn --userscript qute-pass --username-only";
+        "zpl" = "spawn --userscript qute-pass --password-only";
+        "zol" = "spawn --userscript qute-pass --otp-only";
         "J" = "tab-prev";
         "K" = "tab-next";
         "V" = "darkmode";
@@ -367,4 +377,6 @@
       # c.colors.webpage.bg = base00
     '';
   };
+
+  xdg.configFile."qutebrowser/userscripts/qute-pass" .text = builtins.readFile ./scripts/qute-pass.py;
 }
