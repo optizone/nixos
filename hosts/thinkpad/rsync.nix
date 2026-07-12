@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  rsync-bak = pkgs.writeShellScript "rsync-bak" ''
+  backup = pkgs.writeShellScript "backup" ''
     ${pkgs.rsync}/bin/rsync \
         --recursive \
         --update \
@@ -18,6 +18,10 @@
         $@
   '';
 
+  sync = pkgs.writeShellScript "sync" ''
+    ${backup} --delete-after $@
+  '';
+
   zrootPath = "/home/${username}/zroot";
   dataPath = "${zrootPath}/ldata";
   nasesPath = "${zrootPath}/nas";
@@ -25,46 +29,46 @@
 
   zback-script = pkgs.writeShellScript "zback" ''
     # local -> nas
-    ${rsync-bak} "${dataPath}/wiki/" "${nasesPath}/rpi5-k/wiki"
-    ${rsync-bak} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
-    ${rsync-bak} "${dataPath}/media/" "${nasesPath}/rpi5-k/media"
-    ${rsync-bak} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code"
+    ${backup} "${dataPath}/wiki/" "${nasesPath}/rpi5-k/wiki"
+    ${backup} "${dataPath}/disk-images/" "${nasesPath}/rpi5-k/disk-images"
+    ${backup} "${dataPath}/media/" "${nasesPath}/rpi5-k/media"
+    ${backup} "${dataPath}/code/" "${nasesPath}/rpi5-k/backups/code"
 
-    ${rsync-bak} "${zrootPath}/" \
+    ${backup} "${zrootPath}/" \
         "${nasesPath}/rpi5-k/backups/zroot" \
         --exclude-from "${zrootPath}/.gitignore"
 
     # nas -> local
-    ${rsync-bak} "${nasesPath}/rpi5-k/wiki/" "${dataPath}/wiki"
-    ${rsync-bak} "${nasesPath}/rpi5-k/backups/home-assistant/" \
+    ${backup} "${nasesPath}/rpi5-k/wiki/" "${dataPath}/wiki"
+    ${backup} "${nasesPath}/rpi5-k/backups/home-assistant/" \
         "${dataPath}/backups/home-assistant"
 
     # dayly (week) and mounthly (year) retention
-    ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%A)" \
+    ${backup} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%A)" \
         --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
-    ${rsync-bak} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%B)" \
+    ${backup} "root@rpi5-k:/znode/persist" "${dataPath}/backups/rpi5-k/$(date +%B)" \
         --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
-
-    # TODO: shuttle sync?
   '';
 
-  zsync-script = pkgs.writeShellScript "zsync" ''
-    [ -z "$1" ] && echo "Missing shuttle argument" && exit 1
-    SHUTTLE=$1
+  zsync = pkgs.writeShellScriptBin "zsync" ''
+    SHUTTLE="$1"
+    if [ -z "$SHUTTLE" ]; then
+        echo "USAGE: zsync <SHUTTLE>"
+        exit 1
+    fi
 
     # local -> shuttle
-    ${rsync-bak} "${zrootPath}/notes/" "${shuttles}/$SHUTTLE/zroot/notes"
-    ${rsync-bak} "${zrootPath}/ldata/" "${shuttles}/$SHUTTLE/zroot/ldata" \
+    ${sync} "${zrootPath}/notes/" "${shuttles}/$SHUTTLE/zroot/notes"
+    ${sync} "${zrootPath}/ldata/" "${shuttles}/$SHUTTLE/zroot/ldata" \
         --exclude "media/" \
         --exclude "builds/"
-    ${rsync-bak} "${zrootPath}/nixos/" "${shuttles}/$SHUTTLE/zroot/nixos"
-    ${rsync-bak} "${zrootPath}/misc/" "${shuttles}/$SHUTTLE/zroot/misc"
+    ${sync} "${zrootPath}/nixos/" "${shuttles}/$SHUTTLE/zroot/nixos"
+    ${sync} "${zrootPath}/misc/" "${shuttles}/$SHUTTLE/zroot/misc"
 
-    ${rsync-bak} "/nix/store/" "${shuttles}/$SHUTTLE/nix/store"
+    ${sync} "/nix/store/" "${shuttles}/$SHUTTLE/nix/store"
   '';
 
-  zsync = pkgs.writeScriptBin "zsync" zsync-script;
-  zback = pkgs.writeScriptBin "zback" zback-script;
+  zback = pkgs.writeShellScriptBin "zback" zback-script;
 in {
   # TODO: find a way to toggle
   systemd.timers."backup-timer" = {
