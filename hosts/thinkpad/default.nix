@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
 
     ../../core/services/web-utils/lubelogger.nix
+    ../../core/services/srv-utils/paperless.nix
     ../../core/services/media/mpd.nix
     ../../core/services/srv-utils/nix-serve.nix
     ../../core/services/srv-utils/avahi.nix
