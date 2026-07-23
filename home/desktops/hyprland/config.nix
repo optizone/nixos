@@ -102,7 +102,7 @@ in {
       bind = [
         "SUPER, F1, exec, rofi-show-keybinds"
 
-        "SUPER, Return, exec, kitty"
+        "SUPER, Return, exec, ${centerFloat 0.5 0.5} kitty"
         "SUPER, Q, killactive,"
 
         "SUPER, SPACE, fullscreen, 1"
