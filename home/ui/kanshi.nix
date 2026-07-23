@@ -9,7 +9,7 @@ _: {
           {
             criteria = "eDP-1";
             status = "enable";
-            scale = 1.25;
+            scale = 1.33333333333333333333;
           }
         ];
       }
@@ -65,7 +65,7 @@ _: {
             {
               criteria = "eDP-1";
               status = "enable";
-              scale = 1.25;
+              scale = 1.33333333333333333333;
             }
           ];
         };
