@@ -114,6 +114,8 @@
 
         settings = {
           default_agent = "plan";
+
+          autoupdate = false;
           provider.ollama = {
             npm = "@ai-sdk/openai-compatible";
             name = "Ollama";
