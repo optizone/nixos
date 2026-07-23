@@ -113,6 +113,7 @@
         tui.theme = "gruvbox";
 
         settings = {
+          default_agent = "plan";
           provider.ollama = {
             npm = "@ai-sdk/openai-compatible";
             name = "Ollama";
