@@ -1,4 +1,4 @@
-_: {
+{username, ...}: {
   environment.persistence."/znode/persist" = {
     enable = true;
     hideMounts = true;
@@ -48,6 +48,10 @@ _: {
       "/etc/machine-id"
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
+    ];
+
+    users.${username}.files = [
+      ".config/htop/htoprc"
     ];
   };
 
