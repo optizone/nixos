@@ -178,7 +178,10 @@
       };
 
       icon-picker.enable = true;
-      surround.enable = true;
+      surround = {
+        enable = true;
+        useVendoredKeybindings = false;
+      };
 
       yazi-nvim = {
         enable = true;
