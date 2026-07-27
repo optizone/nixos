@@ -117,8 +117,7 @@ in {
         "SUPER SHIFT, B, exec, ${centerFloat 0.5 0.5} kitty htop"
         "SUPER SHIFT, P, exec, ${positionedFloat 0.025 0.55 0.475 0.4} kitty rmpc"
         "SUPER SHIFT, W, exec, ${centerFloat 0.5 0.5} waypaper"
-        # FIXME: env hack
-        "SUPER SHIFT, Return, exec, ${centerFloat 0.5 0.5} QT_QPA_PLATFORMTHEME=qt5ct EDITOR=$$EDITOR SHELL=$$SHELL kitty yazi"
+        "SUPER SHIFT, Return, exec, ${centerFloat 0.5 0.5} EDITOR=nvim kitty yazi"
         "SUPER SHIFT, O, exec, qutebrowser"
         "SUPER SHIFT, V, exec, ${centerFloat 0.5 0.5} pavucontrol"
 
