@@ -65,26 +65,26 @@
 # `nixos-rebuild test` remote host
 test host:
     nixos-rebuild test \
-          --use-remote-sudo \
+          --sudo \
           --ask-sudo-password \
           --flake "./#{{ host }}" \
-          --offline \
+          --fallback \
           --target-host "root@{{ host }}"
 
 # `nixos-rebuild boot` remote host
 boot host:
     nixos-rebuild boot \
-          --use-remote-sudo \
+          --sudo \
           --ask-sudo-password \
           --flake "./#{{ host }}" \
-          --offline \
+          --fallback \
           --target-host "root@{{ host }}"
 
 # `nixos-rebuild switch` remote host
 switch host:
     nixos-rebuild switch \
-          --use-remote-sudo \
+          --sudo \
           --ask-sudo-password \
           --flake "./#{{ host }}" \
-          --offline \
+          --fallback \
           --target-host "root@{{ host }}"
