@@ -5,7 +5,7 @@
 
     directories = [
       "/var/lib/nixos"
-      "/var/lib/containers/storage/volumes/home-assistant"
+      "/var/lib/containers"
 
       {
         directory = "/var/lib/grocy";
