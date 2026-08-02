@@ -751,6 +751,7 @@ exts = [
 	{ name = "mjs", text = "", fg = "#f1e05a" },
 	{ name = "mk", text = "", fg = "#6d8086" },
 	{ name = "mkv", text = "", fg = "#fd971f" },
+	{ name = "avi", text = "", fg = "#fd971f" },
 	{ name = "ml", text = "", fg = "#e37933" },
 	{ name = "mli", text = "", fg = "#e37933" },
 	{ name = "mm", text = "", fg = "#519aba" },
