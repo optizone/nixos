@@ -38,6 +38,8 @@
     ./git.nix
     ./ssh.nix
     ./xdg-mimes.nix
+
+    ./ai.nix
   ];
 
   home.packages = with pkgs; [
