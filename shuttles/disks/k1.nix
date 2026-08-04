@@ -6,7 +6,7 @@ _: {
 
       content = {
         type = "btrfs";
-        extraArgs = ["-f"];
+        extraArgs = ["-f" "-U" "9b67994f-39ae-49c5-956b-c9ecdb685f9e"];
         subvolumes = {
           "/zroot" = {
             mountpoint = "/zroot";
