@@ -3,7 +3,7 @@
     # Update
     echo "'{{ host }}' age key:"
     ssh "root@{{ host }}" "cat /etc/ssh/ssh_host_ed25519_key.pub" \
-        | nix run --offline "nixpkgs#ssh-to-age" \
+        | ssh-to-age \
         | tee .__tmp_ssh_age_key
 
     sed -i "/{{ host }} age.*/d" .sops.yaml
@@ -17,11 +17,11 @@
     # Update secrets.yaml with new host key
     echo ""
     echo "Updating keys:"
-    nix run --offline "nixpkgs#sops" updatekeys secrets.yaml
+    sops updatekeys secrets.yaml
 
     echo ""
     echo "Provisioning:"
-    nix run --offline  "github:nix-community/nixos-anywhere" -- \
+    nixos-anywhere \
         --flake "./#{{ host }}" \
         --target-host root@{{ host }} \
         --no-substitute-on-destination \
@@ -55,7 +55,7 @@
         root@{{ host }}:/var/lib/
 
 @edit-secrets:
-    nix run "nixpkgs#sops" secrets.yaml
+    sops secrets.yaml
 
 @make-password:
     mkpasswd -m sha-512
