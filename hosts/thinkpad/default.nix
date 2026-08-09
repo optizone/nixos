@@ -64,6 +64,7 @@
 
     home.packages = with pkgs; [
       zeal
+      wakatime-cli
       iperf
       ffmpeg
       nixos-anywhere
@@ -82,6 +83,11 @@
         silent = true;
       };
     };
+  };
+
+  services.wakapi = {
+    enable = true;
+    settings.server.port = 3008;
   };
 
   services.v2raya.enable = true;

@@ -172,6 +172,8 @@
     };
 
     utility = {
+      vim-wakatime.enable = true;
+
       outline.aerial-nvim = {
         enable = true;
         mappings.toggle = "<leader>cs";
