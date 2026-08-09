@@ -21,6 +21,8 @@
 
     ../../home/flavours/nixos-module.nix
 
+    ../../core/mestastic.nix
+
     ./rsync.nix
     ./smb-rpi5-k.nix
     ./smb-rpi4-f.nix
@@ -59,7 +61,6 @@
     imports = [
       ../../home/default.nix
       ../../home/gui-apps/utils/pyobd/pyobd.nix
-      ../../home/terminal/apps/contact.nix
     ];
 
     home.packages = with pkgs; [
