@@ -70,6 +70,12 @@ overlay:
 
 # nixos-rebuild aliases
 
+# `nixos-rebuild build`
+build host:
+    nixos-rebuild build \
+          --flake "./#{{ host }}" \
+          --fallback
+
 # `nixos-rebuild test` remote host
 test host:
     nixos-rebuild test \
