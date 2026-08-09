@@ -60,6 +60,14 @@
 @make-password:
     mkpasswd -m sha-512
 
+# overlayfs nix store onto persistent location
+overlay:
+    sudo chown -R root:nixbld /znode/persist/build/nix
+    sudo chown -R root:nixbld /znode/persist/build/nix-workdir
+    sudo mount -t overlay overlay \
+      -olowerdir=/nix/store,upperdir=/znode/persist/build/nix,workdir=/znode/persist/build/nix-workdir \
+      /nix/store
+
 # nixos-rebuild aliases
 
 # `nixos-rebuild test` remote host
