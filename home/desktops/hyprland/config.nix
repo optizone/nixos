@@ -123,7 +123,7 @@ in {
 
         "SUPER, X, exec, rofi-power-menu"
         "SUPER, Z, exec, systemctl suspend"
-        "SUPER SHIFT, Z, exec, systemctl hybernate"
+        "SUPER SHIFT, Z, exec, systemctl hibernate"
 
         "SUPER, P, pseudo,"
         # "SUPER, S, togglesplit,"
