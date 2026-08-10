@@ -15,7 +15,7 @@
             OLLAMA_VULKAN=1 \
             OLLAMA_IGPU_ENABLE=1 \
             OLLAMA_CONTEXT_LENGTH=64000 \
-            ollama serve >./ollama-serve-log 2>&1 & \
+            ollama serve >/dev/null 2>&1 & \
             echo $!
     )
 
