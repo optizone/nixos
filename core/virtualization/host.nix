@@ -3,7 +3,7 @@
   username,
   ...
 }: {
-  users.users.${username}.extraGroups = ["libvirtd"];
+  users.users.${username}.extraGroups = ["incus-admin" "libvirtd"];
 
   environment.systemPackages = with pkgs; [
     virt-manager
@@ -32,8 +32,16 @@
       };
     };
 
+    incus = {
+      enable = true;
+      socketActivation = true;
+    };
+
     spiceUSBRedirection.enable = true;
   };
+
+  networking.nftables.enable = true;
+  networking.firewall.trustedInterfaces = ["incusbr0"];
 
   services.spice-vdagentd.enable = true;
 
