@@ -70,6 +70,7 @@
       ffmpeg
       nixos-anywhere
       just
+      nushell
       nixos-rebuild-ng
       htop
       disko
