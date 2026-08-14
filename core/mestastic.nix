@@ -130,10 +130,10 @@ in {
     (pkgs.writeShellScriptBin "mnodes" ''
       node_arg="$1"
       declare -A nodes=(
-        ${nodes-map-entry "gn01" "TODO"}
+        ${nodes-map-entry "gn01" "base64:F3HaGNoKXzf7B3p1jOIXT7Bf3fD5hlBOCm/AI1rHZkQ="}
         ${nodes-map-entry "gn02" "base64:DYtARWqcwACDu1+0YuipzPGgE8fYCFY4r17HC0fEKiQ="}
-        ${nodes-map-entry "st01" "TODO"}
-        ${nodes-map-entry "st02" "TODO"}
+        ${nodes-map-entry "st01" "base64:J1X9UJBc0q1NH7gzXFdfnrAxG62Y6Uc7gHuk5AnpnWs="}
+        ${nodes-map-entry "st02" "base64:XLXjuy5e9TvIgL5Aja+V4IWMEOnqU5Z3Dm+FClwiJDk="}
       )
 
       [ -n "$node_arg" ] && [ -z "''${nodes[$node_arg]}" ] && \
