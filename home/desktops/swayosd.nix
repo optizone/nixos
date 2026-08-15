@@ -8,8 +8,8 @@
       bind = [",XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"];
       # binds active in lockscreen
       bindl = [
-        ",XF86MonBrightnessUp, exec, swayosd-client --brightness raise 5%+"
-        ",XF86MonBrightnessDown, exec, swayosd-client --brightness lower 5%-"
+        ",XF86MonBrightnessUp, exec, swayosd-client --brightness +5"
+        ",XF86MonBrightnessDown, exec, swayosd-client --brightness -5"
         "SUPER, XF86MonBrightnessUp, exec, brightnessctl set 100%"
         "SUPER, XF86MonBrightnessDown, exec, brightnessctl set 0%"
       ];
