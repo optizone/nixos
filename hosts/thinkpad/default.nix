@@ -135,11 +135,6 @@
     "192.168.88.163" = ["rpi4-f"];
   };
 
-  # needed for MKD2 work project
-  systemd.tmpfiles.rules = [
-    "d /var/run/protei-config-manager 0777 ${username} users"
-  ];
-
   nix = {
     distributedBuilds = true;
 
