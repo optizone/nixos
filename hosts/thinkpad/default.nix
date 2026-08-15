@@ -93,6 +93,7 @@
   };
 
   services.v2raya.enable = true;
+  services.radarr.enable = true;
 
   programs = {
     winbox = {
