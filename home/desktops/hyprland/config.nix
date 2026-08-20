@@ -240,6 +240,7 @@ in {
         "match:class ^(org.gnome.Calculator)$, float true, center true"
         # TODO: does not resize when called from rofi
         "match:class ^(waypaper)$, float true, center true, size ${w50} ${h50}"
+        "match:class ^(blender)$, float true, center true, size ${w50} ${h50}"
         "match:class ^(org.pulseaudio.pavucontrol)$, float true"
         "match:class ^(SoundWireServer)$, float true"
         "match:class ^(file_progress)$, float true"

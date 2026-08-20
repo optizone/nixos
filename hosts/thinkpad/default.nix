@@ -66,6 +66,7 @@
     home.packages = with pkgs; [
       zeal
       wakatime-cli
+      blender
       iperf
       ffmpeg
       nixos-anywhere
