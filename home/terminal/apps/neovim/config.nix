@@ -243,7 +243,7 @@
       noice.enable = true;
       colorizer = {
         enable = true;
-        setupOpts.names = false;
+        setupOpts.user_default_options.names = false;
       };
       illuminate.enable = true;
       breadcrumbs = {
