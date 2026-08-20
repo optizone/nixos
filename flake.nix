@@ -206,7 +206,7 @@
           host = "rpi4-f";
           hostId = "d101d000";
           stateVersion = "25.11";
-          shell = pkgs-arm.bash;
+          shell = pkgs-arm.fish;
         };
 
         modules = [
@@ -230,7 +230,7 @@
           host = "opi2-c";
           hostId = "d101d001";
           stateVersion = "26.05";
-          shell = pkgs-arm.bash;
+          shell = pkgs-arm.fish;
         };
 
         modules = [
