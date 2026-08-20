@@ -35,7 +35,7 @@ in {
       };
 
       backups = {
-        "path" = "/znode/share/backups/";
+        "path" = "/zroot/ldata/backups/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -45,7 +45,7 @@ in {
       };
 
       disk-images = {
-        "path" = "/znode/share/disk-images/";
+        "path" = "/zroot/ldata/disk-images/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -55,7 +55,7 @@ in {
       };
 
       wiki = {
-        "path" = "/znode/share/wiki/";
+        "path" = "/zroot/ldata/wiki/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -65,7 +65,7 @@ in {
       };
 
       media = {
-        "path" = "/znode/share/media/";
+        "path" = "/zroot/ldata/media/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -75,7 +75,7 @@ in {
       };
 
       home = {
-        "path" = "/znode/share/home/";
+        "path" = "/zroot/ldata/home/";
         "browseable" = "yes";
         "public" = "no";
         "writeable" = "yes";
@@ -94,12 +94,11 @@ in {
   networking.firewall.allowPing = true;
 
   systemd.tmpfiles.rules = [
-    "d /znode/share/backups 0750 ${username} users"
-    "d /znode/share/disk-images 0750 ${username} users"
-    "d /znode/share/kiwix-images 0750 ${username} users"
-    "d /znode/share/media 0750 ${username} users"
-    "d /znode/share/home 0750 ${username} users"
-    "d /znode/share/wiki 0750 ${username} users"
+    "d /zroot/ldata/backups 0750 ${username} users"
+    "d /zroot/ldata/disk-images 0750 ${username} users"
+    "d /zroot/ldata/media 0750 ${username} users"
+    "d /zroot/ldata/home 0750 ${username} users"
+    "d /zroot/ldata/wiki 0750 ${username} users"
   ];
 
   systemd.services.samba-smbd.serviceConfig.ExecStartPre = [

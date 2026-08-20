@@ -1,5 +1,5 @@
 _: {
-  environment.persistence."/znode/persist" = {
+  environment.persistence."/zroot/ldata/persist" = {
     enable = true;
     hideMounts = true;
 
@@ -15,10 +15,10 @@ _: {
   };
 
   sops.age.sshKeyPaths = [
-    "/znode/persist/etc/ssh/ssh_host_ed25519_key"
+    "/zroot/ldata/persist/etc/ssh/ssh_host_ed25519_key"
   ];
 
-  fileSystems."/znode/persist".neededForBoot = true;
+  fileSystems."/zroot".neededForBoot = true;
 
   disko.devices = {
     nodev."/" = {
@@ -101,7 +101,7 @@ _: {
 
               content = {
                 type = "filesystem";
-                mountpoint = "/znode/persist";
+                mountpoint = "/zroot";
                 format = "ext4";
                 mountOptions = ["noatime"];
               };
@@ -109,6 +109,22 @@ _: {
           };
         };
       };
+
+      # usb = {
+      #   type = "disk";
+      #   device = "/dev/disk/by-id/usb-Kingston_DataTraveler_3.0_E0D55EA573F5E38169B20100-0:0";
+      #
+      #   content = {
+      #     type = "btrfs";
+      #     extraArgs = ["-f" "-U" "5ccc0817-2cf4-423e-8782-5e89e6e06569"];
+      #     subvolumes = {
+      #       "/zroot" = {
+      #         mountpoint = "/zroot";
+      #         mountOptions = ["compress=lz4"];
+      #       };
+      #     };
+      #   };
+      # };
     };
   };
 }

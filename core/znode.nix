@@ -18,8 +18,7 @@
   ];
 
   nix.settings = {
-    # FIXME: use dedicated dir
-    build-dir = "/znode/persist/build";
+    build-dir = "/zroot/ldata/builds/nix";
     keep-failed = true;
   };
 

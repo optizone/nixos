@@ -7,7 +7,7 @@
     containers.homeassistant = {
       volumes = [
         "home-assistant:/config"
-        "/znode/share/backups/home-assistant:/config/backups"
+        "/zroot/ldata/backups/home-assistant:/config/backups"
         "/var/run/dbus:/run/dbus:ro" # Bluetooth support
       ];
       capabilities = {
@@ -23,7 +23,7 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /znode/share/backups/home-assistant 0750 ${username} users"
+    "d /zroot/ldata/backups/home-assistant 0750 ${username} users"
   ];
 
   networking.firewall.allowedTCPPorts = [8123];

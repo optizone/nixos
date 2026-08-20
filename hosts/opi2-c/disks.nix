@@ -1,5 +1,5 @@
 _: {
-  environment.persistence."/znode/persist" = {
+  environment.persistence."/zroot/ldata/persist" = {
     enable = true;
     hideMounts = true;
 
@@ -18,7 +18,7 @@ _: {
     "/znode/persist/etc/ssh/ssh_host_ed25519_key"
   ];
 
-  fileSystems."/znode/persist".neededForBoot = true;
+  fileSystems."/zroot".neededForBoot = true;
 
   disko.devices = {
     nodev."/" = {
@@ -93,7 +93,7 @@ _: {
 
               content = {
                 type = "filesystem";
-                mountpoint = "/znode/persist";
+                mountpoint = "/zroot/ldata/persist";
                 format = "ext4";
                 mountOptions = ["noatime"];
               };
