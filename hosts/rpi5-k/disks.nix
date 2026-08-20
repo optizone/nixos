@@ -18,6 +18,7 @@
         group = "jellyfin";
       }
       {
+        # TODO: exclide /var/lib/zigbee2mqtt/log
         directory = "/var/lib/zigbee2mqtt";
         user = "zigbee2mqtt";
         group = "zigbee2mqtt";
