@@ -1,6 +1,6 @@
 keys:
+  - &rpi4-f age17kgkfdkqtwrwsxnsy7zatmwrcht08jw0dt9uuudutqt9q76dwqasw7jdgp
   - &rpi5-k age1j9sgxt7x3yx7ggsc6vunplrhhv6c9qs59zwf3tgyz67xpz0fy4tqhd3yhm
-  - &rpi4-f age1clyw2p8c5lk5tvghsmne307nu76xk67g7349zegfu97wtws4qcesltdc0j
   - &zroot age1fju47f2mtxvp0e7ty9arxvj3r5g74wquqm6ta2nmdt53j0kzqegq4v8rrh
   - &thinkpad age19y20q5xtde7m6hll73efnapefwqwazfq6lm6zqf89c49wpj4ug6s3jsg4e
 creation_rules:
@@ -9,5 +9,5 @@ creation_rules:
     - age:
       - *zroot
       - *thinkpad
-      - *rpi4-f
       - *rpi5-k
+      - *rpi4-f
