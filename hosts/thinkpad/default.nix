@@ -67,6 +67,7 @@
       zeal
       wakatime-cli
       blender
+      otpclient
       iperf
       ffmpeg
       nixos-anywhere
