@@ -42,6 +42,10 @@ in {
     settings = {
       default_agent = "plan";
 
+      plugin = [
+        "@dietrichgebert/ponytail"
+      ];
+
       autoupdate = false;
       provider.ollama = {
         npm = "@ai-sdk/openai-compatible";
