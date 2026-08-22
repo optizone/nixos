@@ -16,6 +16,6 @@ enabled_layouts grid
 cd ~/zroot/nixos
 
 launch --cwd=~/zroot/nixos fish
-launch --env FISH_INIT_SUPPRESS_FASTFETCH=true --cwd=~/zroot/nixos fish -C "kitten ssh optizone@rpi5-k"
+launch --env=FISH_INIT_SUPPRESS_FASTFETCH=true --cwd=~/zroot/nixos fish -C "kitten ssh -t optizone@rpi5-k fish -C htop"
 
 focus_tab 0
