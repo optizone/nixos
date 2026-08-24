@@ -83,6 +83,16 @@ in {
         "force user" = "${username}";
         "force group" = "users";
       };
+
+      zroot = {
+        "path" = "/zroot/";
+        "browseable" = "yes";
+        "public" = "no";
+        "writeable" = "yes";
+        "valid users" = "smbuser";
+        "force user" = "${username}";
+        "force group" = "users";
+      };
     };
   };
 

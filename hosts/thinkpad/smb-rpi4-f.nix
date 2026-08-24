@@ -6,36 +6,14 @@
 
   options = ["${automount_opts},credentials=${credentialsPath},rw,uid=${uid},gid=${gid}"];
   fsType = "cifs";
-
-  nasPath = "/home/${username}/zroot/nas/rpi4-f";
 in {
   sops.secrets."${username}/smb-client-auth" = {};
 
   services.samba.enable = true;
 
   fileSystems = {
-    "${nasPath}/backups" = {
-      device = "//rpi4-f/backups";
-      inherit options fsType;
-    };
-
-    "${nasPath}/disk-images" = {
-      device = "//rpi4-f/disk-images";
-      inherit options fsType;
-    };
-
-    "${nasPath}/wiki" = {
-      device = "//rpi4-f/wiki";
-      inherit options fsType;
-    };
-
-    "${nasPath}/media" = {
-      device = "//rpi4-f/media";
-      inherit options fsType;
-    };
-
-    "${nasPath}/home" = {
-      device = "//rpi4-f/home/optizone";
+    "/home/${username}/zroot/nas/rpi4-f" = {
+      device = "//rpi4-f/zroot";
       inherit options fsType;
     };
   };
