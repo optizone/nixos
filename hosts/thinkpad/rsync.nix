@@ -33,6 +33,8 @@
         --archive --delete-after -A -X --numeric-ids --super
       ${backup} "/zroot/nas/rpi4-f/ldata/persist/" "/zroot/ldata/backups/rpi4-f/$(date +%B)" \
         --archive --delete-after -A -X --numeric-ids --super
+      echo "============ DONE ================"
+      echo
     fi
 
 
@@ -54,6 +56,7 @@
         --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
       ${backup} "root@rpi5-k:/znode/persist" "/zroot/ldata/backups/rpi5-k/$(date +%B)" \
         --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
+      echo "============ DONE ================"
     fi
 
     if [ -z "$target" ] || [ "$target" = "k1" ]; then
@@ -67,6 +70,7 @@
         --exclude ".venv"
 
       ${backup} "/nix/store/" "/zroot/shuttles/k1/nix/store"
+      echo "============ DONE ================"
     fi
 
     if [ -z "$target" ] || [ "$target" = "k2" ]; then
@@ -80,6 +84,7 @@
         --exclude ".venv"
 
       ${backup} "/nix/store/" "/zroot/shuttles/k2/nix/store"
+      echo "============ DONE ================"
     fi
   '';
   # TODO: cargo target ldata/builds dir
