@@ -88,7 +88,7 @@ binds {
     Mod+Shift+W      { spawn    "waypaper"; }
     Mod+Shift+Return { spawn    "kitty" "--title kitty_yazi" "yazi"; }
     Mod+Shift+O      { spawn    "qutebrowser"; }
-    Mod+Shift+V      { spawn    "pavucontrol"; }
+    Mod+Shift+V      { spawn    "kitty ""--title kitty_wiremix" "wiremix"; }
 
     Mod+X            { spawn "rofi-power-menu"; }
     Mod+Z            { spawn "systemctl" "suspend"; }

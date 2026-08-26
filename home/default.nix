@@ -49,6 +49,7 @@
     xdg-utils
 
     pavucontrol
+    wiremix
     gnome-calculator
     wineWowPackages.wayland
 

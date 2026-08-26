@@ -119,7 +119,7 @@ in {
         "SUPER SHIFT, W, exec, ${centerFloat 0.5 0.5} waypaper"
         "SUPER SHIFT, Return, exec, ${centerFloat 0.5 0.5} EDITOR=nvim kitty yazi"
         "SUPER SHIFT, O, exec, qutebrowser"
-        "SUPER SHIFT, V, exec, ${centerFloat 0.5 0.5} pavucontrol"
+        "SUPER SHIFT, V, exec, ${centerFloat 0.5 0.5} kitty wiremix"
 
         "SUPER, X, exec, rofi-power-menu"
         "SUPER, Z, exec, systemctl suspend"

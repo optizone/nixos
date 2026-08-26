@@ -117,7 +117,7 @@ in {
       format-muted = "[MUTED]";
       scroll-step = 1;
       on-click = "pamixer -t";
-      on-click-right = "hyprctl dispatch exec '[float true; center true; size monitor_w*0.5 monitor_h*0.5] pavucontrol'";
+      on-click-right = "hyprctl dispatch exec '[float true; center true; size monitor_w*0.5 monitor_h*0.5] kitty wiremix'";
       tooltip = false;
     };
 
