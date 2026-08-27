@@ -59,7 +59,7 @@
       echo "============ DONE ================"
     fi
 
-    if [ -z "$target" ] || [ "$target" = "k1" ]; then
+    if [ "$target" = "k1" ]; then
       echo Backing up to 'k1'
       ${backup} "/zroot/notes/" "/zroot/shuttles/k1/zroot/ldata/backups/zroot/notes"
       ${backup} "/zroot/nixos/" "/zroot/shuttles/k1/zroot/ldata/backups/zroot/nixos"
@@ -73,7 +73,7 @@
       echo "============ DONE ================"
     fi
 
-    if [ -z "$target" ] || [ "$target" = "k2" ]; then
+    if [ "$target" = "k2" ]; then
       echo Backing up to 'k2'
       ${backup} "/zroot/notes/" "/zroot/shuttles/k2/zroot/ldata/backups/zroot/notes"
       ${backup} "/zroot/nixos/" "/zroot/shuttles/k2/zroot/ldata/backups/zroot/nixos"
@@ -84,6 +84,20 @@
         --exclude ".venv"
 
       ${backup} "/nix/store/" "/zroot/shuttles/k2/nix/store"
+      echo "============ DONE ================"
+    fi
+
+    if [ "$target" = "k3" ]; then
+      echo Backing up to 'k3'
+      ${backup} "/zroot/notes/" "/zroot/shuttles/k3/zroot/ldata/backups/zroot/notes"
+      ${backup} "/zroot/nixos/" "/zroot/shuttles/k3/zroot/ldata/backups/zroot/nixos"
+      ${backup} "/zroot/ldata/" "/zroot/shuttles/k3/zroot/ldata/backups/zroot/nixos" \
+        --exclude "/media" \
+        --exclude "/builds" \
+        --exclude ".direnv" \
+        --exclude ".venv"
+
+      ${backup} "/nix/store/" "/zroot/shuttles/k3/nix/store"
       echo "============ DONE ================"
     fi
   '';
