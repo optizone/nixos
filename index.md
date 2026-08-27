@@ -1,14 +1,15 @@
-# ZROOT INFRA
+# zroot/nixos
 
 <!--toc:start-->
 
-- [ZROOT INFRA](#zroot-infra)
+- [zroot/nixos](#zrootnixos)
   - [Gruv-Rice-Box](#gruv-rice-box)
     - [Quick start](#quick-start)
     - [Configuration](#configuration)
+    - [Services](#services)
     - [Gallery](#gallery)
   - [Infrastructure](#infrastructure)
-    - [Quick start](#quick-start)
+    - [Quick start](#quick-start-1)
     - [Devices](#devices)
   - [Special thanks](#special-thanks)
 
@@ -16,9 +17,59 @@
 
 Personal infrastructure config and Hyrpand rice.
 
+Idea is to have one directory (`/zroot`) to be a _consentually_ self replicating
+Zettelkästen, infrastructure code and data.
+
+```bash
+zroot
+├── ldata
+│   ├── backups
+│   ├── builds
+│   ├── code
+│   ├── disk-images
+│   ├── persist # for impermanence
+│   ├── media # jellyfin and immich expect these dirs to exist
+│   │   ├── movies
+│   │   ├── music
+│   │   ├── gallery
+│   │   └── tv
+│   ├── secrets
+│   └── wiki # kiwix-images zeal maps and other knowledge sources
+├── nas
+│   ├── rpi4-f # each is a mounted `/zroot` (dir = NAS hostname)
+│   └── rpi5-k
+├── nixos # this repo
+├── notes # your second brain
+└── shuttles # mounted drives
+    └── apollo11 # can be used as live-iso
+        ├── zroot
+        ├── boot
+        └── nix
+```
+
+That leaves only two (`/boot` and `/nix`) to worry about. With
+[impermanence](https://github.com/nix-community/impermanence) we can persist
+only these three directories.
+
+Using `rsync` we can set rules of what data should be backed up where. For
+instance:
+
+```bash
+rsync /zroot/notes/              /zroot/nas/rpi4-f/notes
+rsync /zroot/ldata/media/movies/ /zroot/nas/rpi5-k/ldata/media/movies
+rsync /zroot                     /zroot/shuttles/k1/zroot
+```
+
+Assuming `rsync` runs every day, you can be sure, that `/zroot` is up to date on
+all machines you have. This way it is trivial to add, replace or recover
+servers.
+
 ## Gruv-Rice-Box
 
-![rmpc-yazi-float](./assets/screenshots/rmpc-yazi-float.png)
+Gruvbox colored retro config. No animations, no opacity, no applets, only
+terminal (and an occasional gui).
+
+![zroot-3-full-rmpc.png](./assets/screenshots/zroot-3-full-rmpc.png)
 
 Workflow is based around these programs:
 
@@ -30,6 +81,11 @@ Workflow is based around these programs:
 - yazi
 
 ### Quick start
+
+> [!WARNING]
+> This repo is under heavy construction. `generic-*` targets are not tested,
+> expect possible breakages, and refer to `thinkpad` or `rpi*` systems for
+> working config in case something isn't working.
 
 `flake.nix` contains all of the avaliable systems. You can add your own (and
 delete mine) or you can use `generic-pc` or `generic-laptop`.
@@ -43,18 +99,17 @@ cd ~
 git clone --recurse-submodules https://github.com/optizone/nixos.git && cd nixos
 
 # Set git credentials with your own
-sed -i 's/gitUsername = "optizone"/gitUsername = "git-username"/' flake.nix
-sed -i 's/gitEmail = "ilya.kek.lol.orbidol@gmail.com"/gitEmail = "email@email.com"/' flake.nix
+sed -i 's/gitUsername = "generic"/gitUsername = "<your-git-useranme-here>"/' flake.nix
+sed -i 's/gitEmail = "generic@generic.gen"/gitEmail = "<your-git-email-here>"/' flake.nix
 
-# Set host and username (substitute `generic-pc -> generic-laptop` and 
-# `pc-user -> laptop-user` in case of using `generic-laptop` system)
-sed -i 's/host = "generic-pc"/host = "host"/' flake.nix
-sed -i 's/username = "pc-user"/username = "username"/' flake.nix
+# Set host and username 
+sed -i 's/host = "generic-host"/host = "<your-host-here>"/' flake.nix
+sed -i 's/username = "generic-user"/username = "<your-username-here>"/' flake.nix
 
 # NOTE: it is recommended to check out all parameters in flake.nix
 
 # Copy your hardware config
-# Assuming you are using clean NixOS install. In case not check paths.
+# Assuming you are using clean NixOS install. In case not set paths.
 cp /etc/nixos/hardware-configuration.nix ./hosts/generic/hardware-configuration.nix
 
 # Apply to boot configuration your choosen system (generic-pc in this case)
@@ -74,7 +129,10 @@ nh --help
 
 For default keybinds check out
 [./home/desktops/hyprland/config.nix](./home/desktops/hyprland/config.nix)
-(dmenu: WIN+SHIFT+D; kitty: WIN+ENTER).
+
+dmenu: WIN+SHIFT+D;\
+kitty: WIN+ENTER;\
+keybinds: WIN+F1;
 
 > [!NOTE]
 > There is a module at `home/flavours/standalone` for generic linux
@@ -89,6 +147,35 @@ browser and don't want to install `google-chrome`) you can replace `../../home/`
 line in `user.nix` with the list of modules you want to enable (for example
 `../../home/browsers/firefox.nix` to install `firefox`). See
 [home/default.nix](./home/default.nix) for default configuration.
+
+### Services
+
+In this repo you can find configs for some bundles of services connected in one
+homelab that can span multiple servers (including user laptops and PCs).
+
+Monitoring:
+
+- `smartd + node_exporter -> prometheus -> grafana`
+- `wakatime-cli -> wakapi`
+- `sysbench + stress-ng`
+- `htop + iotop + iperf` and a bunch of other system monitoring tools
+- `wireshark`
+
+NAS/Media: `samba + jellyfin + immich (wip)`
+
+IoT: `home-assistant + zigbee2mqtt + matter-server + mosquitto`
+
+Virtualization: `incus + podman + docker`
+
+Personal finance: `actual`
+
+Car service bookkeeping: `lubelogger`
+
+AI: `ollama + opencode`
+
+Meshtastic: `mnodes + contact` (configs and TUI)
+
+GUI/CLI/TUI programs can be found in [home/](./home/default.nix).
 
 ### Gallery
 
@@ -117,61 +204,21 @@ installer image. You can build one yourself fillowing instructions at
 
 This is how to setup `rpi5-k` host.
 
-You can either run:
-
-```Bash
+```bash
 just provision rpi5-k
-```
-
-or do it manually:
-
-```Bash
-# On remote host:
-# Print remote host age
-cat /etc/ssh/ssh_host_ed25519_key.pub | nix run nixpkgs#ssh-to-age
-
-# On local machine:
-# Add age key to .sops.yaml 
-nvim .sops.yaml
-
-# Update secrets.yaml with new host key
-nix run nixpkgs#sops updatekeys secrets.yaml
-
-nix run github:nix-community/nixos-anywhere -- --build-on remote \
-    --flake ./#rpi5-k \
-    --target-host root@rpi5-k \
-    # This will create `hardware-configuration.nix` module. In this particular
-    # example it is already created, but for new hosts you won't have one.
-    # So don't forget to import it.
-    --generate-hardware-config nixos-generate-config \
-        ./hosts/rpi5-k/hardware-configuration.nix \
-    --copy-host-keys \
-    # Omit default `restart` phase so we can move host keys to persistent storage
-    --phases kexec,disko,install
-
-# On remote host:
-# Copy ssh keys to persistent location 
-cp /etc/ssh/ssh_host_ed25519_key* /mnt/znode/persist/etc/ssh
-
-# At this point configuration is done
-reboot
-
-# On local host:
-# Now you can provision the system using --target-host option
-nixos-rebuild switch \
-    --use-remote-sudo \
-    --ask-sudo-password \
-    --flake ./#rpi5-k \
-    --target-host rpi5-k@rpi5-k \
-    --build-host rpi5-k@rpi5-k
 ```
 
 ### Devices
 
-Device descriptions can be found [at docs/devices.md](./docs/devices.md).
+| name     | hardware                  | comment                             |
+| -------- | ------------------------- | ----------------------------------- |
+| thinkpad | ThinkBook 16 G6+ IMH 21LE | yeah, not exactly think\***pad**\*  |
+| rpi5-k   | RaspberryPi 5 16GB        | main server                         |
+| rpi4-f   | RaspberryPi 4 8GB         | test server                         |
+| opi2-c   | OrangePi Zero 2 W 4GB     | minivan brains and mesh radio (WIP) |
 
 ## Special thanks
 
-To @Frost-Phoenix for inspiration (and configs).\
+To @Frost-Phoenix for my first configs.\
 To @grahamc for his post
 ["Erase your darlings"](https://grahamc.com/blog/erase-your-darlings/).
