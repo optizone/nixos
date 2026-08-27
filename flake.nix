@@ -316,10 +316,19 @@
         modules = [
           ./hosts/generic/laptop.nix
           nix-index-database.nixosModules.nix-index
+          {
+            programs.nix-index-database.comma.enable = true;
+          }
+          sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
         ];
         specialArgs = {
-          host = "generic-laptop";
-          username = "laptop-user";
+          host = "generic-host";
+          username = "generic-user";
+
+          gitUsername = "generic";
+          gitEmail = "generic@generic.gen";
+
           stateVersion = "25.11";
           shell = pkgs-x86.fish;
 
@@ -328,8 +337,6 @@
             inputs
             font
             fontMono
-            gitUsername
-            gitEmail
             ;
         };
       };
@@ -338,12 +345,21 @@
         system = "x86_64-linux";
 
         modules = [
-          ./hosts/generic/pc.nix
+          ./hosts/generic/laptop.nix
           nix-index-database.nixosModules.nix-index
+          {
+            programs.nix-index-database.comma.enable = true;
+          }
+          sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
         ];
         specialArgs = {
-          host = "generic-pc";
-          username = "pc-user";
+          host = "generic-host";
+          username = "generic-user";
+
+          gitUsername = "generic";
+          gitEmail = "generic@generic.gen";
+
           stateVersion = "25.11";
           shell = pkgs-x86.fish;
 
@@ -352,8 +368,6 @@
             inputs
             font
             fontMono
-            gitUsername
-            gitEmail
             ;
         };
       };
