@@ -70,6 +70,7 @@
       blender
       otpclient
       iperf
+      nix-inspect
       ffmpeg
       nixos-anywhere
       just
