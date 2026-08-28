@@ -23,9 +23,13 @@
 
     if [ -z "$target" ] || [ "$target" = "rpi4-f" ]; then
       echo Backing up to 'rpi4-f'
-      ${backup} "/zroot/notes/" "/zroot/nas/rpi4-f/ldata/backups/zroot/notes"
-      ${backup} "/zroot/nixos/" "/zroot/nas/rpi4-f/ldata/backups/zroot/nixos"
+      ${backup} "/zroot/notes/" "/zroot/nas/rpi4-f/notes"
+      ${backup} "/zroot/nixos/" "/zroot/nas/rpi4-f/nixos"
       ${backup} "/zroot/ldata/secrets/" "/zroot/nas/rpi4-f/ldata/secrets"
+      ${backup} "/zroot/ldata/media/music/" "/zroot/nas/rpi4-f/ldata/media/music"
+      ${backup} "/zroot/ldata/code/" "/zroot/nas/rpi4-f/ldata/code" \
+        --exclude ".direnv" \
+        --exclude ".venv"
 
       echo Backing up from 'rpi4-f'
       # dayly (week) and mounthly (year) retention
@@ -40,12 +44,18 @@
 
     if [ -z "$target" ] || [ "$target" = "rpi5-k" ]; then
       echo Backing up to 'rpi5-k'
-      ${backup} "/zroot/notes/" "/zroot/nas/rpi5-k/ldata/backups/zroot/notes"
-      ${backup} "/zroot/nixos/" "/zroot/nas/rpi5-k/ldata/backups/zroot/nixos"
-      ${backup} "/zroot/ldata/" "/zroot/nas/rpi5-k/ldata" \
+      ${backup} "/zroot/notes/" "/zroot/nas/rpi5-k/backups/zroot/notes"
+      ${backup} "/zroot/nixos/" "/zroot/nas/rpi5-k/backups/zroot/nixos" \
+        --exclude /result
+      # FIXME: rpi5-k does not share zroot yet
+      ${backup} "/zroot/ldata/code/" "/zroot/nas/rpi5-k/backups/code" \
         --exclude "/builds" \
         --exclude ".direnv" \
         --exclude ".venv"
+      ${backup} "/zroot/ldata/media/" "/zroot/nas/rpi5-k/media"
+      ${backup} "/zroot/ldata/disk-images/" "/zroot/nas/rpi5-k/disk-images"
+      ${backup} "/zroot/ldata/wiki/" "/zroot/nas/rpi5-k/wiki"
+      ${backup} "/zroot/ldata/secrets/" "/zroot/nas/rpi5-k/backups/secrets"
 
       echo Backing up from 'rpi5-k'
       ${backup} "/zroot/nas/rpi5-k/ldata/backups/home-assistant/" \
