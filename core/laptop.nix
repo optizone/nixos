@@ -66,8 +66,9 @@
       PLATFORM_PROFILE_ON_AC = "low-power";
       PLATFORM_PROFILE_ON_BAT = "low-power";
 
-      INTEL_GPU_MIN_FREQ_ON_AC = 500;
-      INTEL_GPU_MIN_FREQ_ON_BAT = 500;
+      # TODO: gives an error about bad val or fraction
+      INTEL_GPU_MIN_FREQ_ON_AC = 200;
+      INTEL_GPU_MIN_FREQ_ON_BAT = 200;
 
       STOP_CHARGE_THRESH_BAT0 = 1;
 
