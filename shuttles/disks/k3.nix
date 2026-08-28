@@ -10,12 +10,12 @@ _: {
         subvolumes = {
           "/zroot" = {
             mountpoint = "/zroot";
-            mountOptions = ["compress=lz4"];
+            mountOptions = ["compress=zlib"];
           };
 
           "/nix" = {
             mountpoint = "/nix";
-            mountOptions = ["compress=lz4"];
+            mountOptions = ["compress=zlib"];
           };
         };
       };
