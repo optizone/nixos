@@ -22,7 +22,7 @@
 
     ../../home/flavours/nixos-module.nix
 
-    ../../core/mestastic.nix
+    ../../core/meshtastic
 
     ./rsync.nix
     ./smb-rpi5-k.nix

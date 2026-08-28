@@ -1,0 +1,68 @@
+# start of Meshtastic configure yaml
+channel_url: "$channel_url"
+config:
+  bluetooth:
+    enabled: true
+    fixedPin: "$fixedPin"
+    mode: FIXED_PIN
+  device:
+    buzzerGpio: 25
+    nodeInfoBroadcastSecs: 10800
+  display:
+    screenOnSecs: 600
+  lora:
+    bandwidth: 250
+    codingRate: 5
+    hopLimit: 3
+    ignoreMqtt: true
+    region: EU_868
+    spreadFactor: 11
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 27
+    usePreset: true
+  network:
+    ntpServer: meshtastic.pool.ntp.org
+  position:
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 300
+    gpsEnGpio: 43
+    gpsMode: ENABLED
+    gpsUpdateInterval: 120
+    positionBroadcastSecs: 3600
+    positionBroadcastSmartEnabled: true
+    positionFlags: 811
+  power:
+    lsSecs: 300
+    minWakeSecs: 10
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+  security:
+    privateKey: "$privateKey"
+    publicKey: base64:XLXjuy5e9TvIgL5Aja+V4IWMEOnqU5Z3Dm+FClwiJDk=
+    serialEnabled: true
+module_config:
+  ambientLighting:
+    blue: 46
+    current: 10
+    green: 48
+    red: 1
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    minimumBroadcastSecs: 45
+  externalNotification:
+    alertMessageBuzzer: true
+    enabled: true
+    nagTimeout: 15
+    outputBuzzer: 25
+    usePwm: true
+  mqtt:
+    address: mqtt.meshtastic.org
+    encryptionEnabled: true
+    root: msh/EU_868
+    username: "$username"
+    password: "$password"
+  telemetry:
+    deviceUpdateInterval: 2147483647
+owner: st02
+owner_short: st02
