@@ -21,6 +21,7 @@
     ../../core/services/srv-utils/openssh.nix
     ../../core/services/srv-utils/avahi.nix
     ../../core/services/srv-utils/smb.nix
+    ../../core/services/srv-utils/monitoring.nix
 
     ../../home/flavours/nixos-module.nix
     ../../shuttles
