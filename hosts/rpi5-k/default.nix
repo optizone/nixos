@@ -84,12 +84,12 @@
 
   # =======================================================
 
-  sops.secrets."${host}/user-pass-hash".neededForUsers = true;
-  sops.secrets."${host}/root-pass-hash".neededForUsers = true;
+  sops.secrets."user-pass-hash/${host}".neededForUsers = true;
+  sops.secrets."root-pass-hash/${host}".neededForUsers = true;
 
   users.users = {
-    root.hashedPasswordFile = config.sops.secrets."${host}/root-pass-hash".path;
-    ${username}.hashedPasswordFile = config.sops.secrets."${host}/user-pass-hash".path;
+    root.hashedPasswordFile = config.sops.secrets."root-pass-hash/${host}".path;
+    ${username}.hashedPasswordFile = config.sops.secrets."user-pass-hash/${host}".path;
   };
 
   boot.loader.raspberry-pi.bootloader = "kernel";

@@ -100,11 +100,11 @@ in {
   networking.hostName = "${host}";
   networking.hostId = "${hostId}";
 
-  sops.secrets."${host}/user-pass-hash".neededForUsers = true;
-  sops.secrets."${host}/root-pass-hash".neededForUsers = true;
+  sops.secrets."user-pass-hash/${host}".neededForUsers = true;
+  sops.secrets."root-pass-hash/${host}".neededForUsers = true;
 
-  users.users.root.hashedPasswordFile = config.sops.secrets."${host}/root-pass-hash".path;
-  users.users.${username}.hashedPasswordFile = config.sops.secrets."${host}/user-pass-hash".path;
+  users.users.root.hashedPasswordFile = config.sops.secrets."root-pass-hash/${host}".path;
+  users.users.${username}.hashedPasswordFile = config.sops.secrets."user-pass-hash/${host}".path;
 
   # Pinned to 6.12 to avoid ZFS breakage
   boot = {
