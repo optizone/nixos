@@ -1,4 +1,12 @@
-{pkgs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
+  unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+  };
+
   zai = pkgs.writeShellScriptBin "zai" ''
     # TODO: add usage check. arguments
     #   - <ACTION>: [ code chat pull ], default code
@@ -31,7 +39,7 @@
 in {
   home.packages = with pkgs; [
     ollama-vulkan
-    pi-coding-agent
+    unstable.pi-coding-agent
     zai
   ];
 
