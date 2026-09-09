@@ -1,8 +1,8 @@
 _: {
   disko.devices.disk = {
-    k2 = {
+    k3 = {
       type = "disk";
-      device = "/dev/disk/by-id/usb-General_UDisk-0:0";
+      device = "/dev/disk/by-id/usb-VendorC_ProductCode_FC1749D37D153-0:0";
 
       content = {
         type = "btrfs";
