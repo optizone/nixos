@@ -67,6 +67,7 @@
 
     home.packages = with pkgs; [
       zeal
+      (timr-tui.override {enableSound = true;})
       blender
       otpclient
       iperf
