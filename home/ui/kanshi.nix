@@ -61,6 +61,7 @@ _: {
             {
               criteria = "DP-2";
               status = "enable";
+              position = "0,0";
             }
             {
               criteria = "eDP-1";
