@@ -37,8 +37,8 @@
     wait $SERVER_PID
   '';
 in {
-  home.packages = with pkgs; [
-    ollama-vulkan
+  home.packages = [
+    unstable.ollama-vulkan
     unstable.pi-coding-agent
     zai
   ];
