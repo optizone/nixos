@@ -52,6 +52,22 @@ _: {
 
       {
         profile = {
+          name = "projector";
+          outputs = [
+            {
+              criteria = "HDMI-A-1";
+              status = "enable";
+            }
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+          ];
+        };
+      }
+
+      {
+        profile = {
           name = "protei-work";
           outputs = [
             {
