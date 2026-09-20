@@ -81,6 +81,7 @@
       disko
       ssh-to-age
       sops
+      gh
     ];
 
     programs = {
