@@ -117,7 +117,7 @@
 
       nix_shell = {
         style = "bold fg:color_orange";
-        format = "[<$name> ]($style)";
+        format = "[<ns> ]($style)";
       };
 
       time = {
