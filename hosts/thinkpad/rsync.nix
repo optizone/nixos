@@ -21,6 +21,8 @@
   zback = pkgs.writeShellScriptBin "zback" ''
     target="$1"
 
+    # TODO: backup /boot
+
     if [ -z "$target" ] || [ "$target" = "rpi4-f" ]; then
       echo Backing up to 'rpi4-f'
       ${zsync} "/zroot/notes/" "/zroot/nas/rpi4-f/notes"
