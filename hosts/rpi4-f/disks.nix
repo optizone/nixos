@@ -85,12 +85,12 @@ _: {
 
             nix = {
               label = "NIX";
-              size = "8G";
+              size = "100%";
 
               content = {
                 type = "filesystem";
                 mountpoint = "/nix";
-                format = "ext4";
+                format = "f2fs";
                 mountOptions = ["noatime"];
               };
             };
