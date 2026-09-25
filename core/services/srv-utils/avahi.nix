@@ -1,8 +1,4 @@
-{
-  domain,
-  host,
-  ...
-}: {
+{host, ...}: {
   services.avahi = {
     publish = {
       enable = true;
@@ -13,6 +9,5 @@
     hostName = host;
     nssmdns4 = true;
     openFirewall = true;
-    domainName = domain;
   };
 }
