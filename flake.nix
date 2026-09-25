@@ -223,7 +223,9 @@
       opi2-c = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {
+          system = "aarch64-linux";
           inherit
+            self
             inputs
             username
             domain
@@ -235,6 +237,7 @@
         };
 
         modules = [
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           ./hosts/opi2-c
           sops-nix.nixosModules.sops
           disko.nixosModules.disko

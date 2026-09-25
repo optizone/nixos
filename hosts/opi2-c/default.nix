@@ -1,15 +1,15 @@
 {
   lib,
-  nixpkgs,
   config,
   system,
   host,
   hostId,
   username,
   stateVersion,
+  inputs,
   ...
 }: let
-  pkgs = import nixpkgs {
+  pkgs = import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = false;
     overlays = [
@@ -51,7 +51,7 @@ in {
   imports = [
     ../../core/znode.nix
 
-    ./disks.nix
+    # ./disks.nix
     # ./hardware-configuration.nix
 
     ../../core/services/srv-utils/openssh.nix
@@ -71,6 +71,7 @@ in {
     ];
   };
 
+  # nixpkgs.pkgs = pkgs;
   nixpkgs.config.allowUnfree = false;
   system.stateVersion = "${stateVersion}";
 
