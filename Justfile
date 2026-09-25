@@ -16,11 +16,11 @@
 
     # Update secrets.yaml with new host key
     echo ""
-    echo "Updating keys:"
+    echo "### Updating keys ###"
     sops updatekeys secrets.yaml
 
     echo ""
-    echo "Provisioning:"
+    echo "### Provisioning ###"
     nixos-anywhere \
         --flake "./#{{ host }}" \
         --target-host root@{{ host }} \
@@ -33,12 +33,12 @@
 
     # Copy ssh keys to persistent location 
     echo ""
-    echo "Copying SSH keys to persistent location..."
-    ssh "root@{{ host }}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/zroot/ldata/persist/etc/ssh"
+    echo "### Copying SSH keys to persistent location ###"
+    ssh "root@{{ host }}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/zroot/ldata/persist/{{ host }}/etc/ssh"
 
     # At this point configuration is done
     echo ""
-    echo "Rebooting..."
+    echo "### Rebooting ###"
     ssh "root@{{ host }}" "reboot"
 
 # test connection speed to remote host
