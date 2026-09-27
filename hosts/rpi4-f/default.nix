@@ -95,21 +95,21 @@
   ];
 
   systemd.tmpfiles.rules = [
-    "d /zroot 0755 ${username} users"
+    "d /zroot 0750 ${username} users"
 
-    "d /zroot/ldata 0755 ${username} users"
-    "d /zroot/ldata/backups 0755 ${username} users"
-    "d /zroot/ldata/builds 0755 ${username} users"
-    "d /zroot/ldata/code 0755 ${username} users"
-    "d /zroot/ldata/disk-images 0755 ${username} users"
-    "d /zroot/ldata/media 0755 ${username} users"
-    "d /zroot/ldata/secrets 0755 ${username} users"
-    "d /zroot/ldata/wiki 0755 ${username} users"
-    "d /zroot/ldata/persist 0755 ${username} users"
+    "d /zroot/ldata 0750 ${username} users"
+    "d /zroot/ldata/backups 0750 ${username} users"
+    "d /zroot/ldata/builds 0750 ${username} users"
+    "d /zroot/ldata/code 0750 ${username} users"
+    "d /zroot/ldata/disk-images 0750 ${username} users"
+    "d /zroot/ldata/media 0750 ${username} users"
+    "d /zroot/ldata/secrets 0750 ${username} users"
+    "d /zroot/ldata/wiki 0750 ${username} users"
+    "d /zroot/ldata/persist 0750 ${username} users"
 
-    "d /zroot/nas 0755 ${username} users"
-    "d /zroot/shuttles 0755 ${username} users"
-    "d /zroot/notes 0755 ${username} users"
+    "d /zroot/nas 0750 ${username} users"
+    "d /zroot/shuttles 0750 ${username} users"
+    "d /zroot/notes 0750 ${username} users"
 
     # NOTE: for future
     "L /home/${username}/zroot - - - - /zroot"
