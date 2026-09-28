@@ -1,57 +1,33 @@
 {
-  pkgs,
   username,
+  host,
   ...
 }: {
-  users.users.${username}.extraGroups = ["incus-admin" "libvirtd"];
-
-  environment.systemPackages = with pkgs; [
-    virt-manager
-    virt-viewer
-    spice
-    spice-gtk
-    spice-protocol
-    virtio-win
-    win-spice
-    adwaita-icon-theme
-  ];
+  users.users.${username}.extraGroups = ["incus-admin"];
 
   virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-      };
-    };
-
-    docker = {
-      enable = true;
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
-    };
-
     incus = {
       enable = true;
       socketActivation = true;
     };
 
-    spiceUSBRedirection.enable = true;
+    podman = {
+      enable = true;
+    };
   };
 
   networking.nftables.enable = true;
   networking.firewall.trustedInterfaces = ["incusbr0"];
 
-  services.spice-vdagentd.enable = true;
-
-  programs.dconf.enable = true;
-
-  # NOTE: only works with home-manager managed homes
-  home-manager.users.${username}.dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
+  # TODO: check for relevance
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    directories = [
+      "/var/lib/docker" # NOTE: from podman
+      "/var/lib/incus"
+      "/var/lib/libvirt"
+      "/var/lib/lxc"
+      "/var/lib/lxcfs"
+      "/var/lib/qemu"
+    ];
   };
 }
