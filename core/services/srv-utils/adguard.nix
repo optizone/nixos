@@ -1,4 +1,8 @@
-{domain, ...}: {
+{
+  domain,
+  host,
+  ...
+}: {
   services.adguardhome = {
     enable = true;
     openFirewall = true;
@@ -99,5 +103,19 @@
         }
       ];
     };
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/private 0700 root root"
+  ];
+
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    directories = [
+      {
+        directory = "/var/lib/private/AdGuardHome";
+        user = "nobody";
+        group = "nogroup";
+      }
+    ];
   };
 }

@@ -1,5 +1,9 @@
-{username, ...}: {
-  # TODO: make configurable
+{
+  username,
+  host,
+  ...
+}: {
+  # TODO: remove
   hardware.bluetooth.enable = true;
 
   virtualisation.oci-containers = {
@@ -27,4 +31,11 @@
   ];
 
   networking.firewall.allowedTCPPorts = [8123];
+
+  # TODO: more specific
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    directories = [
+      "/var/lib/containers"
+    ];
+  };
 }

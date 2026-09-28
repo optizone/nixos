@@ -1,4 +1,8 @@
-{username, ...}: {
+{
+  username,
+  host,
+  ...
+}: {
   environment.persistence."/znode/persist" = {
     enable = true;
     hideMounts = true;
@@ -57,7 +61,7 @@
   };
 
   sops.age.sshKeyPaths = [
-    "/znode/persist/etc/ssh/ssh_host_ed25519_key"
+    "/znode/persist/${host}/etc/ssh/ssh_host_ed25519_key"
   ];
 
   services.smartd = {

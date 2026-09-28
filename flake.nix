@@ -261,6 +261,8 @@
           }
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
+          impermanence.nixosModules.impermanence
+          disko.nixosModules.disko
         ];
         specialArgs = {
           host = "thinkpad";

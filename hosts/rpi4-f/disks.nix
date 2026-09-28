@@ -1,5 +1,5 @@
-_: {
-  environment.persistence."/zroot/ldata/persist" = {
+{host, ...}: {
+  environment.persistence."/zroot/ldata/persist/${host}" = {
     enable = true;
     hideMounts = true;
 
@@ -15,7 +15,7 @@ _: {
   };
 
   sops.age.sshKeyPaths = [
-    "/zroot/ldata/persist/etc/ssh/ssh_host_ed25519_key"
+    "/zroot/ldata/persist/${host}/etc/ssh/ssh_host_ed25519_key"
   ];
 
   fileSystems."/zroot".neededForBoot = true;
@@ -100,7 +100,7 @@ _: {
 
       usb = {
         type = "disk";
-        device = "/dev/disk/by-uuid/5ccc0817-2cf4-423e-8782-5e89e6e06569";
+        device = "/dev/disk/by-id/usb-Kingston_DataTraveler_3.0_E0D55EA573F5E38169B20100-0:0";
 
         content = {
           type = "btrfs";
@@ -108,7 +108,38 @@ _: {
           subvolumes = {
             "/zroot" = {
               mountpoint = "/zroot";
-              mountOptions = ["compress=zlib"];
+              mountOptions = [
+                "subvol=zroot"
+                "compress=zstd"
+                "noatime"
+              ];
+            };
+
+            "/zroot/ldata/backups" = {
+              mountpoint = "/zroot/ldata/backups";
+              mountOptions = [
+                "subvol=backups"
+                "compress=zlib:9"
+                "noatime"
+              ];
+            };
+
+            "/zroot/ldata/disk-images" = {
+              mountpoint = "/zroot/ldata/disk-images";
+              mountOptions = [
+                "subvol=disk-images"
+                "compress=zlib:9"
+                "noatime"
+              ];
+            };
+
+            "/zroot/ldata/media" = {
+              mountpoint = "/zroot/ldata/media";
+              mountOptions = [
+                "subvol=media"
+                "compress=none"
+                "noatime"
+              ];
             };
           };
         };

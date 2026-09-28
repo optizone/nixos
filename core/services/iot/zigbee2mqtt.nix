@@ -1,10 +1,11 @@
-_: {
+{host, ...}: {
   services.zigbee2mqtt = {
     enable = true;
 
     dataDir = "/var/lib/zigbee2mqtt";
 
     settings = {
+      # TODO: host specific??
       serial = {
         port = "/dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_225dd3734053ef11a5602de0174bec31-if00-port0";
         adapter = "ember";
@@ -17,6 +18,7 @@ _: {
 
       advanced = {
         channel = 11;
+        # TODO: host specific??
         network_key = [
           187
           229
@@ -55,5 +57,16 @@ _: {
 
       homeassistant.enabled = true;
     };
+  };
+
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    directories = [
+      {
+        # TODO: exclide /var/lib/zigbee2mqtt/log
+        directory = "/var/lib/zigbee2mqtt";
+        user = "zigbee2mqtt";
+        group = "zigbee2mqtt";
+      }
+    ];
   };
 }

@@ -26,7 +26,7 @@
   };
 
   sops.age.sshKeyPaths = [
-    "/zroot/ldata/persist/etc/ssh/ssh_host_ed25519_key"
+    "/zroot/ldata/persist/${host}/etc/ssh/ssh_host_ed25519_key"
   ];
 
   services.smartd = {

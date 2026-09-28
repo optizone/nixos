@@ -1,6 +1,7 @@
 {
   config,
   username,
+  host,
   ...
 }: {
   services = {
@@ -9,10 +10,25 @@
       port = 2283;
       host = "0.0.0.0";
 
-      machine-learning.enable = false;
+      machine-learning.enable = true;
 
       openFirewall = true;
     };
+  };
+
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    directories = [
+      {
+        directory = "/var/lib/postgresql";
+        user = "postgresql";
+        group = "postgresql";
+      }
+      {
+        directory = "/var/lib/redis-immich";
+        user = "redis-immich";
+        group = "redis-immich";
+      }
+    ];
   };
 
   fileSystems."${config.services.immich.mediaLocation}" = {

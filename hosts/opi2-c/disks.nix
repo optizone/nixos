@@ -1,5 +1,5 @@
-_: {
-  environment.persistence."/zroot/ldata/persist" = {
+{host, ...}: {
+  environment.persistence."/zroot/ldata/persist/${host}" = {
     enable = true;
     hideMounts = true;
 

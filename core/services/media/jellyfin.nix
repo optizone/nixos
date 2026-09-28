@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  host,
   ...
 }: {
   services.jellyfin = {
@@ -14,4 +15,14 @@
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg
   ];
+
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    directories = [
+      {
+        directory = "/var/lib/jellyfin";
+        user = "jellyfin";
+        group = "jellyfin";
+      }
+    ];
+  };
 }

@@ -1,7 +1,6 @@
 {
   username,
   pkgs,
-  config,
   ...
 }: {
   # =======================================================
@@ -17,9 +16,13 @@
     ../../core/services/srv-utils/paperless.nix
     ../../core/services/media/mpd.nix
     ../../core/services/srv-utils/nix-serve.nix
-    ../../core/services/srv-utils/monitoring.nix
     ../../core/services/srv-utils/avahi.nix
     ../../core/services/web-utils/actual.nix
+
+    ../../core/services/monitoring/grafana.nix
+    ../../core/services/monitoring/prometheus.nix
+    ../../core/services/monitoring/smartd.nix
+    ../../core/services/monitoring/wakapi.nix
 
     ../../home/flavours/nixos-module.nix
 
@@ -118,6 +121,9 @@
 
   documentation.man.cache.enable = true;
   documentation.dev.enable = true;
+
+  # HACK: needed for impermanence
+  fileSystems."/home".neededForBoot = true;
 
   # =======================================================
 
