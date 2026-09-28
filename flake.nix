@@ -281,6 +281,40 @@
         };
       };
 
+      ntt = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        modules = [
+          ./hosts/ntt
+          nix-index-database.nixosModules.nix-index
+          {
+            programs.nix-index-database.comma.enable = true;
+          }
+          sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
+          disko.nixosModules.disko
+          impermanence.nixosModules.impermanence
+        ];
+        specialArgs = {
+          host = "ntt";
+          hostId = "d000d000";
+          username = "optizone";
+          stateVersion = "26.05";
+          shell = pkgs-x86.fish;
+
+          inherit
+            self
+            inputs
+            domain
+            font
+            fontMono
+            fontSize
+            gitUsername
+            gitEmail
+            ;
+        };
+      };
+
       # ==== VMs ====
 
       # RnD
