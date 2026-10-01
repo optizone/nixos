@@ -25,8 +25,7 @@
       "/var/lib/docker" # NOTE: from podman
       "/var/lib/incus"
       "/var/lib/libvirt"
-      "/var/lib/lxc"
-      "/var/lib/lxcfs"
+      "/var/lib/lxc" # NOTE: /var/lib/lxcfs is device files
       "/var/lib/qemu"
     ];
   };
