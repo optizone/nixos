@@ -17,6 +17,7 @@ in {
   programs.opencode = {
     enable = true;
     tui.theme = "gruvbox";
+    package = unstable.opencode;
 
     settings = {
       default_agent = "plan";
