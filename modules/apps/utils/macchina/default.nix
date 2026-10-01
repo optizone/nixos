@@ -1,0 +1,11 @@
+{
+  pkgs,
+  username,
+  ...
+}: {
+  home-manager.users.${username} = {
+    home.packages = [pkgs.macchina];
+
+    xdg.configFile."macchina/themes/theme.toml".source = ./theme.toml;
+  };
+}

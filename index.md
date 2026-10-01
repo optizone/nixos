@@ -5,7 +5,6 @@
 - [zroot/nixos](#zrootnixos)
   - [Gruv-Rice-Box](#gruv-rice-box)
     - [Quick start](#quick-start)
-    - [Configuration](#configuration)
     - [Services](#services)
     - [Gallery](#gallery)
   - [Infrastructure](#infrastructure)
@@ -90,7 +89,7 @@ Workflow is based around these programs:
 `flake.nix` contains all of the avaliable systems. You can add your own (and
 delete mine) or you can use `generic-pc` or `generic-laptop`.
 
-```Bash
+```bash
 # It is recommended to start at $HOME directory, because some components (only nh
 # CLI at this moment) assume that $HOME/nixos is your system flake.
 cd ~
@@ -109,7 +108,7 @@ sed -i 's/username = "generic-user"/username = "<your-username-here>"/' flake.ni
 # NOTE: it is recommended to check out all parameters in flake.nix
 
 # Copy your hardware config
-# Assuming you are using clean NixOS install. In case not set paths.
+# Assuming you are using clean NixOS install. Otherwise set paths yourself.
 cp /etc/nixos/hardware-configuration.nix ./hosts/generic/hardware-configuration.nix
 
 # Apply to boot configuration your choosen system (generic-pc in this case)
@@ -130,23 +129,9 @@ nh --help
 For default keybinds check out
 [./home/desktops/hyprland/config.nix](./home/desktops/hyprland/config.nix)
 
-dmenu: WIN+SHIFT+D;\
-kitty: WIN+ENTER;\
-keybinds: WIN+F1;
-
-> [!NOTE]
-> There is a module at `home/flavours/standalone` for generic linux
-> installation, but it isn't tested so you can try to figure that one out if you
-> want to (PR's are welcomed).
-
-### Configuration
-
-Each module contains `default.nix` file that is used in `generic-*` systems. If
-you want to select what software to install (for example you only need `firefox`
-browser and don't want to install `google-chrome`) you can replace `../../home/`
-line in `user.nix` with the list of modules you want to enable (for example
-`../../home/browsers/firefox.nix` to install `firefox`). See
-[home/default.nix](./home/default.nix) for default configuration.
+dmenu: `WIN+SHIFT+D`;\
+kitty: `WIN+ENTER`;\
+keybinds: `WIN+F1`;
 
 ### Services
 
@@ -161,21 +146,27 @@ Monitoring:
 - `htop + iotop + iperf` and a bunch of other system monitoring tools
 - `wireshark`
 
-NAS/Media: `samba + jellyfin + immich (wip)`
+NAS/Media: `samba + jellyfin + immich`
 
 IoT: `home-assistant + zigbee2mqtt + matter-server + mosquitto`
 
-Virtualization: `incus + podman + docker`
+Virtualization: `incus + podman`
 
 Personal finance: `actual`
 
 Car service bookkeeping: `lubelogger`
 
-AI: `ollama + opencode`
+AI: `ollama + pi`
 
 Meshtastic: `mnodes + contact` (configs and TUI)
 
-GUI/CLI/TUI programs can be found in [home/](./home/default.nix).
+Misc: `paperless-ng`
+
+ERP: `grocy`
+
+Distributed build: each server is a part of distributed nix build network.
+
+GUI/CLI/TUI programs can be found in [modules/apps/](./modules/apps).
 
 ### Gallery
 
@@ -194,7 +185,8 @@ GUI/CLI/TUI programs can be found in [home/](./home/default.nix).
 All servers are using impermanence (`/` gets wiped at every boot) and sops to
 manage secrets. This combo creates some challenges in provisioning systems on
 new servers and also in configuring new services, so be causious on what you
-really need to persist and don't forget to do so.
+really need to persist and don't forget to do so (usually, persist config is
+bundled with the module itself).
 
 ### Quick start
 
@@ -212,9 +204,11 @@ just provision rpi5-k
 
 | name     | hardware                  | comment                             |
 | -------- | ------------------------- | ----------------------------------- |
-| thinkpad | ThinkBook 16 G6+ IMH 21LE | yeah, not exactly think\***pad**\*  |
-| rpi5-k   | RaspberryPi 5 16GB        | main server                         |
+| thinkpad | ThinkBook 16 G6+ IMH 21LE | workstation                         |
+| rpi5-k   | RaspberryPi 5 16GB        | main server: nas, media, etc        |
 | rpi4-f   | RaspberryPi 4 8GB         | test server                         |
+| oldboi   | TODO 8GB                  | local ai + nas + test playground    |
+| ntt      | TODO 32GB                 | immich + nas                        |
 | opi2-c   | OrangePi Zero 2 W 4GB     | minivan brains and mesh radio (WIP) |
 
 ## Special thanks

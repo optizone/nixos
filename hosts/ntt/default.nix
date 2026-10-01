@@ -1,33 +1,62 @@
 {
-  config,
   username,
+  pkgs,
+  config,
   host,
   hostId,
-  stateVersion,
   ...
 }: {
   # =======================================================
 
   imports = [
-    ../../core/znode.nix
+    # ====== SYSTEM ======
+    ../../modules/system/common.nix
+    ../../modules/system/network/server.nix
+    ../../modules/system/network/hosts.nix
 
-    ../../core/system/bootloader.nix
-    ../../core/system/security.nix
-    ../../core/system/sops.nix
-    ../../core/system/settings.nix
+    ../../modules/system/virtualization/host.nix
 
-    ./disks.nix
+    ../../modules/system/nas/rpi4-f.nix
+    ../../modules/system/nas/rpi5-k.nix
+
     ./hardware-configuration.nix
+    ./disks.nix
+    # TODO: ./rsync.nix
 
-    ../../core/services/srv-utils/openssh.nix
-    ../../core/services/srv-utils/avahi.nix
-    ../../core/services/srv-utils/smb.nix
-    ../../core/services/media/immich.nix
+    # ====== APPS ======
 
-    ../../core/services/monitoring/prometheus.nix
-    ../../core/services/monitoring/smartd.nix
+    ../../modules/apps/editors/vim.nix
 
-    ../../home/flavours/nixos-module.nix
+    ../../modules/apps/shells/fish.nix
+    ../../modules/apps/shells/bash.nix
+
+    ../../modules/apps/utils/eza
+    ../../modules/apps/utils/macchina
+    ../../modules/apps/utils/wiki/man.nix
+    ../../modules/apps/utils/wiki/tldr.nix
+    ../../modules/apps/utils/wiki/wikiman.nix
+    ../../modules/apps/utils/bat.nix
+    ../../modules/apps/utils/btop.nix
+    ../../modules/apps/utils/dust.nix
+    ../../modules/apps/utils/fd.nix
+    ../../modules/apps/utils/fzf.nix
+    ../../modules/apps/utils/nh.nix
+    ../../modules/apps/utils/starship.nix
+    ../../modules/apps/utils/zoxide.nix
+
+    # ====== SERVICES ======
+
+    ../../modules/system/services/builders/builder.nix
+    ../../modules/system/services/builders/distributed.nix
+
+    ../../modules/system/services/media/immich.nix
+    # ../../modules/system/services/srv-utils/nix-serve.nix
+    ../../modules/system/services/srv-utils/avahi.nix
+    ../../modules/system/services/srv-utils/openssh.nix
+    ../../modules/system/services/srv-utils/smb.nix
+
+    ../../modules/system/services/monitoring/prometheus.nix
+    ../../modules/system/services/monitoring/smartd.nix
   ];
 
   # =======================================================
@@ -45,9 +74,6 @@
     keep-derivations = true;
   };
 
-  nixpkgs.config.allowUnfree = false;
-  system.stateVersion = "${stateVersion}";
-
   # =======================================================
 
   time.timeZone = "Europe/Moscow";
@@ -56,20 +82,6 @@
 
   # =======================================================
 
-  home-manager.users.${username} = {
-    imports = [
-      ../../home/terminal/apps/macchina
-      ../../home/terminal/apps/starship.nix
-      ../../home/terminal/shells/bash.nix
-      ../../home/terminal/shells/fish.nix
-      ../../home/terminal/apps/eza
-      ../../home/terminal/apps/bat.nix
-      ../../home/terminal/apps/zoxide.nix
-    ];
-  };
-
-  programs.git.enable = true;
-
   services.v2raya.enable = true;
 
   # =======================================================
@@ -77,6 +89,7 @@
   services.smartd.devices = [{device = "/dev/sda";}];
 
   networking.hostName = "${host}";
+
   networking.hostId = "${hostId}";
 
   sops.secrets."user-pass-hash/${host}".neededForUsers = true;
@@ -84,27 +97,4 @@
 
   users.users.root.hashedPasswordFile = config.sops.secrets."root-pass-hash/${host}".path;
   users.users.${username}.hashedPasswordFile = config.sops.secrets."user-pass-hash/${host}".path;
-
-  systemd.tmpfiles.rules = [
-    "d /zroot 0750 ${username} users"
-
-    "d /zroot/ldata 0750 ${username} users"
-    "d /zroot/ldata/backups 0750 ${username} users"
-    "d /zroot/ldata/builds 0750 ${username} users"
-    "d /zroot/ldata/code 0750 ${username} users"
-    "d /zroot/ldata/disk-images 0750 ${username} users"
-    "d /zroot/ldata/media 0750 ${username} users"
-    "d /zroot/ldata/secrets 0750 ${username} users"
-    "d /zroot/ldata/wiki 0750 ${username} users"
-    "d /zroot/ldata/persist 0750 ${username} users"
-
-    "d /zroot/nas 0750 ${username} users"
-    "d /zroot/shuttles 0750 ${username} users"
-    "d /zroot/notes 0750 ${username} users"
-
-    # NOTE: for future
-    "L /home/${username}/zroot - - - - /zroot"
-
-    # FIXME: shuttles
-  ];
 }

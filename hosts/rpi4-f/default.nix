@@ -5,27 +5,61 @@
   host,
   hostId,
   stateVersion,
+  pkgs,
   ...
 }: {
   # =======================================================
 
   imports = with nixos-raspberrypi.nixosModules; [
+    # ====== SYSTEM ======
+
     raspberry-pi-4.base
     raspberry-pi-4.bluetooth
 
-    ../../core/znode.nix
+    ../../modules/system/common.nix
+    ../../modules/system/network/server.nix
+    ../../modules/system/network/hosts.nix
 
-    ./disks.nix
+    ../../modules/system/virtualization/host.nix
+
+    ../../modules/system/nas/rpi4-f.nix
+    ../../modules/system/nas/rpi5-k.nix
+
     ./hardware-configuration.nix
+    ./disks.nix
+    # TODO: ./rsync.nix
 
-    ../../core/services/srv-utils/openssh.nix
-    ../../core/services/srv-utils/avahi.nix
-    ../../core/services/srv-utils/smb.nix
-    ../../core/services/monitoring/prometheus.nix
-    ../../core/services/web-utils/grocy.nix
+    # ====== APPS ======
 
-    ../../home/flavours/nixos-module.nix
-    ../../shuttles
+    ../../modules/apps/editors/vim.nix
+
+    ../../modules/apps/shells/fish.nix
+    ../../modules/apps/shells/bash.nix
+
+    ../../modules/apps/utils/eza
+    ../../modules/apps/utils/macchina
+    ../../modules/apps/utils/bat.nix
+    ../../modules/apps/utils/btop.nix
+    ../../modules/apps/utils/dust.nix
+    ../../modules/apps/utils/fd.nix
+    ../../modules/apps/utils/fzf.nix
+    ../../modules/apps/utils/nh.nix
+    ../../modules/apps/utils/starship.nix
+    ../../modules/apps/utils/zoxide.nix
+
+    # ====== SERVICES ======
+
+    ../../modules/system/services/builders/builder.nix
+    ../../modules/system/services/builders/distributed.nix
+
+    # ../../modules/system/services/srv-utils/nix-serve.nix
+    ../../modules/system/services/srv-utils/avahi.nix
+    ../../modules/system/services/srv-utils/openssh.nix
+    ../../modules/system/services/srv-utils/smb.nix
+
+    ../../modules/system/services/web-utils/grocy.nix
+
+    ../../modules/system/services/monitoring/prometheus.nix
   ];
 
   # =======================================================
@@ -61,17 +95,19 @@
     };
   };
 
-  home-manager.users.${username} = {
-    imports = [
-      ../../home/headless.nix
-      ../../home/terminal/apps/starship.nix
-      ../../home/terminal/shells/bash.nix
-      ../../home/terminal/shells/fish.nix
-      ../../home/terminal/apps/eza
-      ../../home/terminal/apps/yazi
-      ../../home/terminal/apps/bat.nix
-      ../../home/terminal/apps/zoxide.nix
-    ];
+  services.borgbackup.jobs = {
+    persist = {
+      paths = ["/zroot/ldata/persist/rpi4-f"];
+      repo = "optizone@ntt:/zroot/ldata/backups/rpi4-f";
+      encryption.mode = "none";
+      # encryption = {
+      #   mode = "repokey-blake2";
+      #   passCommand = "cat ${config.sops.secrets."borg/repo-pass/thinkpad".path}";
+      # };
+      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/thinkpad";
+      compression = "none"; # btrfs compression is enabled
+      startAt = "daily";
+    };
   };
 
   # =======================================================
@@ -86,6 +122,7 @@
   users.users.${username}.hashedPasswordFile = config.sops.secrets."user-pass-hash/${host}".path;
 
   boot.loader.raspberry-pi.bootloader = "uboot";
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   system.nixos.tags = let
     cfg = config.boot.loader.raspberry-pi;

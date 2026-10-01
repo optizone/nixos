@@ -111,306 +111,281 @@
     # =====================================================
   };
 
-  outputs = {
-    nixpkgs,
-    self,
-    nix-index-database,
-    home-manager,
-    home-manager-rpi,
-    nixos-raspberrypi,
-    disko-rpi,
-    disko,
-    impermanence,
-    sops-nix,
-    sops-nix-rpi,
-    ...
-  } @ inputs: let
-    domain = "home.arpa";
-    username = "optizone";
-
-    # font = "JetBrainsMono Nerd Font";
-    font = "BigBlueTermPlus Nerd Font";
-    fontMono = "${font} Mono";
-    fontSize = 13;
-
-    gitUsername = "optizone";
-    gitEmail = "ilya.kek.lol.orbidol@gmail.com";
-
-    pkgs-x86 = import nixpkgs {
-      system = "x86_64-linux";
-    };
-
-    pkgs-arm = import nixpkgs {
-      system = "aarch64-linux";
-    };
-  in {
-    homeConfigurations = {
-      protei = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-x86;
-
-        extraSpecialArgs = {
-          gitUsername = "boicov";
-          gitEmail = "boicov@protei.ru";
-          username = "boicov";
-          shell = pkgs-x86.fish;
-
-          inherit
-            self
-            inputs
-            font
-            fontMono
-            ;
-        };
-
-        modules = [./home/flavours/standalone.nix];
-      };
-    };
-
-    nixosConfigurations = {
-      # ==== ARM ====
-
-      # NAS + services
-
-      rpi5-k = nixos-raspberrypi.lib.nixosSystem {
-        specialArgs = {
-          inherit
-            inputs
-            username
-            nixos-raspberrypi
-            domain
-            ;
-          host = "rpi5-k";
-          hostId = "d100d000";
-          stateVersion = "25.11";
-          shell = pkgs-arm.fish;
-        };
-
-        modules = [
-          ./hosts/rpi5-k
-          sops-nix-rpi.nixosModules.sops
-          disko-rpi.nixosModules.disko
-          impermanence.nixosModules.impermanence
-          home-manager-rpi.nixosModules.home-manager
-        ];
-      };
-
-      # RnD
-
-      rpi4-f = nixos-raspberrypi.lib.nixosSystem {
-        specialArgs = {
-          inherit
-            inputs
-            username
-            nixos-raspberrypi
-            domain
-            ;
-          host = "rpi4-f";
-          hostId = "d101d000";
-          stateVersion = "25.11";
-          shell = pkgs-arm.fish;
-        };
-
-        modules = [
-          ./hosts/rpi4-f
-          sops-nix-rpi.nixosModules.sops
-          disko-rpi.nixosModules.disko
-          impermanence.nixosModules.impermanence
-          home-manager-rpi.nixosModules.home-manager
-        ];
-      };
-
-      # FIXME: does not build
-      opi2-c = nixpkgs.lib.nixosSystem {
+  outputs = inputs @ {self, ...}: let
+    # ===================
+    # ==== RPI HOSTS ====
+    # ===================
+    rpi-hosts = {
+      # ==== NAS + services ====
+      rpi5-k = {
         system = "aarch64-linux";
-        specialArgs = {
-          system = "aarch64-linux";
-          inherit
-            self
-            inputs
-            username
-            domain
-            ;
-          host = "opi2-c";
-          hostId = "d101d001";
-          stateVersion = "26.05";
-          shell = pkgs-arm.fish;
-        };
-
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-          ./hosts/opi2-c
-          sops-nix.nixosModules.sops
-          disko.nixosModules.disko
-          impermanence.nixosModules.impermanence
-          home-manager.nixosModules.home-manager
-        ];
+        hostId = "d100d000";
+        stateVersion = "25.11";
       };
 
-      # ==== x86-64 ====
-
-      # Personal
-
-      thinkpad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./hosts/thinkpad
-          nix-index-database.nixosModules.nix-index
-          {
-            programs.nix-index-database.comma.enable = true;
-          }
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          impermanence.nixosModules.impermanence
-          disko.nixosModules.disko
-        ];
-        specialArgs = {
-          host = "thinkpad";
-          username = "thinkpad";
-          stateVersion = "24.05";
-          shell = pkgs-x86.fish;
-
-          inherit
-            self
-            inputs
-            domain
-            font
-            fontMono
-            fontSize
-            gitUsername
-            gitEmail
-            ;
-        };
-      };
-
-      ntt = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./hosts/ntt
-          nix-index-database.nixosModules.nix-index
-          {
-            programs.nix-index-database.comma.enable = true;
-          }
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          disko.nixosModules.disko
-          impermanence.nixosModules.impermanence
-        ];
-        specialArgs = {
-          host = "ntt";
-          hostId = "d000d000";
-          username = "optizone";
-          stateVersion = "26.05";
-          shell = pkgs-x86.fish;
-
-          inherit
-            self
-            inputs
-            domain
-            font
-            fontMono
-            fontSize
-            gitUsername
-            gitEmail
-            ;
-        };
-      };
-
-      # ==== VMs ====
-
-      # RnD
-
-      vm0 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./hosts/vm0
-          nix-index-database.nixosModules.nix-index
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          disko.nixosModules.disko
-        ];
-
-        specialArgs = {
-          host = "vm0";
-          stateVersion = "25.11";
-          shell = pkgs-x86.fish;
-
-          inherit
-            self
-            inputs
-            font
-            fontMono
-            gitUsername
-            gitEmail
-            ;
-        };
-      };
-
-      # === Generic x86-64 ===
-
-      generic-laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./hosts/generic/laptop.nix
-          nix-index-database.nixosModules.nix-index
-          {
-            programs.nix-index-database.comma.enable = true;
-          }
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-        ];
-        specialArgs = {
-          host = "generic-host";
-          username = "generic-user";
-
-          gitUsername = "generic";
-          gitEmail = "generic@generic.gen";
-
-          stateVersion = "25.11";
-          shell = pkgs-x86.fish;
-
-          inherit
-            self
-            inputs
-            font
-            fontMono
-            ;
-        };
-      };
-
-      generic-pc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./hosts/generic/laptop.nix
-          nix-index-database.nixosModules.nix-index
-          {
-            programs.nix-index-database.comma.enable = true;
-          }
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-        ];
-        specialArgs = {
-          host = "generic-host";
-          username = "generic-user";
-
-          gitUsername = "generic";
-          gitEmail = "generic@generic.gen";
-
-          stateVersion = "25.11";
-          shell = pkgs-x86.fish;
-
-          inherit
-            self
-            inputs
-            font
-            fontMono
-            ;
-        };
+      # ==== RnD ====
+      rpi4-f = {
+        system = "aarch64-linux";
+        hostId = "d101d000";
+        stateVersion = "26.05";
       };
     };
+
+    # ===============
+    # ==== HOSTS ====
+    # ===============
+    hosts = {
+      # ==== Workstation ====
+      thinkpad = {
+        system = "x86_64-linux";
+        hostId = "d001d001";
+        username = "thinkpad";
+        stateVersion = "24.05";
+      };
+
+      # ==== NAS + services ====
+      ntt = {
+        system = "x86_64-linux";
+        hostId = "d001d002";
+        stateVersion = "26.05";
+      };
+
+      # ==== AI + services ====
+      oldboi = {
+        system = "x86_64-linux";
+        hostId = "d001d003";
+        stateVersion = "26.05";
+      };
+
+      # ==== WIP ====
+      opi2-c = {
+        system = "aarch64-linux";
+        hostId = "d101d001";
+        stateVersion = "26.05";
+      };
+
+      # ==== RnD ====
+      vm0 = {
+        system = "x86_64-linux";
+        hostId = "00000000";
+        stateVersion = "25.11";
+      };
+
+      # === Generic ===
+      generic-laptop = {
+        system = "x86_64-linux";
+        hostId = "00000000";
+        username = "generic-user";
+        gitUsername = "generic";
+        gitEmail = "generic@generic.gen";
+        stateVersion = "25.11";
+      };
+
+      # === Generic ===
+      generic-pc = {
+        system = "x86_64-linux";
+        hostId = "00000000";
+        username = "generic-user";
+        gitUsername = "generic";
+        gitEmail = "generic@generic.gen";
+        stateVersion = "25.11";
+      };
+    };
+
+    # ======================
+    # ==== HOSTS SCHEMA ====
+    # ======================
+    host-options = lib.mkOption {
+      description = "An attribute set of host definitions to be generated.";
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = {
+            username = lib.mkOption {
+              type = lib.types.str;
+              default = "optizone";
+              description = "Primary user account name for this host.";
+            };
+
+            system = lib.mkOption {
+              type = lib.types.str;
+              default = "x86_64-linux";
+              description = "The target system architecture.";
+            };
+
+            domain = lib.mkOption {
+              type = lib.types.str;
+              default = "home.arpa";
+              description = "";
+            };
+
+            font = lib.mkOption {
+              type = lib.types.str;
+              default = "BigBlueTermPlus Nerd Font";
+              description = "";
+            };
+
+            fontMono = lib.mkOption {
+              type = lib.types.str;
+              default = "BigBlueTermPlus Nerd Font Mono";
+              description = "";
+            };
+
+            fontSize = lib.mkOption {
+              type = lib.types.number;
+              default = 13;
+              description = "";
+            };
+
+            gitUsername = lib.mkOption {
+              type = lib.types.str;
+              default = "optizone";
+              description = "";
+            };
+
+            gitEmail = lib.mkOption {
+              type = lib.types.str;
+              default = "ilya.kek.lol.orbidol@gmail.com";
+              description = "";
+            };
+
+            stateVersion = lib.mkOption {
+              type = lib.types.str;
+              description = "";
+            };
+
+            hostId = lib.mkOption {
+              type = lib.types.str;
+              description = "";
+            };
+          };
+        }
+      );
+    };
+
+    # =================================
+    # ==== COMMON HOST DEFINITIONS ====
+    # =================================
+    sys-config = host: cfg: modules: {
+      specialArgs = {
+        inherit
+          inputs
+          self
+          host
+          ;
+
+        inherit
+          (cfg)
+          system
+          stateVersion
+          username
+          domain
+          font
+          fontMono
+          fontSize
+          gitUsername
+          gitEmail
+          hostId
+          ;
+      };
+
+      modules =
+        [
+          "${self}/hosts/${host}/default.nix"
+
+          {
+            users.users.${cfg.username} = {
+              isNormalUser = true;
+              description = "${cfg.username}";
+              extraGroups = [
+                "networkmanager"
+                "users"
+                "wheel"
+                "${cfg.username}"
+              ];
+            };
+
+            programs.fish.enable = true;
+
+            users.defaultUserShell =
+              (import inputs.nixpkgs {
+                inherit (cfg) system;
+              }).fish;
+
+            nix.settings.allowed-users = ["${cfg.username}"];
+            nix.settings.trusted-users = ["${cfg.username}"];
+
+            nixpkgs.hostPlatform = cfg.system;
+
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "bak";
+
+              users.${cfg.username} = {
+                home = {
+                  username = "${cfg.username}";
+                  stateVersion = "${cfg.stateVersion}";
+                };
+                programs.home-manager.enable = true;
+              };
+
+              extraSpecialArgs = {
+                inherit
+                  inputs
+                  host
+                  ;
+                inherit (cfg) username;
+              };
+            };
+          }
+        ]
+        ++ modules;
+    };
+
+    lib = inputs.nixpkgs.lib;
+  in {
+    nixosConfigurations =
+      # =========================
+      # ==== DEFAULT FACTORY ====
+      # =========================
+      lib.mapAttrs (
+        host: cfg:
+          inputs.nixpkgs.lib.nixosSystem (sys-config host cfg [
+            inputs.nix-index-database.nixosModules.nix-index
+            inputs.sops-nix.nixosModules.sops
+            inputs.home-manager.nixosModules.home-manager
+            inputs.disko.nixosModules.disko
+            inputs.impermanence.nixosModules.impermanence
+          ])
+      )
+      (inputs.nixpkgs.lib.evalModules {
+        modules = [
+          {
+            options.hosts = host-options;
+            config.hosts = hosts;
+          }
+        ];
+      }).config.hosts
+      # =====================
+      # ==== RPI FACTORY ====
+      # =====================
+      // lib.mapAttrs (
+        host: cfg:
+          inputs.nixos-raspberrypi.lib.nixosSystem (sys-config host cfg [
+            inputs.nix-index-database.nixosModules.nix-index
+            inputs.sops-nix-rpi.nixosModules.sops
+            inputs.disko-rpi.nixosModules.disko
+            inputs.impermanence.nixosModules.impermanence
+            inputs.home-manager-rpi.nixosModules.home-manager
+          ])
+      )
+      (inputs.nixpkgs.lib.evalModules {
+        modules = [
+          {
+            options.hosts = host-options;
+            config.hosts = rpi-hosts;
+          }
+        ];
+      }).config.hosts;
   };
 }
