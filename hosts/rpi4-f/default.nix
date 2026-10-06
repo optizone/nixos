@@ -21,7 +21,8 @@
     ../../core/services/srv-utils/openssh.nix
     ../../core/services/srv-utils/avahi.nix
     ../../core/services/srv-utils/smb.nix
-    ../../core/services/srv-utils/monitoring.nix
+    ../../core/services/monitoring/prometheus.nix
+    ../../core/services/web-utils/grocy.nix
 
     ../../home/flavours/nixos-module.nix
     ../../shuttles
