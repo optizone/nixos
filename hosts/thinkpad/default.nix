@@ -16,6 +16,7 @@
 
     ../../modules/system/virtualization/host.nix
 
+    ../../modules/system/nas/oldboi.nix
     ../../modules/system/nas/ntt.nix
     ../../modules/system/nas/rpi4-f.nix
     ../../modules/system/nas/rpi5-k.nix

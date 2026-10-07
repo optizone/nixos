@@ -1,4 +1,5 @@
 keys:
+  - &oldboi age1pcpn74zleglnr6ffvws69cz2j9krvphyznk6q3vkg4krqvv44vzqwnsvd5
   - &ntt age1c8844zkg5f56ygceslgrjw4hwe6v9l8jsppk5fykx2h42wpwcy7sf30hpl
   - &rpi4-f age1r4lzjcxe058hra4j32h656nsdmusegp33c5xx8w20p9fytsawp8qhxu5g2
   - &rpi5-k age1j9sgxt7x3yx7ggsc6vunplrhhv6c9qs59zwf3tgyz67xpz0fy4tqhd3yhm
@@ -13,3 +14,4 @@ creation_rules:
       - *rpi5-k
       - *rpi4-f
       - *ntt
+      - *oldboi
