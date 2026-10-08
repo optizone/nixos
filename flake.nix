@@ -164,13 +164,6 @@
         stateVersion = "26.05";
       };
 
-      # ==== RnD ====
-      vm0 = {
-        system = "x86_64-linux";
-        hostId = "00000000";
-        stateVersion = "25.11";
-      };
-
       # === Generic ===
       generic-laptop = {
         system = "x86_64-linux";
