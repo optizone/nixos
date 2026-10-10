@@ -1,6 +1,8 @@
 {
   username,
   pkgs,
+  config,
+  host,
   ...
 }: let
   zsync = pkgs.writeShellScriptBin "zsync" ''
@@ -21,10 +23,40 @@
   zback = pkgs.writeShellScriptBin "zback" ''
     target="$1"
 
-    # TODO: backup /boot
+    if [ -z "$target" ] || [ "$target" = "oldboi" ]; then
+      echo "Backing up to 'oldboi'"
+
+      zsync "/zroot/notes/" "/zroot/nas/oldboi/notes"
+      zsync "/zroot/nixos/" "/zroot/nas/oldboi/nixos"
+      zsync "/zroot/ldata/secrets/" "/zroot/nas/oldboi/ldata/secrets"
+      zsync "/zroot/ldata/code/" "/zroot/nas/oldboi/ldata/code" \
+        --exclude ".direnv" \
+        --exclude ".venv"
+
+      echo "============ DONE ================"
+      echo
+    fi
+
+
+
+    if [ -z "$target" ] || [ "$target" = "ntt" ]; then
+      echo "Backing up to 'ntt'"
+
+      zsync "/zroot/notes/" "/zroot/nas/ntt/notes"
+      zsync "/zroot/nixos/" "/zroot/nas/ntt/nixos"
+      zsync "/zroot/ldata/secrets/" "/zroot/nas/ntt/ldata/secrets"
+      zsync "/zroot/ldata/code/" "/zroot/nas/ntt/ldata/code" \
+        --exclude ".direnv" \
+        --exclude ".venv"
+
+      echo "============ DONE ================"
+      echo
+    fi
+
 
     if [ -z "$target" ] || [ "$target" = "rpi4-f" ]; then
-      echo Backing up to 'rpi4-f'
+      echo "Backing up to 'rpi4-f'"
+
       zsync "/zroot/notes/" "/zroot/nas/rpi4-f/notes"
       zsync "/zroot/nixos/" "/zroot/nas/rpi4-f/nixos"
       zsync "/zroot/ldata/secrets/" "/zroot/nas/rpi4-f/ldata/secrets"
@@ -33,19 +65,14 @@
         --exclude ".direnv" \
         --exclude ".venv"
 
-      echo Backing up from 'rpi4-f'
-      # dayly (week) and mounthly (year) retention
-      zsync "/zroot/nas/rpi4-f/ldata/persist/" "/zroot/ldata/backups/rpi4-f/$(date +%A)" \
-        --archive --delete-after -A -X --numeric-ids --super
-      zsync "/zroot/nas/rpi4-f/ldata/persist/" "/zroot/ldata/backups/rpi4-f/$(date +%B)" \
-        --archive --delete-after -A -X --numeric-ids --super
       echo "============ DONE ================"
       echo
     fi
 
 
     if [ -z "$target" ] || [ "$target" = "rpi5-k" ]; then
-      echo Backing up to 'rpi5-k'
+      echo "Backing up to 'rpi5-k'"
+
       zsync "/zroot/notes/" "/zroot/nas/rpi5-k/backups/zroot/notes"
       zsync "/zroot/nixos/" "/zroot/nas/rpi5-k/backups/zroot/nixos" \
         --exclude /result
@@ -63,6 +90,7 @@
       zsync "/zroot/nas/rpi5-k/ldata/backups/home-assistant/" \
           "/zroot/ldata/backups/home-assistant"
 
+      # TODO: move to rpi5-k config
       # dayly (week) and mounthly (year) retention
       zsync "root@rpi5-k:/znode/persist" "/zroot/ldata/backups/rpi5-k/$(date +%A)" \
         --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
@@ -72,7 +100,8 @@
     fi
 
     if [ "$target" = "k1" ]; then
-      echo Backing up to 'k1'
+      echo "Backing up to 'k1'"
+
       zsync "/zroot/notes/" "/zroot/shuttles/k1/zroot/notes"
       zsync "/zroot/nixos/" "/zroot/shuttles/k1/zroot/nixos"
       zsync "/zroot/ldata/" "/zroot/shuttles/k1/zroot/ldata" \
@@ -86,7 +115,8 @@
     fi
 
     if [ "$target" = "k2" ]; then
-      echo Backing up to 'k2'
+      echo "Backing up to 'k2'"
+
       zsync "/zroot/notes/" "/zroot/shuttles/k2/zroot/notes"
       zsync "/zroot/nixos/" "/zroot/shuttles/k2/zroot/nixos"
       zsync "/zroot/ldata/" "/zroot/shuttles/k2/zroot/ldata" \
@@ -100,7 +130,8 @@
     fi
 
     if [ "$target" = "k3" ]; then
-      echo Backing up to 'k3'
+      echo "Backing up to 'k3'"
+
       zsync "/zroot/notes/" "/zroot/shuttles/k3/zroot/notes"
       zsync "/zroot/nixos/" "/zroot/shuttles/k3/zroot/nixos"
 
@@ -114,9 +145,7 @@
       echo "============ DONE ================"
     fi
   '';
-  # TODO: cargo target ldata/builds dir
 in {
-  # TODO: find a way to toggle
   systemd.timers."backup-timer" = {
     wantedBy = ["timers.target"];
     timerConfig = {
