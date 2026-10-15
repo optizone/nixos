@@ -290,19 +290,18 @@
               isNormalUser = true;
               description = "${cfg.username}";
               extraGroups = [
-                "networkmanager"
+                "networkmanager" # TODO: move to module
                 "users"
                 "wheel"
                 "${cfg.username}"
               ];
+              shell =
+                (import inputs.nixpkgs {
+                  inherit (cfg) system;
+                }).fish;
             };
 
             programs.fish.enable = true;
-
-            users.defaultUserShell =
-              (import inputs.nixpkgs {
-                inherit (cfg) system;
-              }).fish;
 
             nix.settings.allowed-users = ["${cfg.username}"];
             nix.settings.trusted-users = ["${cfg.username}"];
