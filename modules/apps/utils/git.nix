@@ -17,12 +17,6 @@
           email = "${gitEmail}";
         };
 
-        includeIf = {
-          "gitdir:~/code/protei/" = {
-            path = "~/.config/git/.protei_include";
-          };
-        };
-
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         diff.colorMoved = "default";
@@ -35,7 +29,17 @@
           ];
         };
         core.excludesFile = "/home/${username}/.config/git/.gitignore";
+
+        credential."https://git.protei.ru".helper = "store";
       };
+
+      includes = [
+        {
+          # TODO: replace with `config.xdg.configFile."git/.protei_include".path`
+          path = "~/.config/git/.protei_include";
+          condition = "gitdir:~/code/protei/";
+        }
+      ];
     };
 
     programs.delta = {
