@@ -4,13 +4,16 @@
   config,
   host,
   hostId,
+  lib,
   ...
 }: {
   # =======================================================
 
   imports = [
     # ====== SYSTEM ======
+
     ../../modules/system/common.nix
+    ../../modules/system/bootloader/x86.nix
     ../../modules/system/network/server.nix
     ../../modules/system/network/hosts.nix
 
