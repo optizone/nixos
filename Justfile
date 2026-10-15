@@ -1,16 +1,16 @@
 # Provision remote host
-@provision host:
+@provision config host:
     # Update
     echo "'{{ host }}' age key:"
     ssh "root@{{ host }}" "cat /etc/ssh/ssh_host_ed25519_key.pub" \
         | ssh-to-age \
         | tee .__tmp_ssh_age_key
 
-    sed -i "/{{ host }} age.*/d" .sops.yaml
-    sed -i "/\*{{ host }}/d" .sops.yaml
+    sed -i "/{{ config }} age.*/d" .sops.yaml
+    sed -i "/\*{{ config }}/d" .sops.yaml
 
-    sed -i "2i\  - &{{ host }} $(cat .__tmp_ssh_age_key)" .sops.yaml
-    echo "      - *{{ host }}" >> .sops.yaml
+    sed -i "2i\  - &{{ config }} $(cat .__tmp_ssh_age_key)" .sops.yaml
+    echo "      - *{{ config }}" >> .sops.yaml
     rm .__tmp_ssh_age_key
 
 
@@ -22,19 +22,19 @@
     echo ""
     echo "### Provisioning ###"
     nixos-anywhere \
-        --flake "./#{{ host }}" \
+        --flake "./#{{ config }}" \
         --target-host root@{{ host }} \
         --no-substitute-on-destination \
         --option substitute false \
         --generate-hardware-config nixos-generate-config \
-            ./hosts/{{ host }}/hardware-configuration.nix \
+            ./hosts/{{ config }}/hardware-configuration.nix \
         --copy-host-keys \
         --phases kexec,disko,install
 
     # Copy ssh keys to persistent location 
     echo ""
     echo "### Copying SSH keys to persistent location ###"
-    ssh "root@{{ host }}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/zroot/ldata/persist/{{ host }}/etc/ssh"
+    ssh "root@{{ host }}" "cp /etc/ssh/ssh_host_ed25519_key* /mnt/zroot/ldata/persist/{{ config }}/etc/ssh"
 
     # At this point configuration is done
     echo ""
@@ -71,34 +71,35 @@ overlay:
 # nixos-rebuild aliases
 
 # `nixos-rebuild build`
-build host:
+build host *args:
     nixos-rebuild build \
           --flake "./#{{ host }}" \
+          {{ args }} \
           --fallback
 
 # `nixos-rebuild test` remote host
-test host:
+test host *args:
     nixos-rebuild test \
           --sudo \
           --ask-sudo-password \
           --flake "./#{{ host }}" \
-          --fallback \
+          {{ args }} \
           --target-host "root@{{ host }}"
 
 # `nixos-rebuild boot` remote host
-boot host:
+boot host *args:
     nixos-rebuild boot \
           --sudo \
           --ask-sudo-password \
           --flake "./#{{ host }}" \
-          --fallback \
+          {{ args }} \
           --target-host "root@{{ host }}"
 
 # `nixos-rebuild switch` remote host
-switch host:
+switch host *args:
     nixos-rebuild switch \
           --sudo \
           --ask-sudo-password \
           --flake "./#{{ host }}" \
-          --fallback \
+          {{ args }} \
           --target-host "root@{{ host }}"
