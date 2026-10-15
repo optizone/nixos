@@ -4,7 +4,7 @@ _: {
 
     buildMachines = [
       {
-        hostName = "rpi5-k.local";
+        hostName = "rpi5-k";
         system = "aarch64-linux,armv7l-linux,armv6l-linux";
         protocol = "ssh-ng";
         sshUser = "nixremotebuilder";
@@ -22,7 +22,7 @@ _: {
       }
 
       {
-        hostName = "rpi4-f.local";
+        hostName = "rpi4-f";
         system = "aarch64-linux,armv7l-linux,armv6l-linux";
         protocol = "ssh-ng";
         sshUser = "nixremotebuilder";
