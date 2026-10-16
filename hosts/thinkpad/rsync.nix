@@ -168,4 +168,18 @@ in {
     zback
     zsync
   ];
+
+  services.borgbackup.jobs = {
+    persist-to-ntt = {
+      paths = [
+        "/zroot/ldata/persist/thinkpad"
+        "/zroot/ldata/backups/torrents" # TODO: think of a better place
+      ];
+      repo = "borg@ntt:/zroot/ldata/backups/thinkpad";
+      encryption.mode = "none";
+      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/id_ed25519_borg";
+      compression = "none"; # btrfs compression is enabled
+      startAt = "daily";
+    };
+  };
 }
