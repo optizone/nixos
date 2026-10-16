@@ -114,6 +114,7 @@
     ../../modules/system/services/srv-utils/nix-serve.nix
     ../../modules/system/services/srv-utils/avahi.nix
     ../../modules/system/services/web-utils/actual.nix
+    ../../modules/system/services/srv-utils/borg-serve.nix
 
     ../../modules/system/services/monitoring/grafana.nix
     ../../modules/system/services/monitoring/prometheus.nix
