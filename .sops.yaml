@@ -1,4 +1,5 @@
 keys:
+  - &vm0 age1vastmhjhh9vrtzjd2ugnly5p6fnf0sp48gk7zc7fqt89lty8x4use5gzse
   - &oldboi age1pcpn74zleglnr6ffvws69cz2j9krvphyznk6q3vkg4krqvv44vzqwnsvd5
   - &ntt age1c8844zkg5f56ygceslgrjw4hwe6v9l8jsppk5fykx2h42wpwcy7sf30hpl
   - &rpi4-f age1r4lzjcxe058hra4j32h656nsdmusegp33c5xx8w20p9fytsawp8qhxu5g2
@@ -15,3 +16,4 @@ creation_rules:
       - *rpi4-f
       - *ntt
       - *oldboi
+      - *vm0

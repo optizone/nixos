@@ -103,3 +103,14 @@ switch host *args:
           --flake "./#{{ host }}" \
           {{ args }} \
           --target-host "root@{{ host }}"
+
+setup-vm vm="vm0":
+    incus launch images:nixos/26.05 {{ vm }} --vm \
+        -c security.secureboot=false \
+        -c limits.memory=8GB \
+        --device root,size=16GiB
+    incus wait {{ vm }} agent
+    @incus exec {{ vm }} -- sed -i 's/prohibit-password/yes/' /etc/ssh/sshd_config
+    @incus exec {{ vm }} -- passwd
+    @echo "inet info:"
+    @incus info vm0 | grep inet | head -n 3
