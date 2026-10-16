@@ -57,6 +57,7 @@
     ../../modules/system/services/srv-utils/avahi.nix
     ../../modules/system/services/srv-utils/openssh.nix
     ../../modules/system/services/srv-utils/smb.nix
+    ../../modules/system/services/srv-utils/borg-serve.nix
 
     ../../modules/system/services/monitoring/prometheus.nix
     ../../modules/system/services/monitoring/smartd.nix
