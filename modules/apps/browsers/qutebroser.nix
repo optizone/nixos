@@ -2,8 +2,19 @@
   username,
   fontMono,
   pkgs,
+  host,
   ...
 }: {
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    users.${username} = {
+      directories = [
+        ".local/share/qutebrowser"
+        ".config/qutebrowser/bookmarks"
+      ];
+      files = [".config/qutebrowser/quickmarks"];
+    };
+  };
+
   home-manager.users.${username} = {
     home.packages = [pkgs.pass];
 
