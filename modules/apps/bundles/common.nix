@@ -1,33 +1,42 @@
 {
   pkgs,
   username,
+  inputs,
   ...
-}: {
+}: let
+  unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+  };
+in {
   home-manager.users.${username} = {
-    home.packages = with pkgs; [
-      jq
-      ripgrep
-      killall
-      nixfmt-rfc-style
-      poweralertd
-      shfmt
-      unzip
-      wget
-      netcat
-      (timr-tui.override {enableSound = true;})
-      otpclient
-      iperf
-      nix-inspect
-      ffmpeg
-      nixos-anywhere
-      just
-      nixos-rebuild-ng
-      htop
-      disko
-      ssh-to-age
-      sops
-      gh
-    ];
+    home.packages = with pkgs;
+      [
+        jq
+        ripgrep
+        killall
+        nixfmt-rfc-style
+        poweralertd
+        shfmt
+        unzip
+        wget
+        netcat
+        (timr-tui.override {enableSound = true;})
+        otpclient
+        iperf
+        nix-inspect
+        ffmpeg
+        nixos-anywhere
+        just
+        nixos-rebuild-ng
+        htop
+        disko
+        ssh-to-age
+        sops
+        gh
+      ]
+      ++ [
+        unstable.yt-dlp
+      ];
   };
 
   environment.systemPackages = with pkgs; [
