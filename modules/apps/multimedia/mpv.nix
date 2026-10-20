@@ -9,6 +9,8 @@
     xdg.configFile."mpv/mpv.conf".text = ''
       audio-file-auto=fuzzy
       hwdec=auto
+      cache=yes
+      cache-secs=20
     '';
   };
 }
