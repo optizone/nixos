@@ -175,6 +175,13 @@ in {
         "/zroot/ldata/persist/thinkpad"
         "/zroot/ldata/backups/torrents" # TODO: think of a better place
       ];
+      exclude = [
+        "pp:zroot/ldata/persist/thinkpad/var/lib/docker"
+        "pp:zroot/ldata/persist/thinkpad/var/lib/incus"
+        "pp:zroot/ldata/persist/thinkpad/var/lib/libvirt"
+        "pp:zroot/ldata/persist/thinkpad/var/lib/lxc"
+        "pp:zroot/ldata/persist/thinkpad/var/lib/qemu"
+      ];
       repo = "borg@ntt:/zroot/ldata/backups/thinkpad";
       encryption.mode = "none";
       environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/id_ed25519_borg";
