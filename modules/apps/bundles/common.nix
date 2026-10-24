@@ -16,6 +16,7 @@ in {
         killall
         nixfmt-rfc-style
         poweralertd
+        typst
         shfmt
         unzip
         wget
