@@ -116,7 +116,7 @@
     ../../modules/system/services/web-utils/actual.nix
     ../../modules/system/services/srv-utils/borg-serve.nix
 
-    ../../modules/system/services/monitoring/grafana.nix
+    ../../modules/system/services/monitoring/grafana
     ../../modules/system/services/monitoring/prometheus.nix
     ../../modules/system/services/monitoring/smartd.nix
     ../../modules/system/services/monitoring/wakapi.nix
