@@ -59,6 +59,7 @@
     ../../modules/system/services/srv-utils/smb.nix
     ../../modules/system/services/srv-utils/borg-serve.nix
 
+    ../../modules/system/services/monitoring/grafana
     ../../modules/system/services/monitoring/prometheus.nix
     ../../modules/system/services/monitoring/smartd.nix
   ];
@@ -87,6 +88,11 @@
   # =======================================================
 
   services.v2raya.enable = true;
+
+  custom.grafana = {
+    local-only = false;
+    extra-hosts = ["rpi4-f"];
+  };
 
   # =======================================================
 
