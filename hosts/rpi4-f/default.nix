@@ -27,7 +27,7 @@
 
     ./hardware-configuration.nix
     ./disks.nix
-    # TODO: ./rsync.nix
+    ./backup.nix
 
     # ====== APPS ======
 
@@ -56,6 +56,7 @@
     ../../modules/system/services/srv-utils/avahi.nix
     ../../modules/system/services/srv-utils/openssh.nix
     ../../modules/system/services/srv-utils/smb.nix
+    ../../modules/system/services/srv-utils/borg-serve.nix
 
     ../../modules/system/services/web-utils/grocy.nix
 
@@ -95,21 +96,6 @@
     };
   };
 
-  services.borgbackup.jobs = {
-    persist = {
-      paths = ["/zroot/ldata/persist/rpi4-f"];
-      repo = "optizone@ntt:/zroot/ldata/backups/rpi4-f";
-      encryption.mode = "none";
-      # encryption = {
-      #   mode = "repokey-blake2";
-      #   passCommand = "cat ${config.sops.secrets."borg/repo-pass/thinkpad".path}";
-      # };
-      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/thinkpad";
-      compression = "none"; # btrfs compression is enabled
-      startAt = "daily";
-    };
-  };
-
   # =======================================================
 
   networking.hostName = "${host}";
@@ -122,7 +108,6 @@
   users.users.${username}.hashedPasswordFile = config.sops.secrets."user-pass-hash/${host}".path;
 
   boot.loader.raspberry-pi.bootloader = "uboot";
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   system.nixos.tags = let
     cfg = config.boot.loader.raspberry-pi;
@@ -130,28 +115,5 @@
     "raspberry-pi-${cfg.variant}"
     cfg.bootloader
     config.boot.kernelPackages.kernel.version
-  ];
-
-  systemd.tmpfiles.rules = [
-    "d /zroot 0750 ${username} users"
-
-    "d /zroot/ldata 0750 ${username} users"
-    "d /zroot/ldata/backups 0750 ${username} users"
-    "d /zroot/ldata/builds 0750 ${username} users"
-    "d /zroot/ldata/code 0750 ${username} users"
-    "d /zroot/ldata/disk-images 0750 ${username} users"
-    "d /zroot/ldata/media 0750 ${username} users"
-    "d /zroot/ldata/secrets 0750 ${username} users"
-    "d /zroot/ldata/wiki 0750 ${username} users"
-    "d /zroot/ldata/persist 0750 ${username} users"
-
-    "d /zroot/nas 0750 ${username} users"
-    "d /zroot/shuttles 0750 ${username} users"
-    "d /zroot/notes 0750 ${username} users"
-
-    # NOTE: for future
-    "L /home/${username}/zroot - - - - /zroot"
-
-    # FIXME: shuttles
   ];
 }
