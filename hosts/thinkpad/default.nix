@@ -26,7 +26,7 @@
 
     ./hardware-configuration.nix
     # ./disks.nix
-    ./rsync.nix
+    ./backup.nix
 
     # ====== DESKTOP ======
 
