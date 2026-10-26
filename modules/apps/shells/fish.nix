@@ -116,6 +116,13 @@
           end
         '';
 
+        wtadd = ''
+          function wtadd
+            git worktree add $argv; or return
+            ln -sfn (pwd)/.pi $argv[-1]/.pi
+          end
+        '';
+
         compress = ''
           function compress -d "Create an archive" -a filename
               if [ -e $filename ]
