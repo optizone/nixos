@@ -3,30 +3,30 @@
   hosts = [
     {
       host = "rpi4-f";
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMeGxYZ0M+VIPyQ0yF7TKViIexfIr1BQ3htYFGsXJ2d optizone@rpi4-f";
+      keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMeGxYZ0M+VIPyQ0yF7TKViIexfIr1BQ3htYFGsXJ2d"];
     }
     {
       host = "rpi5-k";
-      key = "";
+      keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXRpgVsn0P4RWbWCIDEkWGV8+fBi2JXEWprixXmYXIh"];
     }
     {
       host = "oldboi";
-      key = "";
+      keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMhUH64qe6d6UJNjWF4vAmn9wZR3LgomWBLcfl0oFneJ"];
     }
     {
       host = "ntt";
-      key = "";
+      keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFKYEefdViLU3BChGdjRDkdoo6EG3dN2W8+puZqib1BF"];
     }
     {
       host = "thinkpad";
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGk7QjmY3Tx9hsh/6E/bDo42zAFC1Yqs6uPtrzvk86AV thinkpad@thinkpad";
+      keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILrNxBrLP9nExTDakNj5dD4F4ml1lNicwpUJMrNUpPFz"];
     }
   ];
   hosts_filtered = builtins.filter (it: it.host != host) hosts;
   repos = builtins.listToAttrs (map (it: {
       name = it.host;
       value = {
-        authorizedKeys = [it.key];
+        authorizedKeys = it.keys;
         path = "/zroot/ldata/backups/${it.host}";
         allowSubRepos = true;
       };
