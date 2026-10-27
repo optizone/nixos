@@ -169,22 +169,39 @@ in {
     zsync
   ];
 
-  services.borgbackup.jobs = {
+  # NOTE: need to run `sudo sudo borg-job-<job-name> list` the first time, so `/root/.ssh/known_hosts` is updated
+  services.borgbackup.jobs = let
+    paths = [
+      "/zroot/ldata/persist/thinkpad"
+      "/zroot/ldata/backups/torrents" # TODO: think of a better place
+    ];
+    exclude = [
+      "pp:zroot/ldata/persist/thinkpad/var/lib/docker"
+      "pp:zroot/ldata/persist/thinkpad/var/lib/incus"
+      "pp:zroot/ldata/persist/thinkpad/var/lib/libvirt"
+      "pp:zroot/ldata/persist/thinkpad/var/lib/lxc"
+      "pp:zroot/ldata/persist/thinkpad/var/lib/qemu"
+    ];
+  in {
     persist-to-ntt = {
-      paths = [
-        "/zroot/ldata/persist/thinkpad"
-        "/zroot/ldata/backups/torrents" # TODO: think of a better place
-      ];
-      exclude = [
-        "pp:zroot/ldata/persist/thinkpad/var/lib/docker"
-        "pp:zroot/ldata/persist/thinkpad/var/lib/incus"
-        "pp:zroot/ldata/persist/thinkpad/var/lib/libvirt"
-        "pp:zroot/ldata/persist/thinkpad/var/lib/lxc"
-        "pp:zroot/ldata/persist/thinkpad/var/lib/qemu"
-      ];
+      inherit paths exclude;
+
       repo = "borg@ntt:/zroot/ldata/backups/thinkpad";
       encryption.mode = "none";
       environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/id_ed25519_borg_thinkpad";
+      environment.BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
+
+      compression = "none"; # btrfs compression is enabled
+      startAt = "daily";
+    };
+
+    persist-to-rpi4-f = {
+      inherit paths exclude;
+
+      repo = "borg@rpi4-f:/zroot/ldata/backups/thinkpad";
+      encryption.mode = "none";
+      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/id_ed25519_borg_thinkpad";
+      environment.BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
       compression = "none"; # btrfs compression is enabled
       startAt = "daily";
     };
