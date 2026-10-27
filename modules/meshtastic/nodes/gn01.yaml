@@ -2,12 +2,12 @@
 channel_url: "$channel_url"
 config:
   security:
-    privateKey: "$privateKey"
+    privateKey: "$private_key"
     publicKey: "base64:F3HaGNoKXzf7B3p1jOIXT7Bf3fD5hlBOCm/AI1rHZkQ="
     serialEnabled: true
   bluetooth:
     enabled: true
-    fixedPin: "$fixedPin"
+    fixedPin: "$fixed_pin"
   device:
     ledHeartbeatDisabled: true
     nodeInfoBroadcastSecs: 10800

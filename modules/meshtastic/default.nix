@@ -2,6 +2,7 @@
   config,
   pkgs,
   username,
+  inputs,
   ...
 }: let
   zcontact = pkgs.writeShellScriptBin "zcontact" ''
@@ -22,13 +23,6 @@
       [gn02]="E8:F6:0A:CB:1A:09"
       [st01]="ED:96:E1:99:09:20"
       [st02]="C7:80:90:01:30:2E"
-    )
-
-    declare -rA node_to_config=(
-      [gn01]="${builtins.readFile ./nodes/gn01.yaml}"
-      [gn02]="${builtins.readFile ./nodes/gn02.yaml}"
-      [st01]="${builtins.readFile ./nodes/st01.yaml}"
-      [st02]="${builtins.readFile ./nodes/st02.yaml}"
     )
 
     usage() {
@@ -88,16 +82,25 @@
 
     username=$(cat ${config.sops.secrets."mnodes/mqtt/username".path})
     password=$(cat ${config.sops.secrets."mnodes/mqtt/password".path})
-    fixedPin=$(cat ${config.sops.secrets."mnodes/bluetooth-pin".path})
+    # FIXME: updating ble config over ble does not work. disabled for now
+    fixed_pin=$(cat ${config.sops.secrets."mnodes/bluetooth-pin".path})
     channel_url=$(cat ${config.sops.secrets."mnodes/channel-url".path})
 
     ble="''${node_to_ble[$node]}"
+    private_key=$(cat "/run/secrets/mnodes/private-key/$node")
+
+    declare -rA node_to_config=(
+      [gn01]="${builtins.readFile ./nodes/gn01.yaml}"
+      [gn02]="${builtins.readFile ./nodes/gn02.yaml}"
+      [st01]="${builtins.readFile ./nodes/st01.yaml}"
+      [st02]="${builtins.readFile ./nodes/st02.yaml}"
+    )
+
     config="''${node_to_config[$node]}"
-    privateKey=$(cat "/run/secrets/mnodes/private-key/$node")
 
     if [ "$configure" = true ]; then
       tmp=$(mktemp)
-      echo "$config" > tmp
+      echo "$config" > "$tmp"
       meshtastic --configure "$tmp" --ble "$ble"
       rm "$tmp"
     elif [ "$print" = true ]; then

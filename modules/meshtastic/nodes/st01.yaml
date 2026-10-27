@@ -3,7 +3,7 @@ channel_url: "$channel_url"
 config:
   bluetooth:
     enabled: true
-    fixedPin: "$fixedPin"
+    fixedPin: "$fixed_pin"
     mode: FIXED_PIN
   device:
     buzzerGpio: 25
@@ -39,7 +39,7 @@ config:
     sdsSecs: 4294967295
     waitBluetoothSecs: 60
   security:
-    privateKey: "$privateKey"
+    privateKey: "$private_key"
     publicKey: base64:J1X9UJBc0q1NH7gzXFdfnrAxG62Y6Uc7gHuk5AnpnWs=
     serialEnabled: true
 module_config:
