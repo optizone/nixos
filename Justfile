@@ -114,3 +114,40 @@ setup-vm vm="vm0":
     @incus exec {{ vm }} -- passwd
     @echo "inet info:"
     @incus info vm0 | grep inet | head -n 3
+
+install:
+    #!/usr/bin/env bash
+
+    read -r -p "Enter username (default: $(whoami)) " username
+    username=${username:-$(whoami)}
+
+    read -r -p "Enter hostname (default: $(hostname)) " hostname
+    hostname=${hostname:-$(hostname)}
+
+    read -r -p "Enter git username (default: $(git config get user.name)) " git_username
+    git_username=${git_username:-"$(git config get user.name)"}
+
+    read -r -p "Enter git email (default: $(git config get user.email)) " git_email
+    git_email=${git_email:-"$(git config get user.email)"}
+
+    echo "Generating hardware config..."
+    hw_cfg_dir=$(mktemp -d)
+    nixos-generate-config --dir $hw_cfg_dir
+    cp $hw_cfg_dir/hardware-configuration.nix ./hosts/generic/hardware-configuration.nix
+
+    sed -i "s/username = \"generic-user\"/username = \"$username\"/" flake.nix
+    sed -i "s/host = \"generic-host\"/host = \"$hostname\"/" flake.nix
+    sed -i "s/gitUsername = \"generic\"/gitUsername = \"$git_username\"/" flake.nix
+    sed -i "s/gitEmail = \"generic@generic.gen\"/gitEmail = \"$git_email\"/" flake.nix
+
+    read -r -p "Choose configuration (pc, laptop) " config
+
+    echo "Ready to load config to your bootloader."
+    read -r -p "Proceed? (type y) " y
+    [ $y="y" ] && exit 0
+
+    ln -s ./hosts/generic/$config.nix hosts/generic/default.nix 
+    nixos-rebuild boot --dry --use-remote-sudo --flake ./#generic-$config
+
+    read -r -p "Reboot? (type y) " y
+    [ $y="y" ] || reboot
