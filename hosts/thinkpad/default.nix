@@ -204,6 +204,8 @@
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
 
+    nitrokey.enable = true;
+
     graphics = {
       enable = true;
       package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mesa;
