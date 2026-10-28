@@ -95,6 +95,7 @@
     ../../modules/apps/utils/kanshi.nix
     ../../modules/apps/utils/lazygit.nix
     ../../modules/apps/utils/nh.nix
+    ../../modules/apps/utils/pass.nix
     ../../modules/apps/utils/pastel.nix
     ../../modules/apps/utils/ssh.nix
     ../../modules/apps/utils/starship.nix

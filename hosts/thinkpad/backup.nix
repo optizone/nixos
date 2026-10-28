@@ -188,7 +188,7 @@ in {
 
       repo = "borg@ntt:/zroot/ldata/backups/thinkpad";
       encryption.mode = "none";
-      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/id_ed25519_borg_thinkpad";
+      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/ssh/id_ed25519_borg_thinkpad";
       environment.BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
 
       compression = "none"; # btrfs compression is enabled
@@ -200,7 +200,7 @@ in {
 
       repo = "borg@rpi4-f:/zroot/ldata/backups/thinkpad";
       encryption.mode = "none";
-      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/id_ed25519_borg_thinkpad";
+      environment.BORG_RSH = "ssh -i /zroot/ldata/secrets/ssh/id_ed25519_borg_thinkpad";
       environment.BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
       compression = "none"; # btrfs compression is enabled
       startAt = "daily";

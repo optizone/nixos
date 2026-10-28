@@ -61,6 +61,10 @@
     nix-ld.enable = true;
   };
 
+  systemd.tmpfiles.rules = [
+    "L /home/${username}/.gnupg - - - - /zroot/ldata/secrets/gnupg"
+  ];
+
   # ==============================
 
   # TODO: enable after moving thinkpad to disko

@@ -16,8 +16,6 @@
   };
 
   home-manager.users.${username} = {
-    home.packages = [pkgs.pass];
-
     programs.qutebrowser = {
       enable = true;
 
@@ -70,12 +68,14 @@
         "darkmode" = "config-cycle colors.webpage.darkmode.enabled";
       };
 
-      keyBindings = {
+      keyBindings = let
+        pass-args = "--username-target secret --username-pattern \"Username: (.+)\"";
+      in {
         "normal" = {
-          "zl" = "spawn --userscript qute-pass";
-          "zul" = "spawn --userscript qute-pass --username-only";
-          "zpl" = "spawn --userscript qute-pass --password-only";
-          "zol" = "spawn --userscript qute-pass --otp-only";
+          "zl" = "spawn --userscript qute-pass ${pass-args}";
+          "zul" = "spawn --userscript qute-pass --username-only ${pass-args}";
+          "zpl" = "spawn --userscript qute-pass --password-only ${pass-args}";
+          "zol" = "spawn --userscript qute-pass --otp-only ${pass-args}";
           "J" = "tab-prev";
           "K" = "tab-next";
           "V" = "darkmode";
