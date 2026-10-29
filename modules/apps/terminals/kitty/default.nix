@@ -47,7 +47,7 @@
         shell = "fish";
         shell_integration = "enabled";
 
-        enabled_layouts = "grid";
+        enabled_layouts = "grid, stack";
       };
 
       keybindings = {
@@ -71,6 +71,7 @@
         "alt+enter" = "new_window";
         "alt+l" = "next_window";
         "alt+h" = "previous_window";
+        "alt+f" = "toggle_layout stack"; # maximize
 
         ## Scrolling
         "alt+k" = "scroll_line_up";
