@@ -11,9 +11,14 @@
         ".local/share/qutebrowser"
         ".config/qutebrowser/bookmarks"
       ];
-      files = [".config/qutebrowser/quickmarks"];
+      # NOTE: for some reason this does not work; and I don't want to debug ts
+      # files = [".config/qutebrowser/quickmarks"];
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "L /home/${username}/.config/qutebrowser/quickmarks - - - - /zroot/ldata/persist/${host}/home/${username}/.config/qutebrowser/quickmarks"
+  ];
 
   home-manager.users.${username} = {
     programs.qutebrowser = {
