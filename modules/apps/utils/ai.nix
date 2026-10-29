@@ -9,9 +9,10 @@
   };
 in {
   home-manager.users.${username} = {
-    home.packages = [
+    home.packages = with pkgs; [
       unstable.ollama-vulkan
       unstable.pi-coding-agent
+      nodejs # for installing extensions
     ];
 
     programs.opencode = {
