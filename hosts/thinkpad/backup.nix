@@ -182,6 +182,7 @@ in {
       "pp:zroot/ldata/persist/thinkpad/var/lib/libvirt"
       "pp:zroot/ldata/persist/thinkpad/var/lib/lxc"
       "pp:zroot/ldata/persist/thinkpad/var/lib/qemu"
+      "/zroot/ldata/persist/thinkpad/home/thinkpad/.local/share/Steam/"
     ];
   in {
     persist-to-ntt = {

@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  host,
+  username,
+  ...
+}: {
   programs = {
     steam = {
       enable = true;
@@ -19,5 +24,11 @@
         "--expose-wayland"
       ];
     };
+  };
+
+  environment.persistence."/zroot/ldata/persist/${host}" = {
+    users.${username}.directories = [
+      "/.local/share/Steam/"
+    ];
   };
 }
