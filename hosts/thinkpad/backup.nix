@@ -21,131 +21,135 @@
         $@
   '';
 
-  zback = pkgs.writeShellScriptBin "zback" ''
-    target="$1"
+  zback = let
+    # FIXME: i dunno
+    sync = "${zsync}/bin/zsync";
+  in
+    pkgs.writeShellScriptBin "zback" ''
+      target="$1"
 
-    if [ -z "$target" ] || [ "$target" = "oldboi" ]; then
-      echo "Backing up to 'oldboi'"
+      if [ "$target" = "oldboi" ]; then
+        echo "Backing up to 'oldboi'"
 
-      zsync "/zroot/notes/" "/zroot/nas/oldboi/notes"
-      zsync "/zroot/nixos/" "/zroot/nas/oldboi/nixos"
-      zsync "/zroot/ldata/secrets/" "/zroot/nas/oldboi/ldata/secrets"
-      zsync "/zroot/ldata/code/" "/zroot/nas/oldboi/ldata/code" \
-        --exclude ".direnv" \
-        --exclude ".venv"
+        ${sync} "/zroot/notes/" "/zroot/nas/oldboi/notes"
+        ${sync} "/zroot/nixos/" "/zroot/nas/oldboi/nixos"
+        ${sync} "/zroot/ldata/secrets/" "/zroot/nas/oldboi/ldata/secrets"
+        ${sync} "/zroot/ldata/code/" "/zroot/nas/oldboi/ldata/code" \
+          --exclude ".direnv" \
+          --exclude ".venv"
 
-      echo "============ DONE ================"
-      echo
-    fi
-
-
-
-    if [ -z "$target" ] || [ "$target" = "ntt" ]; then
-      echo "Backing up to 'ntt'"
-
-      zsync "/zroot/notes/" "/zroot/nas/ntt/notes"
-      zsync "/zroot/nixos/" "/zroot/nas/ntt/nixos"
-      zsync "/zroot/ldata/secrets/" "/zroot/nas/ntt/ldata/secrets"
-      zsync "/zroot/ldata/code/" "/zroot/nas/ntt/ldata/code" \
-        --exclude ".direnv" \
-        --exclude ".venv"
-
-      echo "============ DONE ================"
-      echo
-    fi
+        echo "============ DONE ================"
+        echo
+      fi
 
 
-    if [ -z "$target" ] || [ "$target" = "rpi4-f" ]; then
-      echo "Backing up to 'rpi4-f'"
 
-      zsync "/zroot/notes/" "/zroot/nas/rpi4-f/notes"
-      zsync "/zroot/nixos/" "/zroot/nas/rpi4-f/nixos"
-      zsync "/zroot/ldata/secrets/" "/zroot/nas/rpi4-f/ldata/secrets"
-      zsync "/zroot/ldata/media/music/" "/zroot/nas/rpi4-f/ldata/media/music"
-      zsync "/zroot/ldata/code/" "/zroot/nas/rpi4-f/ldata/code" \
-        --exclude ".direnv" \
-        --exclude ".venv"
+      if [ -z "$target" ] || [ "$target" = "ntt" ]; then
+        echo "Backing up to 'ntt'"
 
-      echo "============ DONE ================"
-      echo
-    fi
+        ${sync} "/zroot/notes/" "/zroot/nas/ntt/notes"
+        ${sync} "/zroot/nixos/" "/zroot/nas/ntt/nixos"
+        ${sync} "/zroot/ldata/secrets/" "/zroot/nas/ntt/ldata/secrets"
+        ${sync} "/zroot/ldata/code/" "/zroot/nas/ntt/ldata/code" \
+          --exclude ".direnv" \
+          --exclude ".venv"
+
+        echo "============ DONE ================"
+        echo
+      fi
 
 
-    if [ -z "$target" ] || [ "$target" = "rpi5-k" ]; then
-      echo "Backing up to 'rpi5-k'"
+      if [ -z "$target" ] || [ "$target" = "rpi4-f" ]; then
+        echo "Backing up to 'rpi4-f'"
 
-      zsync "/zroot/notes/" "/zroot/nas/rpi5-k/backups/zroot/notes"
-      zsync "/zroot/nixos/" "/zroot/nas/rpi5-k/backups/zroot/nixos" \
-        --exclude /result
-      # FIXME: rpi5-k does not share zroot yet
-      zsync "/zroot/ldata/code/" "/zroot/nas/rpi5-k/backups/code" \
-        --exclude "/builds" \
-        --exclude ".direnv" \
-        --exclude ".venv"
-      zsync "/zroot/ldata/media/" "/zroot/nas/rpi5-k/media"
-      zsync "/zroot/ldata/disk-images/" "/zroot/nas/rpi5-k/disk-images"
-      zsync "/zroot/ldata/wiki/" "/zroot/nas/rpi5-k/wiki"
-      zsync "/zroot/ldata/secrets/" "/zroot/nas/rpi5-k/backups/secrets"
+        ${sync} "/zroot/notes/" "/zroot/nas/rpi4-f/notes"
+        ${sync} "/zroot/nixos/" "/zroot/nas/rpi4-f/nixos"
+        ${sync} "/zroot/ldata/secrets/" "/zroot/nas/rpi4-f/ldata/secrets"
+        ${sync} "/zroot/ldata/media/music/" "/zroot/nas/rpi4-f/ldata/media/music"
+        ${sync} "/zroot/ldata/code/" "/zroot/nas/rpi4-f/ldata/code" \
+          --exclude ".direnv" \
+          --exclude ".venv"
 
-      echo Backing up from 'rpi5-k'
-      zsync "/zroot/nas/rpi5-k/ldata/backups/home-assistant/" \
-          "/zroot/ldata/backups/home-assistant"
+        echo "============ DONE ================"
+        echo
+      fi
 
-      # TODO: move to rpi5-k config
-      # dayly (week) and mounthly (year) retention
-      zsync "root@rpi5-k:/znode/persist" "/zroot/ldata/backups/rpi5-k/$(date +%A)" \
-        --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
-      zsync "root@rpi5-k:/znode/persist" "/zroot/ldata/backups/rpi5-k/$(date +%B)" \
-        --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
-      echo "============ DONE ================"
-    fi
 
-    if [ "$target" = "k1" ]; then
-      echo "Backing up to 'k1'"
+      if [ -z "$target" ] || [ "$target" = "rpi5-k" ]; then
+        echo "Backing up to 'rpi5-k'"
 
-      zsync "/zroot/notes/" "/zroot/shuttles/k1/zroot/notes"
-      zsync "/zroot/nixos/" "/zroot/shuttles/k1/zroot/nixos"
-      zsync "/zroot/ldata/" "/zroot/shuttles/k1/zroot/ldata" \
-        --exclude "/media" \
-        --exclude "/builds" \
-        --exclude ".direnv" \
-        --exclude ".venv"
+        ${sync} "/zroot/notes/" "/zroot/nas/rpi5-k/backups/zroot/notes"
+        ${sync} "/zroot/nixos/" "/zroot/nas/rpi5-k/backups/zroot/nixos" \
+          --exclude /result
+        # FIXME: rpi5-k does not share zroot yet
+        ${sync} "/zroot/ldata/code/" "/zroot/nas/rpi5-k/backups/code" \
+          --exclude "/builds" \
+          --exclude ".direnv" \
+          --exclude ".venv"
+        ${sync} "/zroot/ldata/media/" "/zroot/nas/rpi5-k/media"
+        ${sync} "/zroot/ldata/disk-images/" "/zroot/nas/rpi5-k/disk-images"
+        ${sync} "/zroot/ldata/wiki/" "/zroot/nas/rpi5-k/wiki"
+        ${sync} "/zroot/ldata/secrets/" "/zroot/nas/rpi5-k/backups/secrets"
 
-      zsync "/nix/store/" "/zroot/shuttles/k1/nix/store"
-      echo "============ DONE ================"
-    fi
+        echo Backing up from 'rpi5-k'
+        ${sync} "/zroot/nas/rpi5-k/ldata/backups/home-assistant/" \
+            "/zroot/ldata/backups/home-assistant"
 
-    if [ "$target" = "k2" ]; then
-      echo "Backing up to 'k2'"
+        # TODO: move to rpi5-k config
+        # dayly (week) and mounthly (year) retention
+        ${sync} "root@rpi5-k:/znode/persist" "/zroot/ldata/backups/rpi5-k/$(date +%A)" \
+          --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
+        ${sync} "root@rpi5-k:/znode/persist" "/zroot/ldata/backups/rpi5-k/$(date +%B)" \
+          --archive --delete-after --exclude "build/" -A -X --numeric-ids --super
+        echo "============ DONE ================"
+      fi
 
-      zsync "/zroot/notes/" "/zroot/shuttles/k2/zroot/notes"
-      zsync "/zroot/nixos/" "/zroot/shuttles/k2/zroot/nixos"
-      zsync "/zroot/ldata/" "/zroot/shuttles/k2/zroot/ldata" \
-        --exclude "/media" \
-        --exclude "/builds" \
-        --exclude ".direnv" \
-        --exclude ".venv"
+      if [ "$target" = "k1" ]; then
+        echo "Backing up to 'k1'"
 
-      zsync "/nix/store/" "/zroot/shuttles/k2/nix/store"
-      echo "============ DONE ================"
-    fi
+        ${sync} "/zroot/notes/" "/zroot/shuttles/k1/zroot/notes"
+        ${sync} "/zroot/nixos/" "/zroot/shuttles/k1/zroot/nixos"
+        ${sync} "/zroot/ldata/" "/zroot/shuttles/k1/zroot/ldata" \
+          --exclude "/media" \
+          --exclude "/builds" \
+          --exclude ".direnv" \
+          --exclude ".venv"
 
-    if [ "$target" = "k3" ]; then
-      echo "Backing up to 'k3'"
+        ${sync} "/nix/store/" "/zroot/shuttles/k1/nix/store"
+        echo "============ DONE ================"
+      fi
 
-      zsync "/zroot/notes/" "/zroot/shuttles/k3/zroot/notes"
-      zsync "/zroot/nixos/" "/zroot/shuttles/k3/zroot/nixos"
+      if [ "$target" = "k2" ]; then
+        echo "Backing up to 'k2'"
 
-      zsync "/zroot/ldata/backups/home-assistant/" "/zroot/shuttles/k3/zroot/ldata/backups/home-assistant"
-      zsync "/zroot/ldata/disk-images/"            "/zroot/shuttles/k3/zroot/ldata/disk-images"
-      zsync "/zroot/ldata/secrets/"                "/zroot/shuttles/k3/zroot/ldata/secrets"
-      zsync "/zroot/ldata/media/music/"            "/zroot/shuttles/k3/zroot/ldata/media/music"
-      zsync "/zroot/ldata/code/"                   "/zroot/shuttles/k3/zroot/ldata/code" \
-        --exclude ".direnv" \
-        --exclude ".venv"
-      echo "============ DONE ================"
-    fi
-  '';
+        ${sync} "/zroot/notes/" "/zroot/shuttles/k2/zroot/notes"
+        ${sync} "/zroot/nixos/" "/zroot/shuttles/k2/zroot/nixos"
+        ${sync} "/zroot/ldata/" "/zroot/shuttles/k2/zroot/ldata" \
+          --exclude "/media" \
+          --exclude "/builds" \
+          --exclude ".direnv" \
+          --exclude ".venv"
+
+        ${sync} "/nix/store/" "/zroot/shuttles/k2/nix/store"
+        echo "============ DONE ================"
+      fi
+
+      if [ "$target" = "k3" ]; then
+        echo "Backing up to 'k3'"
+
+        ${sync} "/zroot/notes/" "/zroot/shuttles/k3/zroot/notes"
+        ${sync} "/zroot/nixos/" "/zroot/shuttles/k3/zroot/nixos"
+
+        ${sync} "/zroot/ldata/backups/home-assistant/" "/zroot/shuttles/k3/zroot/ldata/backups/home-assistant"
+        ${sync} "/zroot/ldata/disk-images/"            "/zroot/shuttles/k3/zroot/ldata/disk-images"
+        ${sync} "/zroot/ldata/secrets/"                "/zroot/shuttles/k3/zroot/ldata/secrets"
+        ${sync} "/zroot/ldata/media/music/"            "/zroot/shuttles/k3/zroot/ldata/media/music"
+        ${sync} "/zroot/ldata/code/"                   "/zroot/shuttles/k3/zroot/ldata/code" \
+          --exclude ".direnv" \
+          --exclude ".venv"
+        echo "============ DONE ================"
+      fi
+    '';
 in {
   systemd.timers."backup-timer" = {
     wantedBy = ["timers.target"];
@@ -157,7 +161,7 @@ in {
   };
 
   systemd.services."zback" = {
-    script = "zback";
+    script = "${zback}/bin/zback";
 
     serviceConfig = {
       Type = "oneshot";
@@ -166,8 +170,8 @@ in {
   };
 
   environment.systemPackages = [
-    zback
     zsync
+    zback
   ];
 
   # NOTE: need to run `sudo sudo borg-job-<job-name> list` the first time, so `/root/.ssh/known_hosts` is updated
@@ -182,7 +186,7 @@ in {
       "pp:zroot/ldata/persist/thinkpad/var/lib/libvirt"
       "pp:zroot/ldata/persist/thinkpad/var/lib/lxc"
       "pp:zroot/ldata/persist/thinkpad/var/lib/qemu"
-      "/zroot/ldata/persist/thinkpad/home/thinkpad/.local/share/Steam/"
+      "pp:/zroot/ldata/persist/thinkpad/home/thinkpad/.local/share/Steam/"
     ];
   in {
     persist-to-ntt = {
