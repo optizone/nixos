@@ -109,13 +109,13 @@
 
     ../../modules/system/services/builders/distributed.nix
 
-    ../../modules/system/services/web-utils/lubelogger.nix
-    ../../modules/system/services/srv-utils/paperless.nix
+    ../../modules/system/services/web/lubelogger.nix
+    ../../modules/system/services/web/paperless.nix
     ../../modules/system/services/media/mpd.nix
-    ../../modules/system/services/srv-utils/nix-serve.nix
-    ../../modules/system/services/srv-utils/avahi.nix
-    ../../modules/system/services/web-utils/actual.nix
-    ../../modules/system/services/srv-utils/borg-serve.nix
+    ../../modules/system/services/utils/nix-serve.nix
+    ../../modules/system/services/utils/avahi.nix
+    ../../modules/system/services/web/actual.nix
+    ../../modules/system/services/utils/borg-serve.nix
 
     ../../modules/system/services/monitoring/grafana
     ../../modules/system/services/monitoring/prometheus.nix

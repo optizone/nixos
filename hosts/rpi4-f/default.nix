@@ -52,11 +52,11 @@
     ../../modules/system/services/builders/builder.nix
     ../../modules/system/services/builders/distributed.nix
 
-    # ../../modules/system/services/srv-utils/nix-serve.nix
-    ../../modules/system/services/srv-utils/avahi.nix
-    ../../modules/system/services/srv-utils/openssh.nix
-    ../../modules/system/services/srv-utils/smb.nix
-    ../../modules/system/services/srv-utils/borg-serve.nix
+    # ../../modules/system/services/utils/nix-serve.nix
+    ../../modules/system/services/utils/avahi.nix
+    ../../modules/system/services/utils/openssh.nix
+    ../../modules/system/services/utils/smb.nix
+    ../../modules/system/services/utils/borg-serve.nix
 
     ../../modules/system/services/web-utils/grocy.nix
 

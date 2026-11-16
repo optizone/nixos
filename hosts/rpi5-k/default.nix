@@ -19,10 +19,10 @@
     ./hardware-configuration.nix
     ./nginx.nix
 
-    ../../core/services/srv-utils/smb.nix
-    ../../core/services/srv-utils/nfs.nix
-    ../../core/services/srv-utils/openssh.nix
-    ../../core/services/srv-utils/adguard.nix
+    ../../core/services/utils/smb.nix
+    ../../core/services/utils/nfs.nix
+    ../../core/services/utils/openssh.nix
+    ../../core/services/utils/adguard.nix
 
     ../../core/services/media/jellyfin.nix
 

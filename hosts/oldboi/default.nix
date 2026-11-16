@@ -50,10 +50,10 @@
     ../../modules/system/services/builders/distributed.nix
 
     # ../../modules/system/services/media/immich.nix
-    # ../../modules/system/services/srv-utils/nix-serve.nix
-    ../../modules/system/services/srv-utils/avahi.nix
-    ../../modules/system/services/srv-utils/openssh.nix
-    ../../modules/system/services/srv-utils/smb.nix
+    # ../../modules/system/services/utils/nix-serve.nix
+    ../../modules/system/services/utils/avahi.nix
+    ../../modules/system/services/utils/openssh.nix
+    ../../modules/system/services/utils/smb.nix
 
     ../../modules/system/services/monitoring/prometheus.nix
     ../../modules/system/services/monitoring/smartd.nix

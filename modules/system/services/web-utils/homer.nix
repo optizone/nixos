@@ -1,5 +1,0 @@
-{...}: {
-  services.homer = {
-    enable = true;
-  };
-}
